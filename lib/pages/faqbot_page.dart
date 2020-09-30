@@ -21,10 +21,14 @@ class _FaqBotPageState extends State<FaqBotPage> {
       body: Column(
         children: [
           Flexible(
-            child: ListView.builder(
-              itemBuilder: (_, int index) => myWidgets.faqMessage(
-                  context: context, message: _messages[index]),
-              itemCount: _messages.length,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
+              child: ListView.builder(
+                itemBuilder: (_, int index) => myWidgets.faqMessage(
+                    context: context, message: _messages[index]),
+                itemCount: _messages.length,
+              ),
             ),
           ),
           Divider(
