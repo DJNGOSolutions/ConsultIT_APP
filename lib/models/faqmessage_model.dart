@@ -5,5 +5,6 @@ class FAQMessage {
   String sender;
   bool type;
 
-  FAQMessage({@required this.message, @required this.sender, this.type});
+  FAQMessage(
+      {@required this.message, @required this.sender, @required this.type});
 }
