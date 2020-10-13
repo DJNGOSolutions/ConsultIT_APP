@@ -1,5 +1,6 @@
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/router.dart';
+import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/router.dart';
@@ -85,3 +86,35 @@ List<Widget> _userMessage(context, FAQMessage message) {
     ),
   ];
 }
+
+// Campo para ingresar texto
+inputField(String hintTxt, labelTxt, IconData icon) => Container(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: MyColors.mainColor.withOpacity(0.3),
+                blurRadius: 15.0,
+                offset: Offset(0, 10))
+          ]),
+      child: TextField(
+        decoration: InputDecoration(
+            prefixIcon: Icon(
+              icon,
+              color: MyColors.secondaryColor,
+            ),
+            contentPadding: EdgeInsets.all(2),
+            labelText: labelTxt.toUpperCase(),
+            labelStyle: TextStyle(
+                fontFamily: Fonts.primaryFont,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(37, 117, 191, .6)),
+            border: InputBorder.none,
+            hintText: hintTxt,
+            hintStyle: TextStyle(
+                fontFamily: Fonts.primaryFont,
+                color: Color.fromRGBO(37, 117, 191, .6))),
+      ),
+    );
