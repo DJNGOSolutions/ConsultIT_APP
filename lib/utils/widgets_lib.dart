@@ -7,9 +7,11 @@ import '../utils/router.dart';
 
 Widget faqbot(BuildContext context) {
   return FloatingActionButton(
+    backgroundColor: MyColors.mainColor,
+    foregroundColor: MyColors.accentColor,
     onPressed: () => Navigator.pushNamed(context, FAQ_BOT_ROUTE),
-    tooltip: 'Incrementar',
-    child: Icon(Icons.add),
+    tooltip: 'Preguntanos lo que desees',
+    child: Icon(Icons.message),
   );
 }
 
@@ -121,13 +123,14 @@ customButton(
         @required String labelText,
         bool isMain = true,
         bool isAccent = false,
-        @required String route}) =>
+        @required String route,
+        double fontSize = 14.0}) =>
     GestureDetector(
       onTap: () => Navigator.pushNamed(context, route),
       child: Container(
         constraints: BoxConstraints(minWidth: 100, maxWidth: 150),
         height: 45,
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: isMain

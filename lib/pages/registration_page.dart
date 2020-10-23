@@ -456,8 +456,15 @@ class _RegistrationPageState extends State<RegistrationPage>
                     children: [
                       // Nombre segun documento de identidad
                       inputField(
-                          hintText: 'Ingrese su nombre',
-                          labelText: 'Nombre completo',
+                          hintText: 'Ingrese su(s) nombre(s)',
+                          labelText: 'Nombre(s)',
+                          icon: Icons.person_outline,
+                          uppercase: false,
+                          bold: false),
+                      // Apellidos segun documento de identidad
+                      inputField(
+                          hintText: 'Ingrese su(s) apellido(s)',
+                          labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
                           bold: false),
@@ -475,11 +482,11 @@ class _RegistrationPageState extends State<RegistrationPage>
                           icon: Icons.phone,
                           uppercase: false,
                           bold: false),
-                      // Telefono de contacto
+                      // Fecha de Nacimiento
                       inputField(
-                          hintText: 'Ej. Licenciado, Ingeniero, etc',
-                          labelText: 'Titulo profesional',
-                          icon: Icons.verified_user,
+                          hintText: 'Día/Mes/Año. Ej 07/09/1997',
+                          labelText: 'Fecha de Nacimiento',
+                          icon: Icons.calendar_today,
                           uppercase: false,
                           bold: false),
                     ],
@@ -489,6 +496,166 @@ class _RegistrationPageState extends State<RegistrationPage>
             ),
           ),
           // Fin de datos personales
+
+          // Inicio de contenedor para informacion de informacion profesional
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Icon(Icons.verified_user,
+                            size: 28, color: Color.fromRGBO(3, 90, 166, 1)),
+                      ),
+                    ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          'INFORMACION PROFESIONAL',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: Fonts.primaryFont,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Campos para ingresar informacion de residencia
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromRGBO(143, 148, 251, .2),
+                            blurRadius: 20.0,
+                            offset: Offset(0, 10))
+                      ]),
+                  child: Column(
+                    children: [
+                      // Pais de residencia
+                      inputField(
+                          hintText: 'Ingrese su titulo profesional',
+                          labelText: 'Titulo profesional',
+                          icon: Icons.picture_in_picture,
+                          uppercase: false,
+                          bold: false),
+                      // Ciudad de residencia
+                      inputField(
+                        hintText: 'Precio de preferencia por hora',
+                        labelText: 'Precio por hora de consulta',
+                        icon: Icons.attach_money,
+                        uppercase: false,
+                        bold: false,
+                      ),
+                      // Codigo postal
+                      inputField(
+                        hintText: 'Ej. Tecnologia, startups, textiles, etc',
+                        labelText: 'Giro de especializacion',
+                        icon: Icons.dialpad,
+                        uppercase: false,
+                        bold: false,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Fin de datos de profesionales
+
+          // Inicio de contenedor para informacion de residencia
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Icon(Icons.my_location,
+                            size: 28, color: Color.fromRGBO(3, 90, 166, 1)),
+                      ),
+                    ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      flex: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          'DATOS DE RESIDENCIA',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: Fonts.primaryFont,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                // Campos para ingresar informacion de residencia
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Color.fromRGBO(143, 148, 251, .2),
+                            blurRadius: 20.0,
+                            offset: Offset(0, 10))
+                      ]),
+                  child: Column(
+                    children: [
+                      // Pais de residencia
+                      inputField(
+                          hintText: 'Ingrese su país de residencía',
+                          labelText: 'Pais',
+                          icon: Icons.location_on,
+                          uppercase: false,
+                          bold: false),
+                      // Ciudad de residencia
+                      inputField(
+                        hintText: 'Ingrese su ciudad de residencía',
+                        labelText: 'Ciudad',
+                        icon: Icons.location_city,
+                        uppercase: false,
+                        bold: false,
+                      ),
+                      // Codigo postal
+                      inputField(
+                        hintText: 'Ingrese su código postal',
+                        labelText: 'Código postal',
+                        icon: Icons.dialpad,
+                        uppercase: false,
+                        bold: false,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Fin de datos de residencia
 
           // Inicio de contenedor para datos de la aplicacion
           Container(
@@ -522,7 +689,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     ),
                   ],
                 ),
-                // Campos para ingresar informacion personal
+                // Campos para ingresar informacion de usuario
                 SizedBox(
                   height: 5,
                 ),
@@ -539,14 +706,14 @@ class _RegistrationPageState extends State<RegistrationPage>
                       ]),
                   child: Column(
                     children: [
-                      // Nombre segun documento de identidad
+                      // Username
                       inputField(
                           hintText: 'Ingrese su usuario',
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,
                           uppercase: false,
                           bold: false),
-                      // Correo Electronico
+                      // Password
                       inputField(
                           hintText: 'Ingrese su contraseña',
                           labelText: 'Contraseña',
@@ -554,7 +721,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                           uppercase: false,
                           bold: false,
                           obscure: true),
-                      // Telefono de contacto
+                      // Repeat password
                       inputField(
                           hintText: 'Repita su contraseña',
                           labelText: 'Repetir contraseña',
@@ -568,7 +735,12 @@ class _RegistrationPageState extends State<RegistrationPage>
               ],
             ),
           ),
-          // Fin de datos personales
+          // Fin de datos de usuario
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+            child: customButton(
+                context: context, labelText: 'Registrarse', route: HOME_ROUTE),
+          )
         ],
       ),
     );
