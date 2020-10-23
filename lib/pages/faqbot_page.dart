@@ -1,4 +1,5 @@
 import 'package:consult_it_app/models/faqmessage_model.dart';
+import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
@@ -16,6 +17,7 @@ class _FaqBotPageState extends State<FaqBotPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
+        backgroundColor: MyColors.mainColor,
         title: Text('Consult It'),
       ),
       body: Column(
