@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -126,7 +128,9 @@ customButton(
         @required String route,
         double fontSize = 14.0}) =>
     GestureDetector(
-      onTap: () => Navigator.pushNamed(context, route),
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
       child: Container(
         constraints: BoxConstraints(minWidth: 100, maxWidth: 150),
         height: 45,
