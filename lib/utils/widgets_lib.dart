@@ -100,17 +100,16 @@ inputField(
       decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
-            color: MyColors.secondaryColor,
+            color: MyColors.textFieldColor,
           ),
           contentPadding: EdgeInsets.only(left: 8, top: 2, bottom: 2, right: 4),
           labelText: uppercase ? labelText.toUpperCase() : labelText,
           labelStyle: TextStyle(
               fontFamily: Fonts.primaryFont,
               fontWeight: bold ? FontWeight.bold : FontWeight.normal,
-              color: Color.fromRGBO(37, 117, 191, 1)),
+              color: MyColors.textFieldColor),
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(
-              fontFamily: Fonts.primaryFont,
-              color: Color.fromRGBO(37, 117, 191, .6))),
+              fontFamily: Fonts.primaryFont, color: MyColors.mainColor)),
     );

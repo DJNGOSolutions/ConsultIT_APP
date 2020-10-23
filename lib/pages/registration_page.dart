@@ -51,11 +51,11 @@ class _RegistrationPageState extends State<RegistrationPage>
           Padding(
             padding: const EdgeInsets.only(bottom: 20.0, right: 10),
             child: Container(
-              height: 85,
+              height: 95,
               width: 85,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/badge.png'))),
+                      image: AssetImage('assets/images/logo.png'))),
             ),
           ),
           Container(
@@ -82,7 +82,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: Fonts.secondaryFont,
-                      color: MyColors.mainColor,
+                      color: MyColors.secondaryColor,
                       fontSize: 16,
                     ),
                   ),
@@ -93,8 +93,8 @@ class _RegistrationPageState extends State<RegistrationPage>
           // Tabs para emprendedor y asesores.
           TabBar(
             indicatorWeight: 3,
-            indicatorColor: MyColors.mainColor,
-            unselectedLabelColor: MyColors.secondaryColor,
+            indicatorColor: MyColors.accentColor,
+            unselectedLabelColor: Colors.grey,
             labelColor: MyColors.mainColor,
             labelStyle: TextStyle(
                 fontFamily: Fonts.primaryFont,

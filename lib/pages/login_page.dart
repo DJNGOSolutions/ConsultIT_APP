@@ -61,18 +61,6 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment(0, 9),
-            child: SizedBox(
-              width: width,
-              height: height * 0.99,
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: kHomeImage,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-          Align(
             alignment: Alignment(0, 80.5),
             child: ClipShadowPath(
               shadow: boxShadow,
@@ -85,21 +73,19 @@ class LoginPage extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 140, bottom: 80),
+                  padding: const EdgeInsets.only(top: 140, bottom: 40),
                   child: Material(
                       borderRadius: BorderRadius.circular(10),
-                      shadowColor: kNeumorphicColor.withOpacity(0.5),
-                      elevation: 12.0,
                       color: Colors.transparent,
                       child: Column(
                         children: [
-                          Text(
-                            'Consult IT',
-                            style: TextStyle(
-                                fontSize: 58,
-                                fontFamily: Fonts.secondaryFont,
-                                fontWeight: FontWeight.bold,
-                                color: MyColors.mainColor),
+                          Container(
+                            height: 180,
+                            width: 250,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/logo.png'))),
                           ),
                         ],
                       )),
@@ -109,7 +95,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      vertical: 20.0, horizontal: 30),
+                      vertical: 10.0, horizontal: 30),
                   child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
@@ -172,7 +158,7 @@ class LoginPage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color.fromRGBO(3, 90, 166, 1),
+                                color: MyColors.mainColor,
                                 boxShadow: [
                                   BoxShadow(
                                       color:
@@ -204,7 +190,7 @@ class LoginPage extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color.fromRGBO(64, 186, 213, 1),
+                                color: MyColors.secondaryColor,
                                 boxShadow: [
                                   BoxShadow(
                                       color: MyColors.secondaryColor
@@ -238,5 +224,3 @@ class LoginPage extends StatelessWidget {
 }
 
 final kNeumorphicColor = Color.fromRGBO(235, 228, 229, 1); // rgb(235, 228, 229)
-final kHomeImage =
-    'https://user-images.githubusercontent.com/31005114/78748465-b5327d00-799e-11ea-9f40-38d322a9531a.png';
