@@ -89,11 +89,11 @@ List<Widget> _userMessage(context, FAQMessage message) {
 
 // Campo para ingresar texto
 inputField(
-        {String hintText,
-        String labelText,
-        IconData icon,
-        bool uppercase,
-        bool bold,
+        {@required String hintText,
+        @required String labelText,
+        @required IconData icon,
+        bool uppercase = true,
+        bool bold = true,
         bool obscure = false}) =>
     TextField(
       obscureText: obscure,
@@ -111,5 +111,47 @@ inputField(
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(
-              fontFamily: Fonts.primaryFont, color: MyColors.mainColor)),
+              fontSize: 14,
+              fontFamily: Fonts.primaryFont,
+              color: MyColors.textFieldColor.withOpacity(0.7))),
+    );
+
+customButton(
+        {@required BuildContext context,
+        @required String labelText,
+        bool isMain = true,
+        bool isAccent = false,
+        @required String route}) =>
+    GestureDetector(
+      onTap: () => Navigator.pushNamed(context, route),
+      child: Container(
+        constraints: BoxConstraints(minWidth: 100, maxWidth: 150),
+        height: 45,
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: isMain
+                ? MyColors.mainColor
+                : isAccent ? MyColors.accentColor : MyColors.secondaryColor,
+            boxShadow: [
+              BoxShadow(
+                  color: isAccent
+                      ? Colors.grey.withOpacity(0.4)
+                      : MyColors.mainColor.withOpacity(0.4),
+                  blurRadius: 8.0,
+                  offset: Offset(0, 7))
+            ]),
+        child: Center(
+          child: FittedBox(
+            child: Text(
+              labelText.toUpperCase(),
+              style: TextStyle(
+                  fontFamily: Fonts.secondaryFont,
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400),
+            ),
+          ),
+        ),
+      ),
     );
