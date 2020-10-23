@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 120, bottom: 60),
+                  padding: const EdgeInsets.only(top: 140, bottom: 80),
                   child: Material(
                       borderRadius: BorderRadius.circular(10),
                       shadowColor: kNeumorphicColor.withOpacity(0.5),
@@ -94,21 +94,12 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'Welcome to',
-                            style: TextStyle(
-                                fontSize: 58,
-                                fontFamily: Fonts.secondaryFont,
-                                fontWeight: FontWeight.bold,
-                                color: MyColors.mainColor),
-                          ),
-                          Text(
                             'Consult IT',
                             style: TextStyle(
                                 fontSize: 58,
                                 fontFamily: Fonts.secondaryFont,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                            textAlign: TextAlign.center,
+                                color: MyColors.mainColor),
                           ),
                         ],
                       )),
@@ -119,8 +110,24 @@ class LoginPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 20.0, horizontal: 30),
-                  child:
-                      inputField('Ingrese su usuario', 'usuario', Icons.person),
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: MyColors.mainColor.withOpacity(0.3),
+                                blurRadius: 15.0,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: inputField(
+                          hintText: 'Ingrese su usuario',
+                          labelText: 'usuario',
+                          icon: Icons.person,
+                          uppercase: true,
+                          bold: true,
+                          obscure: false)),
                 ),
               ),
               Align(
@@ -128,8 +135,24 @@ class LoginPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 30),
-                  child: inputField(
-                      'Ingrese su contraseña', 'contraseña', Icons.lock),
+                  child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: MyColors.mainColor.withOpacity(0.3),
+                                blurRadius: 15.0,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: inputField(
+                          hintText: 'Ingrese su contraseña',
+                          labelText: 'contraseña',
+                          bold: true,
+                          icon: Icons.lock,
+                          uppercase: true,
+                          obscure: false)),
                 ),
               ),
               Align(
@@ -172,7 +195,8 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, HOME_ROUTE),
+                          onTap: () =>
+                              Navigator.pushNamed(context, REGISTRATION_ROUTE),
                           child: Container(
                             constraints:
                                 BoxConstraints(minWidth: 100, maxWidth: 150),
