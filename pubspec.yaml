@@ -33,6 +33,7 @@ dependencies:
   fluttertoast: ^7.1.1
   shared_preferences: ^0.5.12
   transparent_image: ^1.0.0
+  neumorphic: any
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
   assets:
     - assets/faq-bot/consultit-faqbot-xtwp-0472b6f8e6f9.json
     - assets/images/
+    - assets/images/icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

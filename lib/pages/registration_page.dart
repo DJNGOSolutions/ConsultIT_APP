@@ -548,7 +548,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                     children: [
                       // Pais de residencia
                       inputField(
-                          hintText: 'Ingrese su titulo profesional',
+                          hintText:
+                              'Ej. Licenciado, Economista, Ingeniero, etc.',
                           labelText: 'Titulo profesional',
                           icon: Icons.picture_in_picture,
                           uppercase: false,
@@ -556,7 +557,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                       // Ciudad de residencia
                       inputField(
                         hintText: 'Precio de preferencia por hora',
-                        labelText: 'Precio por hora de consulta',
+                        labelText: 'Precio base por hora de consulta',
                         icon: Icons.attach_money,
                         uppercase: false,
                         bold: false,
@@ -565,7 +566,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                       inputField(
                         hintText: 'Ej. Tecnologia, startups, textiles, etc',
                         labelText: 'Giro de especializacion',
-                        icon: Icons.dialpad,
+                        icon: Icons.keyboard,
                         uppercase: false,
                         bold: false,
                       ),

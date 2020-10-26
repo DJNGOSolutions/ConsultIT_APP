@@ -2,6 +2,7 @@ import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
 
 class FaqBotPage extends StatefulWidget {
@@ -70,12 +71,17 @@ class _FaqBotPageState extends State<FaqBotPage> {
 
   void _submitQuery(String text) {
     _messageController.clear();
-    FAQMessage faqMessage =
-        new FAQMessage(message: text, sender: "Ronald Vega", type: true);
-    setState(() {
-      _messages.add(faqMessage);
-    });
-    _dialogFlowResponse(text);
+    if (text == null || text.replaceAll(" ", "") == "") {
+      Fluttertoast.showToast(
+          msg: "El mensaje no puede estar vacío", fontSize: 16);
+    } else {
+      FAQMessage faqMessage =
+          new FAQMessage(message: text, sender: "Ronald Vega", type: true);
+      setState(() {
+        _messages.add(faqMessage);
+      });
+      _dialogFlowResponse(text);
+    }
   }
 
   void _dialogFlowResponse(query) async {
