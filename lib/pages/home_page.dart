@@ -12,11 +12,31 @@ class HomePage extends StatelessWidget {
         leading: IconButton(
             icon: Icon(
               Icons.menu,
-              color: MyColors.accentColor,
+              color: MyColors.mainColor,
             ),
             onPressed: () => Navigator.pushNamed(context, LOGIN_ROUTE)),
-        backgroundColor: MyColors.mainColor,
-        title: Text('Bienvenido a Consult IT'),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: Text(
+                "CONSULT",
+                style: Styles.headerTextStyle.apply(color: MyColors.mainColor),
+              ),
+            ),
+            Text(
+              "IT",
+              style: Styles.headerTextStyle.apply(color: MyColors.accentColor),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.11,
+            )
+          ],
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
