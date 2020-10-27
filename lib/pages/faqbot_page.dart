@@ -1,5 +1,4 @@
 import 'package:consult_it_app/models/faqmessage_model.dart';
-import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:fluttertoast/fluttertoast.dart';

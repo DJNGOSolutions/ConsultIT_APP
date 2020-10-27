@@ -16,12 +16,12 @@ Widget faqbot(BuildContext context) {
     child: Center(
       child: Container(
         margin:
-            const EdgeInsets.only(top: 4.0, bottom: 4.0, left: 2.0, right: 4.0),
-        height: 30,
-        width: 30,
+            const EdgeInsets.only(top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
+        height: 35,
+        width: 40,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/icons/SendMessage.png'))),
+                image: AssetImage('assets/images/icons/FAQ.png'))),
       ),
     ),
   );
@@ -342,14 +342,14 @@ Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 4.0),
+                padding: const EdgeInsets.only(right: 3.0),
                 child: Text(
-                  "CONSULT",
+                  "Consult",
                   style: Styles.neumorphicTextStyle(
                       fontWeight: FontWeight.bold,
                       color: MyColors.mainColor,
                       blurRadius: 15,
-                      size: 22.0),
+                      size: 24.0),
                 ),
               ),
               Text(
@@ -357,9 +357,12 @@ Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
                 style: Styles.neumorphicTextStyle(
                     fontWeight: FontWeight.bold,
                     color: MyColors.accentColor,
-                    blurRadius: 20.0,
-                    size: 25.0),
+                    blurRadius: 15.0,
+                    size: 24.0),
               ),
+              SizedBox(
+                width: 3.0,
+              )
             ],
           )
         ],

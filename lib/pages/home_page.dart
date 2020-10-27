@@ -79,7 +79,11 @@ class HomePage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, bottom: 5.0),
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: myWidgets.addBusinessWidget(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: myWidgets.businessWidget(
                       businessName: "Venta de textiles s.a. de c.v."),
                 ),
@@ -89,7 +93,6 @@ class HomePage extends StatelessWidget {
                       businessName: "Tienda de ropa online",
                       businessImage: "assets/images/icons/OnlineShoping.png"),
                 ),
-                myWidgets.addBusinessWidget()
               ],
             ),
           )
