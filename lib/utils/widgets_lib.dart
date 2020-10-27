@@ -13,7 +13,17 @@ Widget faqbot(BuildContext context) {
     foregroundColor: MyColors.accentColor,
     onPressed: () => Navigator.pushNamed(context, FAQ_BOT_ROUTE),
     tooltip: 'Preguntanos lo que desees',
-    child: Icon(Icons.message),
+    child: Center(
+      child: Container(
+        margin:
+            const EdgeInsets.only(top: 4.0, bottom: 4.0, left: 2.0, right: 4.0),
+        height: 30,
+        width: 30,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/icons/SendMessage.png'))),
+      ),
+    ),
   );
 }
 
@@ -254,7 +264,7 @@ Widget businessWidget(
 }
 
 // TODO: Agregar menu lateral
-Widget customAppBar(BuildContext context) => AppBar(
+Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
       bottomOpacity: 0,
       toolbarOpacity: 1.0,
       leading: Padding(
@@ -279,23 +289,37 @@ Widget customAppBar(BuildContext context) => AppBar(
           padding: const EdgeInsets.only(
               left: 4.0, top: 4.0, right: 12.0, bottom: 4.0),
           child: Tooltip(
-            message: "Cerrar Sesión",
+            message: canGoBack ? "Retroceder" : "Cerrar Sesión",
             child: GestureDetector(
-              onTap: () => Navigator.pushNamed(context, LOGIN_ROUTE),
+              onTap: () => canGoBack
+                  ? Navigator.canPop(context)
+                      ? Navigator.pop(context)
+                      : Navigator.pushNamed(context, HOME_ROUTE)
+                  : Navigator.pushNamed(context, LOGIN_ROUTE),
               child: NeuCard(
                 bevel: 16.0,
                 curveType: CurveType.concave,
                 decoration: NeumorphicDecoration(
                     borderRadius: BorderRadius.circular(12.0),
                     color: Colors.white),
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/icons/LogOut.png'))),
-                ),
+                child: canGoBack
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 30,
+                          color: MyColors.mainColor,
+                        ),
+                      )
+                    : Container(
+                        margin: const EdgeInsets.all(8.0),
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/icons/LogOut.png'))),
+                      ),
               ),
             ),
           ),

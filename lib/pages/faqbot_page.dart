@@ -17,10 +17,7 @@ class _FaqBotPageState extends State<FaqBotPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColors.mainColor,
-        title: Text('Consult It'),
-      ),
+      appBar: myWidgets.customAppBar(context: context, canGoBack: true),
       body: Column(
         children: [
           Flexible(
@@ -59,14 +56,12 @@ class _FaqBotPageState extends State<FaqBotPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 4.0),
-            child: IconButton(
-                tooltip: "Enviar mensaje",
-                icon: Icon(
-                  Icons.send,
-                  color: MyColors.accentColor,
-                ),
-                onPressed: () => _submitQuery(_messageController.text)),
+            margin: EdgeInsets.symmetric(horizontal: 6.0, vertical: 5.0),
+            height: 30,
+            width: 30,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/icons/SendMessage.png'))),
           ),
         ],
       ),
