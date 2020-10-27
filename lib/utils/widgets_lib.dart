@@ -260,7 +260,7 @@ Widget customAppBar(BuildContext context) => AppBar(
           message: "Menú",
           child: NeuCard(
             bevel: 16,
-            curveType: CurveType.flat,
+            curveType: CurveType.concave,
             decoration: NeumorphicDecoration(
                 borderRadius: BorderRadius.circular(12.0), color: Colors.white),
             child: Icon(
@@ -273,20 +273,25 @@ Widget customAppBar(BuildContext context) => AppBar(
       actions: [
         Padding(
           padding: const EdgeInsets.only(
-              left: 4.0, top: 4.0, right: 8.0, bottom: 4.0),
+              left: 4.0, top: 4.0, right: 12.0, bottom: 4.0),
           child: Tooltip(
             message: "Cerrar Sesión",
-            child: NeuButton(
-              onPressed: () => Navigator.pushNamed(context, LOGIN_ROUTE),
-              decoration: NeumorphicDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.white),
-              child: Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/icons/LogOut.png'))),
+            child: GestureDetector(
+              onTap: () => Navigator.pushNamed(context, LOGIN_ROUTE),
+              child: NeuCard(
+                bevel: 16.0,
+                curveType: CurveType.concave,
+                decoration: NeumorphicDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: Colors.white),
+                child: Container(
+                  margin: const EdgeInsets.all(8.0),
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/icons/LogOut.png'))),
+                ),
               ),
             ),
           ),
