@@ -8,13 +8,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: myWidgets.customAppBar(context),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildMyBusinessSection(context),
-          _buildMoreOptionsSection(context)
-        ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          children: [
+            _buildMyBusinessSection(context),
+            _buildMoreOptionsSection(context)
+          ],
+        ),
       ),
       floatingActionButton: myWidgets.faqbot(context),
     );
@@ -137,6 +139,33 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                myWidgets.actionWidget(
+                    action: "Consultar cartera de asesores",
+                    context: context,
+                    actionImagePath:
+                        "assets/images/icons/BookProfesionals.png"),
+                SizedBox(
+                  height: 10.0,
+                ),
+                myWidgets.actionWidget(
+                    action: "Consultar fluctuación del mercado",
+                    context: context,
+                    actionImagePath:
+                        "assets/images/icons/MarketFluctuation.png"),
+                SizedBox(
+                  height: 10.0,
+                ),
+                myWidgets.actionWidget(
+                    action: "Obtener analisis de cuentas para un comercio",
+                    context: context,
+                    actionImagePath: "assets/images/icons/DataAnalytic.png")
+              ],
+            ),
+          )
         ],
       );
 }

@@ -317,3 +317,52 @@ Widget customAppBar(BuildContext context) => AppBar(
         ],
       ),
     );
+
+Widget actionWidget({
+  @required String action,
+  String actionImagePath = 'assets/images/icons/FolderDataColor.png',
+  String route,
+  @required BuildContext context,
+}) {
+  return Tooltip(
+    message: "Ir a ${action.toUpperCase()}",
+    child: NeuCard(
+        bevel: 24,
+        curveType: CurveType.emboss,
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.only(top: 10.0, right: 15.0, left: 15.0),
+        decoration: NeumorphicDecoration(
+            borderRadius: BorderRadius.circular(12.0), color: Colors.white),
+        width: MediaQuery.of(context).size.width,
+        height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Flexible(
+              child: Container(
+                height: 65,
+                width: 65,
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage(actionImagePath))),
+              ),
+              fit: FlexFit.loose,
+              flex: 3,
+            ),
+            SizedBox(
+              height: 30.0,
+            ),
+            Flexible(
+              child: Text(
+                action.toUpperCase(),
+                style: Styles.bodyTextStyle.apply(color: Colors.black54),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+              ),
+              fit: FlexFit.loose,
+              flex: 4,
+            ),
+          ],
+        )),
+  );
+}
