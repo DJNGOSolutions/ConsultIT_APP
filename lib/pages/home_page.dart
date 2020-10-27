@@ -162,7 +162,10 @@ class HomePage extends StatelessWidget {
                 myWidgets.actionWidget(
                     action: "Obtener analisis de cuentas para un comercio",
                     context: context,
-                    actionImagePath: "assets/images/icons/DataAnalytic.png")
+                    actionImagePath: "assets/images/icons/DataAnalytic.png"),
+                SizedBox(
+                  height: 30.0,
+                ),
               ],
             ),
           )

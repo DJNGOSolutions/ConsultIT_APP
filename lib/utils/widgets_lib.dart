@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
 import '../utils/router.dart';
 
+//FAB para el bot
 Widget faqbot(BuildContext context) {
   return FloatingActionButton(
     backgroundColor: MyColors.mainColor,
@@ -16,6 +17,7 @@ Widget faqbot(BuildContext context) {
   );
 }
 
+//Widget que se utiliza para los mensajes con el bot
 Widget faqMessage(
     {@required FAQMessage message, @required BuildContext context}) {
   return Column(
@@ -23,7 +25,7 @@ Widget faqMessage(
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: message.type
               ? _userMessage(context, message)
               : _botMessage(context, message),
@@ -36,20 +38,19 @@ Widget faqMessage(
   );
 }
 
+//Mensaje de respuessta del bot
 List<Widget> _botMessage(BuildContext context, FAQMessage message) {
   return <Widget>[
     Container(
       margin: const EdgeInsets.only(right: 16.0),
-      child: CircleAvatar(
-        child: Text(
-          'CI',
-          style: TextStyle(fontSize: 20),
-        ),
-        backgroundColor: Colors.purpleAccent,
-      ),
+      width: 60.0,
+      height: 55.0,
+      decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/images/logo.png"))),
     ),
     Expanded(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(message.sender,
@@ -250,6 +251,7 @@ Widget businessWidget(
   );
 }
 
+// TODO: Agregar menu lateral
 Widget customAppBar(BuildContext context) => AppBar(
       bottomOpacity: 0,
       toolbarOpacity: 1.0,
@@ -338,6 +340,7 @@ Widget customAppBar(BuildContext context) => AppBar(
       ),
     );
 
+// TODO: Agregar navegacion a nueva ruta (Crear un router para esta navegacion).
 Widget actionWidget({
   @required String action,
   String actionImagePath = 'assets/images/icons/FolderDataColor.png',
