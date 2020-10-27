@@ -61,7 +61,11 @@ class _FaqBotPageState extends State<FaqBotPage> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 4.0),
             child: IconButton(
-                icon: Icon(Icons.send),
+                tooltip: "Enviar mensaje",
+                icon: Icon(
+                  Icons.send,
+                  color: MyColors.accentColor,
+                ),
                 onPressed: () => _submitQuery(_messageController.text)),
           ),
         ],

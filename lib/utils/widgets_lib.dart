@@ -83,10 +83,12 @@ List<Widget> _userMessage(context, FAQMessage message) {
     Container(
       margin: const EdgeInsets.only(left: 16.0),
       child: CircleAvatar(
-          child: new Text(
-        message.sender.substring(0, 1),
-        style: TextStyle(fontSize: 20),
-      )),
+          backgroundColor: MyColors.mainColor,
+          child: Text(
+            message.sender.substring(0, 1) +
+                message.sender.split(' ').last.substring(0, 1),
+            style: TextStyle(fontSize: 20, color: MyColors.accentColor),
+          )),
     ),
   ];
 }
