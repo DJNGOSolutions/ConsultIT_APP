@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class Fonts {
@@ -25,4 +27,23 @@ class Styles {
       wordSpacing: 1.9);
   static TextStyle get subHeaderTextStyle => TextStyle(
       fontFamily: Fonts.primaryFont, fontSize: 18, fontWeight: FontWeight.bold);
+  static TextStyle neumorphicTextStyle(
+          {double size = 24.0,
+          Color color = Colors.grey,
+          FontWeight fontWeight = FontWeight.bold,
+          double blurRadius = 10}) =>
+      TextStyle(
+          fontWeight: fontWeight,
+          fontSize: size,
+          shadows: [
+            Shadow(
+                offset: Offset(2, 2),
+                color: Colors.black38,
+                blurRadius: blurRadius),
+            Shadow(
+                offset: Offset(-2, -2),
+                color: Colors.white.withOpacity(0.85),
+                blurRadius: blurRadius)
+          ],
+          color: color);
 }

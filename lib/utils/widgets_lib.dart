@@ -303,17 +303,37 @@ Widget customAppBar(BuildContext context) => AppBar(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: Text(
-              "CONSULT",
-              style: Styles.headerTextStyle.apply(color: MyColors.mainColor),
-            ),
+          Container(
+            margin: const EdgeInsets.all(8.0),
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/appBar_logo.png'))),
           ),
-          Text(
-            "IT",
-            style: Styles.headerTextStyle.apply(color: MyColors.accentColor),
-          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 4.0),
+                child: Text(
+                  "CONSULT",
+                  style: Styles.neumorphicTextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: MyColors.mainColor,
+                      blurRadius: 15,
+                      size: 22.0),
+                ),
+              ),
+              Text(
+                "IT",
+                style: Styles.neumorphicTextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: MyColors.accentColor,
+                    blurRadius: 20.0,
+                    size: 25.0),
+              ),
+            ],
+          )
         ],
       ),
     );
