@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 15.0, left: 15.0),
-            height: 200,
+            height: 170,
             width: MediaQuery.of(context).size.width,
             child: ListView(
               scrollDirection: Axis.horizontal,
