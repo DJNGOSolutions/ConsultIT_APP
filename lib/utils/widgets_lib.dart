@@ -357,7 +357,7 @@ Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
                 style: Styles.neumorphicTextStyle(
                     fontWeight: FontWeight.bold,
                     color: MyColors.accentColor,
-                    blurRadius: 15.0,
+                    blurRadius: 20.0,
                     size: 24.0),
               ),
               SizedBox(
