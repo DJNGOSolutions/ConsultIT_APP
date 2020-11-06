@@ -1,3 +1,4 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -10,23 +11,23 @@ import '../utils/router.dart';
 Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
       bottomOpacity: 0,
       toolbarOpacity: 1.0,
-      leading: Padding(
-        padding:
-            const EdgeInsets.only(left: 8.0, top: 4.0, right: 4.0, bottom: 4.0),
-        child: Tooltip(
-          message: "Menú",
-          child: NeuCard(
-            bevel: 16,
-            curveType: CurveType.concave,
-            decoration: NeumorphicDecoration(
-                borderRadius: BorderRadius.circular(12.0), color: Colors.white),
-            child: Icon(
-              Icons.menu,
-              color: MyColors.mainColor,
-            ),
-          ),
-        ),
-      ),
+      // leading: Padding(
+      //   padding:
+      //       const EdgeInsets.only(left: 8.0, top: 4.0, right: 4.0, bottom: 4.0),
+      //   child: Tooltip(
+      //     message: "Menú",
+      //     child: NeuCard(
+      //       bevel: 16,
+      //       curveType: CurveType.concave,
+      //       decoration: NeumorphicDecoration(
+      //           borderRadius: BorderRadius.circular(12.0), color: Colors.white),
+      //       child: Icon(
+      //         Icons.menu,
+      //         color: MyColors.mainColor,
+      //       ),
+      //     ),
+      //   ),
+      // ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(
@@ -121,8 +122,6 @@ Widget faqbot(BuildContext context) {
     tooltip: 'Preguntanos lo que desees',
     child: Center(
       child: Container(
-        margin:
-            const EdgeInsets.only(top: 4.0, bottom: 4.0, left: 4.0, right: 4.0),
         height: 35,
         width: 40,
         decoration: BoxDecoration(
@@ -386,14 +385,14 @@ Widget actionWidget({
         decoration: NeumorphicDecoration(
             borderRadius: BorderRadius.circular(12.0), color: Colors.white),
         width: MediaQuery.of(context).size.width,
-        height: 100,
+        height: 85,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Flexible(
               child: Container(
-                height: 65,
-                width: 65,
+                height: 55,
+                width: 55,
                 decoration: BoxDecoration(
                     image: DecorationImage(image: AssetImage(actionImagePath))),
               ),
@@ -412,7 +411,7 @@ Widget actionWidget({
                 maxLines: 3,
               ),
               fit: FlexFit.loose,
-              flex: 4,
+              flex: 6,
             ),
           ],
         )),

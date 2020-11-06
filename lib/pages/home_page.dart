@@ -1,3 +1,4 @@
+import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
@@ -18,7 +19,9 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       floatingActionButton: myWidgets.faqbot(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
