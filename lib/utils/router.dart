@@ -1,3 +1,4 @@
+import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
@@ -10,6 +11,7 @@ const String HOME_ROUTE = 'HOME_ROUTE';
 const String REGISTRATION_ROUTE = 'REGISTRATION_ROUTE';
 const String LOGIN_ROUTE = 'LOGIN_ROUTE';
 const String SPLASH_ROUTE = 'SPLASH_ROUTE';
+const String ADD_BUSINESS_ROUTE = 'ADD_BUSINESS_ROUTE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -29,6 +31,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       break;
     case SPLASH_ROUTE:
       return MaterialPageRoute(builder: (context) => SplashPage());
+      break;
+    case ADD_BUSINESS_ROUTE:
+      return MaterialPageRoute(builder: (context) => AddBusinessPage());
       break;
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());

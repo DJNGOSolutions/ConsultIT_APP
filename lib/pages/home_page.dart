@@ -1,4 +1,5 @@
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
+import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
@@ -31,7 +32,7 @@ class HomePage extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.only(top: 15.0, right: 0.0, left: 20.0),
+            padding: const EdgeInsets.only(top: 12.0, right: 0.0, left: 20.0),
             child: Row(
               children: [
                 Flexible(
@@ -58,14 +59,15 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       Tooltip(
-                        message: "Ver todos mis comercios",
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_forward,
-                              color: MyColors.mainColor,
-                            ),
-                            onPressed: null),
-                      )
+                          message: "Ver todos mis comercios",
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_forward,
+                                color: MyColors.mainColor,
+                              ),
+                              onPressed:
+                                  null) //Navigator.pushNamed(context, MY_BUSINESS_PAGE)),
+                          )
                     ],
                   ),
                   flex: 7,
@@ -81,9 +83,12 @@ class HomePage extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: myWidgets.addBusinessWidget(),
+                GestureDetector(
+                  onTap: () => Navigator.pushNamed(context, ADD_BUSINESS_ROUTE),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: myWidgets.addBusinessWidget(),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
