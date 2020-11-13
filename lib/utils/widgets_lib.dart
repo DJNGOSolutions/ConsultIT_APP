@@ -1,4 +1,3 @@
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -8,7 +7,8 @@ import 'package:neumorphic/neumorphic.dart';
 import '../utils/router.dart';
 
 // TODO: Agregar menu lateral
-Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
+Widget customAppBar({@required BuildContext context, bool canGoBack = false}) =>
+    AppBar(
       bottomOpacity: 0,
       toolbarOpacity: 1.0,
       actions: [
@@ -88,7 +88,7 @@ Widget customAppBar({BuildContext context, bool canGoBack = false}) => AppBar(
                     size: 24.0),
               ),
               SizedBox(
-                width: 3.0,
+                width: 6.0,
               )
             ],
           )
@@ -222,17 +222,18 @@ inputField(
 
 customButton(
         {@required BuildContext context,
-        @required String labelText,
+        String labelText = '',
         bool isMain = true,
         bool isAccent = false,
         @required String route,
+        double maxWidth = 150,
         double fontSize = 14.0}) =>
     GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, route);
       },
       child: Container(
-        constraints: BoxConstraints(minWidth: 100, maxWidth: 150),
+        constraints: BoxConstraints(minWidth: 100, maxWidth: maxWidth),
         height: 45,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
@@ -255,8 +256,8 @@ customButton(
               style: TextStyle(
                   fontFamily: Fonts.secondaryFont,
                   fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400),
+                  color: isAccent ? MyColors.mainColor : Colors.white,
+                  fontWeight: isAccent ? FontWeight.bold : FontWeight.w400),
             ),
           ),
         ),
@@ -309,45 +310,55 @@ Widget addBusinessWidget() {
 
 Widget businessWidget(
     {@required String businessName,
+    @required BuildContext context,
+    @required String routeName,
+    String heroTag = 'BusinessImage',
     String businessImage = 'assets/images/icons/FolderDataColor.png'}) {
-  return Tooltip(
-    message: "Ver detalle de: ${businessName.toUpperCase()}",
-    child: NeuCard(
-        bevel: 24,
-        curveType: CurveType.emboss,
-        padding: EdgeInsets.all(8),
-        margin: EdgeInsets.only(top: 10.0, right: 15.0),
-        decoration: NeumorphicDecoration(
-            borderRadius: BorderRadius.circular(12.0), color: Colors.white),
-        width: 150,
-        height: 80,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(businessImage))),
+  return GestureDetector(
+    onTap: () => Navigator.pushNamed(context, routeName),
+    child: Tooltip(
+      message: "Ver detalle de: ${businessName.toUpperCase()}",
+      child: NeuCard(
+          bevel: 24,
+          curveType: CurveType.emboss,
+          padding: EdgeInsets.all(8),
+          margin: EdgeInsets.only(top: 10.0, right: 15.0),
+          decoration: NeumorphicDecoration(
+              borderRadius: BorderRadius.circular(12.0), color: Colors.white),
+          width: 150,
+          height: 80,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(
+                child: Hero(
+                  tag: heroTag,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image:
+                            DecorationImage(image: AssetImage(businessImage))),
+                  ),
+                ),
+                fit: FlexFit.loose,
+                flex: 4,
               ),
-              fit: FlexFit.loose,
-              flex: 4,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Flexible(
-              child: Text(
-                businessName.toUpperCase(),
-                style: Styles.bodyTextStyle.apply(color: Colors.black54),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
+              SizedBox(
+                height: 20.0,
               ),
-              fit: FlexFit.loose,
-              flex: 4,
-            ),
-          ],
-        )),
+              Flexible(
+                child: Text(
+                  businessName.toUpperCase(),
+                  style: Styles.bodyTextStyle.apply(color: Colors.black54),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                ),
+                fit: FlexFit.loose,
+                flex: 4,
+              ),
+            ],
+          )),
+    ),
   );
 }
 

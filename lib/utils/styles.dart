@@ -19,6 +19,8 @@ class Styles {
       fontFamily: Fonts.secondaryFont,
       fontSize: 16,
       fontWeight: FontWeight.bold);
+  static TextStyle get bodyTextStyleNonBold => TextStyle(
+      fontFamily: Fonts.secondaryFont, fontSize: 16, color: Colors.black87);
   static TextStyle get headerTextStyle => TextStyle(
       fontFamily: Fonts.secondaryFont,
       fontSize: 20,

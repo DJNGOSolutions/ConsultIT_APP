@@ -1,7 +1,9 @@
 import 'package:consult_it_app/pages/addBusiness_page.dart';
+import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
+import 'package:consult_it_app/pages/profile_Page.dart';
 import 'package:consult_it_app/pages/registration_page.dart';
 import 'package:consult_it_app/pages/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,8 @@ const String REGISTRATION_ROUTE = 'REGISTRATION_ROUTE';
 const String LOGIN_ROUTE = 'LOGIN_ROUTE';
 const String SPLASH_ROUTE = 'SPLASH_ROUTE';
 const String ADD_BUSINESS_ROUTE = 'ADD_BUSINESS_ROUTE';
+const String PROFILE_PAGE = 'PROFILE_PAGE';
+const String BUSINESS_PROFILE_PAGE = 'BUSINESS_PROFILE_PAGE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -35,6 +39,15 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
     case ADD_BUSINESS_ROUTE:
       return MaterialPageRoute(builder: (context) => AddBusinessPage());
       break;
+    case PROFILE_PAGE:
+      return MaterialPageRoute(builder: (context) => ProfilePage());
+    case BUSINESS_PROFILE_PAGE:
+      return MaterialPageRoute(
+          builder: (context) => BusinessProfilePage(
+                imgPath: 'assets/images/icons/FolderDataColor.png',
+                heroTag: 'BusinessImage',
+                businessName: 'Venta de textiles S.A. de C.V.',
+              ));
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());
   }

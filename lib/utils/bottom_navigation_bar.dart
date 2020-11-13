@@ -1,8 +1,13 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
+  final int currentIndex;
+
+  const CustomBottomNavigationBar({Key key, this.currentIndex = 0})
+      : super(key: key);
   @override
   _CustomBottomNavigationBarState createState() =>
       _CustomBottomNavigationBarState();
@@ -14,11 +19,26 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
+    currentIndex = widget.currentIndex;
   }
 
   changePage(int index) => setState(() {
         currentIndex = index;
+        switch (currentIndex) {
+          case 0:
+            Navigator.pushNamedAndRemoveUntil(
+                context, HOME_ROUTE, (route) => false);
+            break;
+          case 1:
+            Navigator.pushNamedAndRemoveUntil(
+                context, HOME_ROUTE, (route) => false);
+            break;
+          case 2:
+            Navigator.pushNamed(context, PROFILE_PAGE);
+            break;
+          default:
+        }
+        print(currentIndex);
       });
 
   @override
