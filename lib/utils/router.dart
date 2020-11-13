@@ -1,5 +1,6 @@
 import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
+import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
@@ -16,6 +17,7 @@ const String SPLASH_ROUTE = 'SPLASH_ROUTE';
 const String ADD_BUSINESS_ROUTE = 'ADD_BUSINESS_ROUTE';
 const String PROFILE_PAGE = 'PROFILE_PAGE';
 const String BUSINESS_PROFILE_PAGE = 'BUSINESS_PROFILE_PAGE';
+const String CONSULTANTS_LIST_PAGE = 'CONSULTANTS_LIST_PAGE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -47,6 +49,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
                 imgPath: 'assets/images/icons/FolderDataColor.png',
                 heroTag: 'BusinessImage',
                 businessName: 'Venta de textiles S.A. de C.V.',
+              ));
+    case CONSULTANTS_LIST_PAGE:
+      return MaterialPageRoute(
+          builder: (context) => ConsultantsListPage(
+                heroTag: 'ConsultantName',
+                imgPath: 'assets/images/icons/BookProfesionals.png',
+                optionName: 'Consultar cartera de asesores',
               ));
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());

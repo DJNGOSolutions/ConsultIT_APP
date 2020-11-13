@@ -159,6 +159,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 myWidgets.actionWidget(
+                    route: CONSULTANTS_LIST_PAGE,
                     action: "Consultar cartera de asesores",
                     context: context,
                     actionImagePath:
@@ -167,6 +168,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
+                    route: null,
                     action: "Consultar fluctuación del mercado",
                     context: context,
                     actionImagePath:
@@ -175,6 +177,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
+                    route: null,
                     action: "Obtener analisis de cuentas para un comercio",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),

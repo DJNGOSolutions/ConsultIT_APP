@@ -366,48 +366,141 @@ Widget businessWidget(
 Widget actionWidget({
   @required String action,
   String actionImagePath = 'assets/images/icons/FolderDataColor.png',
-  String route,
+  @required String route,
   @required BuildContext context,
 }) {
-  return Tooltip(
-    message: "Ir a ${action.toUpperCase()}",
-    child: NeuCard(
-        bevel: 24,
-        curveType: CurveType.emboss,
-        padding: EdgeInsets.all(8),
-        margin: EdgeInsets.only(top: 10.0, right: 15.0, left: 15.0),
-        decoration: NeumorphicDecoration(
-            borderRadius: BorderRadius.circular(12.0), color: Colors.white),
-        width: MediaQuery.of(context).size.width,
-        height: 85,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Flexible(
-              child: Container(
-                height: 55,
-                width: 55,
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(actionImagePath))),
+  return GestureDetector(
+    onTap: () => Navigator.pushNamed(context, route),
+    child: Tooltip(
+      message: "Ir a ${action.toUpperCase()}",
+      child: NeuCard(
+          bevel: 24,
+          curveType: CurveType.emboss,
+          padding: EdgeInsets.all(8),
+          margin: EdgeInsets.only(top: 10.0, right: 15.0, left: 15.0),
+          decoration: NeumorphicDecoration(
+              borderRadius: BorderRadius.circular(12.0), color: Colors.white),
+          width: MediaQuery.of(context).size.width,
+          height: 85,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Flexible(
+                child: Container(
+                  height: 55,
+                  width: 55,
+                  decoration: BoxDecoration(
+                      image:
+                          DecorationImage(image: AssetImage(actionImagePath))),
+                ),
+                fit: FlexFit.loose,
+                flex: 3,
               ),
-              fit: FlexFit.loose,
-              flex: 3,
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Flexible(
-              child: Text(
-                action.toUpperCase(),
-                style: Styles.bodyTextStyle.apply(color: Colors.black54),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
+              SizedBox(
+                height: 30.0,
               ),
-              fit: FlexFit.loose,
-              flex: 6,
-            ),
-          ],
-        )),
+              Flexible(
+                child: Text(
+                  action.toUpperCase(),
+                  style: Styles.bodyTextStyle.apply(color: Colors.black54),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                ),
+                fit: FlexFit.loose,
+                flex: 6,
+              ),
+            ],
+          )),
+    ),
+  );
+}
+
+Widget staffItem(
+    {@required BuildContext context,
+    String staffName,
+    String staffPosition,
+    String staffNumber,
+    String imgPath}) {
+  return Center(
+    child: Hero(
+      tag: staffName + staffNumber,
+      child: GestureDetector(
+        onTap: (() => {}),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Flexible(
+                flex: 4,
+                fit: FlexFit.loose,
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: Center(
+                    child: Container(
+                      height: 65,
+                      width: 65,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(75.0),
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                            image: NetworkImage(imgPath), fit: BoxFit.cover),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Flexible(
+                  flex: 10,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text(staffName, style: Styles.headerTextStyle),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text(staffPosition,
+                              style: Styles.bodyTextStyleNonBold
+                                  .apply(color: MyColors.secondaryColor)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text(staffNumber,
+                              style: Styles.subHeaderTextStyle),
+                        ),
+                        Center(
+                          child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 1.0,
+                              color: Color(0xFF0F2037)),
+                        )
+                      ],
+                    ),
+                  )),
+              Flexible(
+                  flex: 1,
+                  fit: FlexFit.loose,
+                  child: Center(
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 22.0),
+                        child: Icon(Icons.chevron_right),
+                      ),
+                    ),
+                  ))
+            ],
+          ),
+        ),
+      ),
+    ),
   );
 }
