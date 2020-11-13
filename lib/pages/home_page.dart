@@ -93,14 +93,18 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: myWidgets.businessWidget(
-                      businessName: "Venta de textiles s.a. de c.v."),
+                      businessName: "Venta de textiles s.a. de c.v.",
+                      context: context,
+                      routeName: BUSINESS_PROFILE_PAGE),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: myWidgets.businessWidget(
-                      businessName: "Tienda de ropa online",
-                      businessImage: "assets/images/icons/OnlineShoping.png"),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 8.0),
+                //   child: myWidgets.businessWidget(
+                //       businessName: "Tienda de ropa online",
+                //       businessImage: "assets/images/icons/OnlineShoping.png",
+                //       context: context,
+                //       routeName: BUSINESS_PROFILE_PAGE),
+                // ),
               ],
             ),
           )
