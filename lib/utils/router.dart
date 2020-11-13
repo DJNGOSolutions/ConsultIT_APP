@@ -4,7 +4,7 @@ import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
-import 'package:consult_it_app/pages/profile_Page.dart';
+import 'package:consult_it_app/pages/profile_page.dart';
 import 'package:consult_it_app/pages/registration_page.dart';
 import 'package:consult_it_app/pages/splash_page.dart';
 import 'package:flutter/material.dart';

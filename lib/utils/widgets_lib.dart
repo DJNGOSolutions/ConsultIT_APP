@@ -481,7 +481,7 @@ Widget staffItem(
                           child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 1.0,
-                              color: Color(0xFF0F2037)),
+                              color: MyColors.secondaryColor),
                         )
                       ],
                     ),
@@ -493,7 +493,10 @@ Widget staffItem(
                     child: Container(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 5.0, right: 22.0),
-                        child: Icon(Icons.chevron_right),
+                        child: Icon(
+                          Icons.chevron_right,
+                          color: MyColors.secondaryColor,
+                        ),
                       ),
                     ),
                   ))
