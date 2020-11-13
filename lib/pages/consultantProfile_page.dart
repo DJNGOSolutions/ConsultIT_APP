@@ -38,7 +38,7 @@ class ConsultantProfilePage extends StatelessWidget {
                       width: 150,
                       height: 150,
                       decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: MyColors.mainColor.withOpacity(0.8),
                           image: DecorationImage(
                               image: NetworkImage(imgPath), fit: BoxFit.cover),
                           borderRadius: BorderRadius.all(Radius.circular(75.0)),
@@ -52,11 +52,11 @@ class ConsultantProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Ronald Vega',
+                    'Fernando Velasquez',
                     style: Styles.headerTextStyle.apply(fontSizeFactor: 1.3),
                   ),
                   SizedBox(height: 5.0),
-                  Text('Emprendedor/a'.toUpperCase(),
+                  Text('Asesor Profesional'.toUpperCase(),
                       style: Styles.bodyTextStyle),
                   SizedBox(height: 20.0),
                   Row(
@@ -74,9 +74,8 @@ class ConsultantProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('RonaldVega14',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                  child: Text('FerVelasquez',
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('usuario'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -95,9 +94,8 @@ class ConsultantProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('6313 9711',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                  child: Text('7855 9711',
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('Teléfono'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -123,11 +121,10 @@ class ConsultantProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('La Libertad',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                  child: Text('\$7.50',
+                                      style: Styles.headerTextStyle),
                                 ),
-                                Text('Departamento'.toUpperCase(),
+                                Text('Precio por hora'.toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: Styles.bodyTextStyle)
                               ]),
@@ -145,13 +142,13 @@ class ConsultantProfilePage extends StatelessWidget {
                                       right: 8.0,
                                       bottom: 2.0),
                                   child: FittedBox(
-                                    child: Text('Antiguo Cuscatlan',
+                                    child: Text('4.8 / 5.0',
                                         style: Styles.headerTextStyle.apply(
                                           fontSizeFactor: 1.1,
                                         )),
                                   ),
                                 ),
-                                Text('Municipio'.toUpperCase(),
+                                Text('Rating'.toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: Styles.bodyTextStyle)
                               ]),
@@ -167,18 +164,30 @@ class ConsultantProfilePage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(
                                   top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
-                              child: Text('07/09/1997',
+                              child: Text('Tecnologia e Inovación',
                                   style: Styles.headerTextStyle),
                             ),
                           ],
                         ),
-                        Text('Fecha de nacimiento'.toUpperCase(),
+                        Text('Especialidad en'.toUpperCase(),
                             textAlign: TextAlign.center,
                             style: Styles.bodyTextStyle)
                       ]),
                   SizedBox(height: 40.0),
-                  myWidgets.customButton(
-                      context: context, labelText: 'Editar Perfil', route: null)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      myWidgets.customButton(
+                          context: context,
+                          labelText: 'Editar Perfil',
+                          route: null),
+                      myWidgets.customButton(
+                          isMain: false,
+                          context: context,
+                          labelText: 'Metodos de pago',
+                          route: null)
+                    ],
+                  )
                 ],
               ),
             ))

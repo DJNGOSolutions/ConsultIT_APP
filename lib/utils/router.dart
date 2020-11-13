@@ -1,5 +1,6 @@
 import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
+import 'package:consult_it_app/pages/consultantProfile_page.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';

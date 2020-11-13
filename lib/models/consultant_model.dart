@@ -13,9 +13,11 @@
 * String state,
 * String city,
  */
+import 'package:consult_it_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 class Consultant {
+  User user;
   String firstname;
   String lastName;
   String deegre;
@@ -41,5 +43,6 @@ class Consultant {
       @required this.averageRating,
       @required this.consultantType,
       @required this.state,
-      @required this.city});
+      @required this.city,
+      @required this.user});
 }

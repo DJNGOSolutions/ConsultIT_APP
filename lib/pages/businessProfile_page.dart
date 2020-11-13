@@ -2,6 +2,7 @@ import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BusinessProfilePage extends StatelessWidget {
   final String heroTag, imgPath, businessName;
@@ -39,26 +40,26 @@ class BusinessProfilePage extends StatelessWidget {
                     SizedBox(height: 20.0),
                     Text(
                       businessName,
-                      style: Styles.headerTextStyle.apply(fontSizeFactor: 1.3),
+                      style: Styles.headerTextStyle,
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 5.0),
                     Text('Nombre legal del comercio'.toUpperCase(),
                         style: Styles.bodyTextStyle),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 10.0),
                     Padding(
                       padding: const EdgeInsets.only(
                           top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
                       child: Text('Camisas Depormundo',
                           textAlign: TextAlign.center,
-                          style: Styles.headerTextStyle
-                              .apply(fontSizeFactor: 1.1)),
+                          style: Styles.headerTextStyle),
                     ),
                     Text('Nombre comercial'.toUpperCase(),
                         textAlign: TextAlign.center,
                         style: Styles.bodyTextStyle)
                   ]),
               SizedBox(
-                height: 20.0,
+                height: 10.0,
               ),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -73,8 +74,7 @@ class BusinessProfilePage extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
                               child: Text('Venta de ropa',
-                                  style: Styles.headerTextStyle
-                                      .apply(fontSizeFactor: 1.1)),
+                                  style: Styles.headerTextStyle),
                             ),
                             Text('Linea de negocio'.toUpperCase(),
                                 textAlign: TextAlign.center,
@@ -92,9 +92,7 @@ class BusinessProfilePage extends StatelessWidget {
                                   top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
                               child: FittedBox(
                                 child: Text('Textiles',
-                                    style: Styles.headerTextStyle.apply(
-                                      fontSizeFactor: 1.1,
-                                    )),
+                                    style: Styles.headerTextStyle),
                               ),
                             ),
                             Text('Sector de negocio'.toUpperCase(),
@@ -103,7 +101,7 @@ class BusinessProfilePage extends StatelessWidget {
                           ]),
                     ),
                   ]),
-              SizedBox(height: 20.0),
+              SizedBox(height: 10.0),
               Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -135,7 +133,7 @@ class BusinessProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.75,
                       context: context,
-                      route: null,
+                      route: 'Textiles+',
                       labelText: 'Consultar situacion del mercado',
                       isMain: false),
                   SizedBox(

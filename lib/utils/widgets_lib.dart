@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
 import '../utils/router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // TODO: Agregar menu lateral
 Widget customAppBar({@required BuildContext context, bool canGoBack = false}) =>
@@ -230,7 +231,12 @@ customButton(
         double fontSize = 14.0}) =>
     GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, route);
+        if (route.contains('+')) {
+          route.replaceAll('+', '');
+          _launchUrl(query: route);
+        } else {
+          Navigator.pushNamed(context, route);
+        }
       },
       child: Container(
         constraints: BoxConstraints(minWidth: 100, maxWidth: maxWidth),
@@ -506,4 +512,17 @@ Widget staffItem(
       ),
     ),
   );
+}
+
+Future<void> _launchUrl({@required String query}) async {
+  String url = 'https://www.google.com/search?q=';
+  String finalUrl =
+      'oportunidad de mercado para empresas de ' + query + ' en El Salvador';
+  finalUrl = finalUrl.replaceAll(" ", '+');
+  url = url + finalUrl;
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
