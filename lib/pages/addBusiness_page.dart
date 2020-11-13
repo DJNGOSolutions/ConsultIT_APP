@@ -47,6 +47,17 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Center(
+                    child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'Ingrese toda la informacion solicitada a continuacion sobre su comercio o empresa, esta informacion sera utilizada para crear un perfil de su empresa dentro del sistema.\n\nLa informacion registrada dentro del sistema no será compartida con ninguna fuente externa a ConsultIT sin su previo consentimiento.',
+                    style: Styles.bodyTextStyleNonBold,
+                  ),
+                )),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                   decoration: BoxDecoration(
@@ -132,7 +143,10 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 Center(
                   child: myWidgets.customButton(
                       context: context, labelText: "Agregar", route: null),
-                )
+                ),
+                SizedBox(
+                  height: 25,
+                ),
               ],
             )));
   }
