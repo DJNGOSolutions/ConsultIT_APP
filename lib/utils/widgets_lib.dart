@@ -246,7 +246,9 @@ customButton(
             borderRadius: BorderRadius.circular(8),
             color: isMain
                 ? MyColors.mainColor
-                : isAccent ? MyColors.accentColor : MyColors.secondaryColor,
+                : isAccent
+                    ? MyColors.accentColor
+                    : MyColors.secondaryColor,
             boxShadow: [
               BoxShadow(
                   color: isAccent
@@ -493,15 +495,15 @@ Widget staffItem(
                     ),
                   )),
               Flexible(
-                  flex: 1,
-                  fit: FlexFit.loose,
+                  flex: 2,
+                  fit: FlexFit.tight,
                   child: Center(
                     child: Container(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 5.0, right: 22.0),
                         child: Icon(
-                          Icons.chevron_right,
-                          color: MyColors.secondaryColor,
+                          Icons.arrow_forward,
+                          color: MyColors.mainColor,
                         ),
                       ),
                     ),
@@ -521,7 +523,7 @@ Future<void> _launchUrl({@required String query}) async {
   finalUrl = finalUrl.replaceAll(" ", '+');
   url = url + finalUrl;
   if (await canLaunch(url)) {
-    await launch(url);
+    await launch(url, forceWebView: true);
   } else {
     throw 'Could not launch $url';
   }

@@ -136,7 +136,7 @@ class HomePage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Más Acciones',
+                          'Opciones',
                           style: Styles.headerTextStyle,
                         ),
                       ),

@@ -95,6 +95,9 @@ class _ConsultantsListPageState extends State<ConsultantsListPage> {
                     imgPath:
                         'https://res.cloudinary.com/twenty20/private_images/t_watermark-criss-cross-10/v1442027779000/photosp/a4098098-a065-4734-8683-6d12b05e3006/stock-photo-portrait-men-profile-beard-a4098098-a065-4734-8683-6d12b05e3006.jpg',
                     context: context),
+                SizedBox(
+                  height: 40.0,
+                )
               ]),
         ));
   }
