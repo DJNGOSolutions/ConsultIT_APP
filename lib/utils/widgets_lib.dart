@@ -394,18 +394,20 @@ Widget actionWidget({
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Flexible(
-                child: Container(
-                  height: 55,
-                  width: 55,
-                  decoration: BoxDecoration(
-                      image:
-                          DecorationImage(image: AssetImage(actionImagePath))),
+                child: Center(
+                  child: Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(actionImagePath))),
+                  ),
                 ),
-                fit: FlexFit.loose,
+                fit: FlexFit.tight,
                 flex: 3,
               ),
               SizedBox(
-                height: 30.0,
+                height: 20.0,
               ),
               Flexible(
                 child: Text(
@@ -415,7 +417,7 @@ Widget actionWidget({
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                 ),
-                fit: FlexFit.loose,
+                fit: FlexFit.tight,
                 flex: 6,
               ),
             ],
@@ -453,7 +455,7 @@ Widget staffItem(
                       width: 65,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(75.0),
-                        color: Colors.transparent,
+                        color: MyColors.accentColor.withOpacity(0.6),
                         image: DecorationImage(
                             image: NetworkImage(imgPath), fit: BoxFit.cover),
                       ),

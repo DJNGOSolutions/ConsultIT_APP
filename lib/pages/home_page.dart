@@ -117,14 +117,17 @@ class HomePage extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.only(top: 15.0, right: 0.0, left: 20.0),
+            padding: const EdgeInsets.only(top: 12.0, right: 0.0, left: 20.0),
             child: Row(
               children: [
                 Flexible(
-                  child: Icon(
-                    Icons.more_vert,
-                    size: 35.0,
-                    color: MyColors.mainColor,
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage('assets/images/icons/Manager.png'))),
                   ),
                   flex: 1,
                   fit: FlexFit.loose,
@@ -136,16 +139,10 @@ class HomePage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          'Opciones',
+                          'Consultas',
                           style: Styles.headerTextStyle,
                         ),
                       ),
-                      IconButton(
-                          icon: Icon(
-                            Icons.arrow_forward,
-                            color: MyColors.mainColor,
-                          ),
-                          onPressed: null)
                     ],
                   ),
                   flex: 7,
@@ -169,7 +166,7 @@ class HomePage extends StatelessWidget {
                 ),
                 myWidgets.actionWidget(
                     route: null,
-                    action: "Consultar fluctuación del mercado",
+                    action: "Analizar Mercado",
                     context: context,
                     actionImagePath:
                         "assets/images/icons/MarketFluctuation.png"),
@@ -178,7 +175,7 @@ class HomePage extends StatelessWidget {
                 ),
                 myWidgets.actionWidget(
                     route: null,
-                    action: "Obtener analisis de cuentas para un comercio",
+                    action: "Analizar mis comercios",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),
                 SizedBox(

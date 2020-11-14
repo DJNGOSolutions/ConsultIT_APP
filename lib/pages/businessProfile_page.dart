@@ -290,7 +290,7 @@ class BusinessProfilePage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 40.0,
+                height: 30.0,
               )
             ],
           ),
