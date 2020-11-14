@@ -60,7 +60,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           builder: (context) => ConsultantsListPage(
                 heroTag: 'ConsultantName',
                 imgPath: 'assets/images/icons/BookProfesionals.png',
-                optionName: 'Consultar cartera de asesores',
+                optionName: 'Cartera de asesores',
               ));
     case CONSULTANT_DETAILS_PAGE:
       Consultant consultant = new Consultant(
