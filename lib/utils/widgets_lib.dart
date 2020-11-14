@@ -239,7 +239,7 @@ customButton(
         }
       },
       child: Container(
-        constraints: BoxConstraints(minWidth: 100, maxWidth: maxWidth),
+        constraints: BoxConstraints(minWidth: 60, maxWidth: maxWidth),
         height: 45,
         padding: EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
+import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
@@ -74,8 +75,7 @@ class ProfilePage extends StatelessWidget {
                                       right: 8.0,
                                       bottom: 2.0),
                                   child: Text('RonaldVega14',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('usuario'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -95,8 +95,7 @@ class ProfilePage extends StatelessWidget {
                                       right: 8.0,
                                       bottom: 2.0),
                                   child: Text('6313 9711',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('Teléfono'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -123,8 +122,7 @@ class ProfilePage extends StatelessWidget {
                                       right: 8.0,
                                       bottom: 2.0),
                                   child: Text('La Libertad',
-                                      style: Styles.headerTextStyle
-                                          .apply(fontSizeFactor: 1.1)),
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('Departamento'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -143,12 +141,9 @@ class ProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: FittedBox(
-                                    child: Text('Antiguo Cuscatlan',
-                                        style: Styles.headerTextStyle.apply(
-                                          fontSizeFactor: 1.1,
-                                        )),
-                                  ),
+                                  child: Text('Antiguo Cuscatlan',
+                                      textAlign: TextAlign.center,
+                                      style: Styles.headerTextStyle),
                                 ),
                                 Text('Municipio'.toUpperCase(),
                                     textAlign: TextAlign.center,
@@ -177,7 +172,9 @@ class ProfilePage extends StatelessWidget {
                       ]),
                   SizedBox(height: 40.0),
                   myWidgets.customButton(
-                      context: context, labelText: 'Editar Perfil', route: null)
+                      context: context,
+                      labelText: 'Editar Perfil',
+                      route: EDIT_PROFILE_PAGE)
                 ],
               ),
             ))

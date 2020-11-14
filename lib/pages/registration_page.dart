@@ -282,15 +282,15 @@ class _RegistrationPageState extends State<RegistrationPage>
                     children: [
                       // Pais de residencia
                       inputField(
-                          hintText: 'Ingrese su país de residencía',
-                          labelText: 'Pais',
+                          hintText: 'Ingrese su departamento de residencía',
+                          labelText: 'Departamento',
                           icon: Icons.location_on,
                           uppercase: false,
                           bold: false),
                       // Ciudad de residencia
                       inputField(
-                        hintText: 'Ingrese su ciudad de residencía',
-                        labelText: 'Ciudad',
+                        hintText: 'Ingrese su municipio de residencía',
+                        labelText: 'Municipio',
                         icon: Icons.location_city,
                         uppercase: false,
                         bold: false,

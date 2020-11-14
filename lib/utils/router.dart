@@ -5,6 +5,7 @@ import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/consultantDetails_page.dart';
 import 'package:consult_it_app/pages/consultantProfile_page.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
+import 'package:consult_it_app/pages/editProfile_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
@@ -23,6 +24,7 @@ const String PROFILE_PAGE = 'PROFILE_PAGE';
 const String BUSINESS_PROFILE_PAGE = 'BUSINESS_PROFILE_PAGE';
 const String CONSULTANTS_LIST_PAGE = 'CONSULTANTS_LIST_PAGE';
 const String CONSULTANT_DETAILS_PAGE = 'CONSULTANT_DETAILS_PAGE';
+const String EDIT_PROFILE_PAGE = 'EDIT_PROFILE_PAGE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -88,6 +90,9 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
                 imgPath: 'assets/images/icons/profile.png',
                 consultant: consultant,
               ));
+    case EDIT_PROFILE_PAGE:
+      return MaterialPageRoute(
+          builder: (context) => EditProfilePage(heroTag: 'Image'));
     default:
       return MaterialPageRoute(builder: (context) => LoginPage());
   }
