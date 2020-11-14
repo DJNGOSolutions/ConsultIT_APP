@@ -428,15 +428,17 @@ Widget actionWidget({
 
 Widget staffItem(
     {@required BuildContext context,
-    String staffName,
+    String staffName = '',
     String staffPosition,
     String staffNumber,
-    String imgPath}) {
+    String imgPath,
+    String heroTag = 'Imagen'}) {
+  heroTag = heroTag + staffName;
   return Center(
     child: Hero(
-      tag: staffName + staffNumber,
+      tag: heroTag,
       child: GestureDetector(
-        onTap: (() => {}),
+        onTap: (() => {Navigator.pushNamed(context, CONSULTANT_DETAILS_PAGE)}),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.15,
           width: MediaQuery.of(context).size.width,

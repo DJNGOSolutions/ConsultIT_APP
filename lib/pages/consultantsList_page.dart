@@ -89,7 +89,7 @@ class _ConsultantsListPageState extends State<ConsultantsListPage> {
                         'https://46svmh2eidr34ea1z715q5mm-wpengine.netdna-ssl.com/wp-content/uploads/Galbraith-3web-cropped-small.jpg',
                     context: context),
                 myWidgets.staffItem(
-                    staffName: 'Staff Name',
+                    staffName: 'Eduardo',
                     staffPosition: 'Staff Position',
                     staffNumber: 'Staff Number',
                     imgPath:

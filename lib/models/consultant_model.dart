@@ -22,7 +22,7 @@ class Consultant {
   String lastName;
   String deegre;
   String photo;
-  DateTime birthdate;
+  String birthdate;
   double referencePrice;
   double historicAveragePrice;
   String phoneNumber;
