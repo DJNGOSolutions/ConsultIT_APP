@@ -3,6 +3,9 @@ import 'package:equatable/equatable.dart';
 abstract class HomeState extends Equatable {}
 
 class OnHomePage extends HomeState {
+  final int currentIndex;
+
+  OnHomePage(this.currentIndex);
   @override
   String toString() => 'OnHomePage';
 }
@@ -55,4 +58,12 @@ class OnFAQBotPage extends HomeState {
 class OnAnalizeMarket extends HomeState {
   @override
   String toString() => 'OnAnalizeMarket';
+}
+
+class ChangeHomeContainer extends HomeState {
+  final int currentIndex;
+
+  ChangeHomeContainer(this.currentIndex);
+  @override
+  String toString() => 'ChangeHomeContainer';
 }

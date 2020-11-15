@@ -32,7 +32,7 @@ class _HomeControllerState extends State<HomeController> {
 
   @override
   void initState() {
-    _homeBloc = HomeBloc(OnHomePage(), userRepository: UserRepository());
+    _homeBloc = HomeBloc(OnHomePage(0), userRepository: UserRepository());
     super.initState();
   }
 
@@ -77,6 +77,7 @@ class _HomeControllerState extends State<HomeController> {
       return HomePage(
         authenticationBloc: authenticationBloc,
         homeBloc: _homeBloc,
+        currentIndex: state.currentIndex,
       );
     } else if (state is OnAddBusinessPage) {
       return AddBusinessPage(

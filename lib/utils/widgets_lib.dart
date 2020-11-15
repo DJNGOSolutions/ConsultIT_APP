@@ -101,7 +101,7 @@ Widget faqbot({Function function}) {
   return FloatingActionButton(
     backgroundColor: MyColors.mainColor,
     foregroundColor: MyColors.accentColor,
-    onPressed: () => function,
+    onPressed: function,
     tooltip: 'Preguntanos lo que desees',
     child: Center(
       child: Container(

@@ -1,12 +1,16 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final int currentIndex;
+  final HomeBloc homeBloc;
 
-  const CustomBottomNavigationBar({Key key, this.currentIndex = 0})
+  const CustomBottomNavigationBar(
+      {Key key, @required this.currentIndex, @required this.homeBloc})
       : super(key: key);
   @override
   _CustomBottomNavigationBarState createState() =>
@@ -15,6 +19,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex;
+  HomeBloc get _homeBloc => widget.homeBloc;
 
   @override
   void initState() {
@@ -26,10 +31,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         currentIndex = index;
         switch (currentIndex) {
           case 0:
+            _homeBloc.add(BottomBarPressed(0));
             break;
           case 1:
+            _homeBloc.add(BottomBarPressed(1));
             break;
           case 2:
+            _homeBloc.add(BottomBarPressed(2));
             break;
           default:
         }

@@ -2,38 +2,61 @@ import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/pages/consultantsList_page.dart';
+import 'package:consult_it_app/pages/profile_Page.dart';
+import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final HomeBloc homeBloc;
   final AuthenticationBloc authenticationBloc;
+  final int currentIndex;
 
   const HomePage(
-      {Key key, @required this.homeBloc, @required this.authenticationBloc})
+      {Key key,
+      @required this.homeBloc,
+      @required this.authenticationBloc,
+      @required this.currentIndex})
       : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex;
+  HomeBloc get _homeBloc => widget.homeBloc;
+  @override
+  void initState() {
+    _currentIndex = widget.currentIndex;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: myWidgets.customAppBar(
           context: context,
-          function: () => authenticationBloc.add(LoggedOut())),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: ListView(
-          children: [
-            _buildMyBusinessSection(context),
-            _buildMoreOptionsSection(context)
-          ],
-        ),
+          function: () => widget.authenticationBloc.add(LoggedOut())),
+      body: BlocListener<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state is ChangeHomeContainer) {
+            _currentIndex = state.currentIndex;
+          }
+        },
+        child: _buildHomeContainer(context),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        homeBloc: _homeBloc,
+      ),
       floatingActionButton:
-          myWidgets.faqbot(function: () => homeBloc.add(ToFAQBotPage())),
+          myWidgets.faqbot(function: () => _homeBloc.add(ToFAQBotPage())),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
@@ -96,7 +119,7 @@ class HomePage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 GestureDetector(
-                  onTap: () => homeBloc.add(ToAddBusinessPage()),
+                  onTap: () => widget.homeBloc.add(ToAddBusinessPage()),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: myWidgets.addBusinessWidget(),
@@ -107,7 +130,8 @@ class HomePage extends StatelessWidget {
                   child: myWidgets.businessWidget(
                       businessName: "Venta de textiles s.a. de c.v.",
                       context: context,
-                      function: () => homeBloc.add(ToMyBusinessDetailsPage())),
+                      function: () =>
+                          widget.homeBloc.add(ToMyBusinessDetailsPage())),
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 8.0),
@@ -168,7 +192,8 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 myWidgets.actionWidget(
-                    function: () => homeBloc.add(ToConsultantsListPage()),
+                    function: () =>
+                        widget.homeBloc.add(ToConsultantsListPage()),
                     action: "Consultar cartera de asesores",
                     context: context,
                     actionImagePath:
@@ -177,7 +202,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => homeBloc.add(ToAnalizeMarketPage()),
+                    function: () => widget.homeBloc.add(ToAnalizeMarketPage()),
                     action: "Analizar Mercado",
                     context: context,
                     actionImagePath:
@@ -186,7 +211,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => homeBloc.add(ToMyBusinessesList()),
+                    function: () => widget.homeBloc.add(ToMyBusinessesList()),
                     action: "Analizar mis comercios",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),
@@ -198,4 +223,45 @@ class HomePage extends StatelessWidget {
           )
         ],
       );
+
+  Widget _buildHomeContainer(BuildContext context) {
+    if (widget.currentIndex == 0) {
+      return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          children: [
+            _buildMyBusinessSection(context),
+            _buildMoreOptionsSection(context)
+          ],
+        ),
+      );
+    } else if (widget.currentIndex == 1) {
+      return Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ConsultantsListPage(
+            heroTag: 'ConsultantName',
+            imgPath: 'assets/images/icons/BookProfesionals.png',
+            optionName: 'Cartera de asesores',
+            homeBloc: _homeBloc,
+          ));
+    } else if (widget.currentIndex == 2) {
+      return Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ProfilePage(homeBloc: widget.homeBloc));
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          children: [
+            _buildMyBusinessSection(context),
+            _buildMoreOptionsSection(context)
+          ],
+        ),
+      );
+    }
+  }
 }

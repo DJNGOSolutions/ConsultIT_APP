@@ -75,3 +75,11 @@ class ToAnalizeMarketPage extends HomeEvent {
   @override
   String toString() => 'ToAnalizeMarketPage';
 }
+
+class BottomBarPressed extends HomeEvent {
+  final int currentIndex;
+
+  BottomBarPressed(this.currentIndex);
+  @override
+  String toString() => 'BottomBarPressed';
+}
