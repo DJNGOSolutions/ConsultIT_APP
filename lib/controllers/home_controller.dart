@@ -1,6 +1,5 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
-import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/pages/addBusiness_page.dart';

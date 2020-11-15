@@ -5,7 +5,6 @@ import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // TODO: Agregar menu lateral
 Widget customAppBar(
@@ -512,17 +511,4 @@ Widget staffItem(
       ),
     ),
   );
-}
-
-Future<void> _launchUrl({@required String query}) async {
-  String url = 'https://www.google.com/search?q=';
-  String finalUrl =
-      'oportunidad de mercado para empresas de ' + query + ' en El Salvador';
-  finalUrl = finalUrl.replaceAll(" ", '+');
-  url = url + finalUrl;
-  if (await canLaunch(url)) {
-    await launch(url, forceWebView: true);
-  } else {
-    throw 'Could not launch $url';
-  }
 }

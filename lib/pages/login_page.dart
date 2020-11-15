@@ -5,10 +5,8 @@ import 'package:consult_it_app/utils/neumorphismWidgets/bottom_left_clipper_bott
 import 'package:consult_it_app/utils/neumorphismWidgets/clip_shadow_path.dart';
 import 'package:consult_it_app/utils/neumorphismWidgets/top_right_clipper.dart';
 import 'package:consult_it_app/utils/neumorphismWidgets/top_right_clipper_bottom.dart';
-import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart';
 
 class LoginPage extends StatelessWidget {

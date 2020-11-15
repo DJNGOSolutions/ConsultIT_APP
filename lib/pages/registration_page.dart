@@ -1,10 +1,8 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
-import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart';
 import 'package:flutter/material.dart';
-import 'package:consult_it_app/utils/router.dart';
 
 class RegistrationPage extends StatefulWidget {
   final AuthenticationBloc authenticationBloc;
