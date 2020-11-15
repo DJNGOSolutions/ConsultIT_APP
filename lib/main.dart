@@ -1,7 +1,6 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/controllers/home_controller.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
-import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/login_page.dart';
 import 'package:consult_it_app/pages/registration_page.dart';
 import 'package:consult_it_app/pages/splash_page.dart';
@@ -9,7 +8,6 @@ import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'utils/router.dart' as router;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

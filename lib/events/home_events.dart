@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class HomeEvent extends Equatable {}
 
@@ -43,6 +44,9 @@ class ToConsultantDetailsPage extends HomeEvent {
 }
 
 class ToWebView extends HomeEvent {
+  final String query;
+
+  ToWebView({@required this.query});
   @override
   String toString() => 'ToWebView';
 }
@@ -65,4 +69,9 @@ class SaveNewProfileInfo extends HomeEvent {
 class ToFAQBotPage extends HomeEvent {
   @override
   String toString() => 'ToFAQBotPage';
+}
+
+class ToAnalizeMarketPage extends HomeEvent {
+  @override
+  String toString() => 'ToAnalizeMarketPage';
 }

@@ -51,3 +51,8 @@ class OnFAQBotPage extends HomeState {
   @override
   String toString() => 'OnFAQBotPage';
 }
+
+class OnAnalizeMarket extends HomeState {
+  @override
+  String toString() => 'OnAnalizeMarket';
+}

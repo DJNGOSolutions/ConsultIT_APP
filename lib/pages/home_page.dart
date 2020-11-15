@@ -177,7 +177,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => homeBloc.add(ToWebView()),
+                    function: () => homeBloc.add(ToAnalizeMarketPage()),
                     action: "Analizar Mercado",
                     context: context,
                     actionImagePath:
@@ -186,7 +186,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => homeBloc.add(ToWebView()),
+                    function: () => homeBloc.add(ToMyBusinessesList()),
                     action: "Analizar mis comercios",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),

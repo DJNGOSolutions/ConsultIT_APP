@@ -279,7 +279,8 @@ class BusinessProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.73,
                       context: context,
-                      function: () => homeBloc.add(ToWebView()),
+                      function: () =>
+                          homeBloc.add(ToWebView(query: 'Textiles')),
                       labelText: 'Consultar situacion del mercado',
                       isMain: false),
                   SizedBox(

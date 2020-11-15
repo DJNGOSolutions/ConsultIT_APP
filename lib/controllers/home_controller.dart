@@ -3,6 +3,7 @@ import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
+import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/consultantDetails_page.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
@@ -78,7 +79,9 @@ class _HomeControllerState extends State<HomeController> {
         homeBloc: _homeBloc,
       );
     } else if (state is OnAddBusinessPage) {
-      return AddNewBusiness();
+      return AddBusinessPage(
+        homeBloc: _homeBloc,
+      );
     } else if (state is OnMyBusinessDetails) {
       return BusinessProfilePage(
           imgPath: 'assets/images/icons/FolderDataColor.png',

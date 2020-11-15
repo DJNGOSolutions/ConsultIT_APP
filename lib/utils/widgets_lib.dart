@@ -1,14 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
-import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
-import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
-import '../utils/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // TODO: Agregar menu lateral
@@ -26,7 +22,7 @@ Widget customAppBar(
           child: Tooltip(
             message: canGoBack ? "Retroceder" : "Cerrar Sesión",
             child: GestureDetector(
-              onTap: () => function,
+              onTap: function,
               child: NeuCard(
                 bevel: 16.0,
                 curveType: CurveType.concave,
@@ -233,9 +229,7 @@ customButton(
         double maxWidth = 150,
         double fontSize = 14.0}) =>
     GestureDetector(
-      onTap: () {
-        function();
-      },
+      onTap: function,
       child: Container(
         constraints: BoxConstraints(minWidth: 60, maxWidth: maxWidth),
         height: 45,
@@ -321,7 +315,7 @@ Widget businessWidget(
     String heroTag = 'BusinessImage',
     String businessImage = 'assets/images/icons/FolderDataColor.png'}) {
   return GestureDetector(
-    onTap: () => function,
+    onTap: function,
     child: Tooltip(
       message: "Ver detalle de: ${businessName.toUpperCase()}",
       child: NeuCard(
@@ -376,7 +370,7 @@ Widget actionWidget({
   @required BuildContext context,
 }) {
   return GestureDetector(
-    onTap: () => function,
+    onTap: function,
     child: Tooltip(
       message: "Ir a ${action.toUpperCase()}",
       child: NeuCard(

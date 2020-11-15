@@ -42,7 +42,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage();
     } else if (event is ToFAQBotPage) {
       yield OnFAQBotPage();
+    } else if (event is ToAnalizeMarketPage) {
+      yield OnAnalizeMarket();
+    } else {
+      throw UnimplementedError();
     }
-    throw UnimplementedError();
   }
 }
