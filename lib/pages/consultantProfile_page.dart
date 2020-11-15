@@ -1,3 +1,5 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
@@ -8,17 +10,21 @@ String imgPath =
 
 class ConsultantProfilePage extends StatelessWidget {
   final String heroTag;
-  const ConsultantProfilePage({Key key, this.heroTag = 'Image'})
+  final HomeBloc homeBloc;
+  const ConsultantProfilePage(
+      {Key key, this.heroTag = 'Image', @required this.homeBloc})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myWidgets.customAppBar(context: context),
+      appBar: myWidgets.customAppBar(
+          context: context, function: () => homeBloc.add(ToHomePage())),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 2,
       ),
-      floatingActionButton: myWidgets.faqbot(context),
+      floatingActionButton:
+          myWidgets.faqbot(function: () => homeBloc.add(ToFAQBotPage())),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: Stack(children: <Widget>[
         ClipPath(
@@ -180,12 +186,12 @@ class ConsultantProfilePage extends StatelessWidget {
                       myWidgets.customButton(
                           context: context,
                           labelText: 'Editar Perfil',
-                          route: null),
+                          function: () => homeBloc.add(ToEditProfilePage())),
                       myWidgets.customButton(
                           isMain: false,
                           context: context,
                           labelText: 'Metodos de pago',
-                          route: null)
+                          function: null)
                     ],
                   )
                 ],

@@ -1,3 +1,5 @@
+import 'package:consult_it_app/bloc/authentication_bloc.dart';
+import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/utils/neumorphismWidgets/bottom_left_clipper.dart';
 import 'package:consult_it_app/utils/neumorphismWidgets/bottom_left_clipper_bottom.dart';
 import 'package:consult_it_app/utils/neumorphismWidgets/clip_shadow_path.dart';
@@ -10,6 +12,10 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart';
 
 class LoginPage extends StatelessWidget {
+  final AuthenticationBloc authenticationBloc;
+
+  const LoginPage({Key key, @required this.authenticationBloc})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -150,7 +156,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, HOME_ROUTE),
+                          onTap: () => authenticationBloc.add(LoggedIn()),
                           child: Container(
                             constraints:
                                 BoxConstraints(minWidth: 100, maxWidth: 150),
@@ -182,7 +188,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () =>
-                              Navigator.pushNamed(context, REGISTRATION_ROUTE),
+                              authenticationBloc.add(ToRegistrationForm()),
                           child: Container(
                             constraints:
                                 BoxConstraints(minWidth: 100, maxWidth: 150),

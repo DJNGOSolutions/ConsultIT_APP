@@ -26,15 +26,10 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         currentIndex = index;
         switch (currentIndex) {
           case 0:
-            Navigator.pushNamedAndRemoveUntil(
-                context, HOME_ROUTE, (route) => false);
             break;
           case 1:
-            Navigator.pushNamedAndRemoveUntil(
-                context, HOME_ROUTE, (route) => false);
             break;
           case 2:
-            Navigator.pushNamed(context, PROFILE_PAGE);
             break;
           default:
         }

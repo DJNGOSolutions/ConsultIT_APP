@@ -1,3 +1,7 @@
+import 'package:bloc/bloc.dart';
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -8,7 +12,10 @@ import '../utils/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // TODO: Agregar menu lateral
-Widget customAppBar({@required BuildContext context, bool canGoBack = false}) =>
+Widget customAppBar(
+        {@required BuildContext context,
+        bool canGoBack = false,
+        @required Function function}) =>
     AppBar(
       bottomOpacity: 0,
       toolbarOpacity: 1.0,
@@ -19,11 +26,7 @@ Widget customAppBar({@required BuildContext context, bool canGoBack = false}) =>
           child: Tooltip(
             message: canGoBack ? "Retroceder" : "Cerrar Sesión",
             child: GestureDetector(
-              onTap: () => canGoBack
-                  ? Navigator.canPop(context)
-                      ? Navigator.pop(context)
-                      : Navigator.pushNamed(context, HOME_ROUTE)
-                  : Navigator.pushNamed(context, LOGIN_ROUTE),
+              onTap: () => function,
               child: NeuCard(
                 bevel: 16.0,
                 curveType: CurveType.concave,
@@ -98,11 +101,11 @@ Widget customAppBar({@required BuildContext context, bool canGoBack = false}) =>
     );
 
 //FAB para el bot
-Widget faqbot(BuildContext context) {
+Widget faqbot({Function function}) {
   return FloatingActionButton(
     backgroundColor: MyColors.mainColor,
     foregroundColor: MyColors.accentColor,
-    onPressed: () => Navigator.pushNamed(context, FAQ_BOT_ROUTE),
+    onPressed: () => function,
     tooltip: 'Preguntanos lo que desees',
     child: Center(
       child: Container(
@@ -226,17 +229,12 @@ customButton(
         String labelText = '',
         bool isMain = true,
         bool isAccent = false,
-        @required String route,
+        @required Function function,
         double maxWidth = 150,
         double fontSize = 14.0}) =>
     GestureDetector(
       onTap: () {
-        if (route.contains('+')) {
-          route.replaceAll('+', '');
-          _launchUrl(query: route);
-        } else {
-          Navigator.pushNamed(context, route);
-        }
+        function();
       },
       child: Container(
         constraints: BoxConstraints(minWidth: 60, maxWidth: maxWidth),
@@ -319,11 +317,11 @@ Widget addBusinessWidget() {
 Widget businessWidget(
     {@required String businessName,
     @required BuildContext context,
-    @required String routeName,
+    @required Function function,
     String heroTag = 'BusinessImage',
     String businessImage = 'assets/images/icons/FolderDataColor.png'}) {
   return GestureDetector(
-    onTap: () => Navigator.pushNamed(context, routeName),
+    onTap: () => function,
     child: Tooltip(
       message: "Ver detalle de: ${businessName.toUpperCase()}",
       child: NeuCard(
@@ -374,11 +372,11 @@ Widget businessWidget(
 Widget actionWidget({
   @required String action,
   String actionImagePath = 'assets/images/icons/FolderDataColor.png',
-  @required String route,
+  @required Function function,
   @required BuildContext context,
 }) {
   return GestureDetector(
-    onTap: () => Navigator.pushNamed(context, route),
+    onTap: () => function,
     child: Tooltip(
       message: "Ir a ${action.toUpperCase()}",
       child: NeuCard(
@@ -432,13 +430,15 @@ Widget staffItem(
     String staffPosition,
     String staffNumber,
     String imgPath,
+    @required HomeBloc bloc,
+    //TODO: @required Consultant consultant,
     String heroTag = 'Imagen'}) {
   heroTag = heroTag + staffName;
   return Center(
     child: Hero(
       tag: heroTag,
       child: GestureDetector(
-        onTap: (() => {Navigator.pushNamed(context, CONSULTANT_DETAILS_PAGE)}),
+        onTap: (() => {bloc.add(ToConsultantDetailsPage())}),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.15,
           width: MediaQuery.of(context).size.width,

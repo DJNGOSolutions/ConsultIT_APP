@@ -1,24 +1,31 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 String imgPath =
     'https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png';
 
 class ProfilePage extends StatelessWidget {
   final String heroTag;
-  const ProfilePage({Key key, this.heroTag = 'Image'}) : super(key: key);
+  final HomeBloc homeBloc;
+  const ProfilePage({Key key, this.heroTag = 'Image', @required this.homeBloc})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myWidgets.customAppBar(context: context),
+      appBar: myWidgets.customAppBar(
+          context: context, function: () => homeBloc.add(ToHomePage())),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 2,
       ),
-      floatingActionButton: myWidgets.faqbot(context),
+      floatingActionButton:
+          myWidgets.faqbot(function: () => homeBloc.add(ToFAQBotPage())),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       body: Stack(children: <Widget>[
         ClipPath(
@@ -174,7 +181,7 @@ class ProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       context: context,
                       labelText: 'Editar Perfil',
-                      route: EDIT_PROFILE_PAGE)
+                      function: () => homeBloc.add(ToEditProfilePage()))
                 ],
               ),
             ))

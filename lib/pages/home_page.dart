@@ -1,15 +1,26 @@
+import 'package:consult_it_app/bloc/authentication_bloc.dart';
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
-import 'package:consult_it_app/utils/router.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
 
 class HomePage extends StatelessWidget {
+  final HomeBloc homeBloc;
+  final AuthenticationBloc authenticationBloc;
+
+  const HomePage(
+      {Key key, @required this.homeBloc, @required this.authenticationBloc})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: myWidgets.customAppBar(context: context),
+      appBar: myWidgets.customAppBar(
+          context: context,
+          function: () => authenticationBloc.add(LoggedOut())),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -21,7 +32,8 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),
-      floatingActionButton: myWidgets.faqbot(context),
+      floatingActionButton:
+          myWidgets.faqbot(function: () => homeBloc.add(ToFAQBotPage())),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
@@ -84,7 +96,7 @@ class HomePage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, ADD_BUSINESS_ROUTE),
+                  onTap: () => homeBloc.add(ToAddBusinessPage()),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: myWidgets.addBusinessWidget(),
@@ -95,7 +107,7 @@ class HomePage extends StatelessWidget {
                   child: myWidgets.businessWidget(
                       businessName: "Venta de textiles s.a. de c.v.",
                       context: context,
-                      routeName: BUSINESS_PROFILE_PAGE),
+                      function: () => homeBloc.add(ToMyBusinessDetailsPage())),
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.only(left: 8.0),
@@ -156,7 +168,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 myWidgets.actionWidget(
-                    route: CONSULTANTS_LIST_PAGE,
+                    function: () => homeBloc.add(ToConsultantsListPage()),
                     action: "Consultar cartera de asesores",
                     context: context,
                     actionImagePath:
@@ -165,7 +177,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    route: null,
+                    function: () => homeBloc.add(ToWebView()),
                     action: "Analizar Mercado",
                     context: context,
                     actionImagePath:
@@ -174,7 +186,7 @@ class HomePage extends StatelessWidget {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    route: null,
+                    function: () => homeBloc.add(ToWebView()),
                     action: "Analizar mis comercios",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),

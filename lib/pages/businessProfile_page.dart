@@ -1,20 +1,27 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
 
 class BusinessProfilePage extends StatelessWidget {
   final String heroTag, imgPath, businessName;
+  final HomeBloc homeBloc;
   const BusinessProfilePage(
       {Key key,
       @required this.heroTag,
       @required this.imgPath,
-      @required this.businessName})
+      @required this.businessName,
+      @required this.homeBloc})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: myWidgets.customAppBar(canGoBack: true, context: context),
+        appBar: myWidgets.customAppBar(
+            canGoBack: true,
+            context: context,
+            function: () => homeBloc.add(ToHomePage())),
         body: Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 10),
           child: ListView(
@@ -265,14 +272,14 @@ class BusinessProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       context: context,
                       labelText: 'Editar comercio',
-                      route: null),
+                      function: () => homeBloc.add(ToEditBusinessPage())),
                   SizedBox(
                     height: 13.0,
                   ),
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.73,
                       context: context,
-                      route: 'Textiles+',
+                      function: () => homeBloc.add(ToWebView()),
                       labelText: 'Consultar situacion del mercado',
                       isMain: false),
                   SizedBox(
@@ -281,7 +288,7 @@ class BusinessProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.54,
                       context: context,
-                      route: null,
+                      function: null,
                       labelText: 'Realizar flujo de caja',
                       isMain: false,
                       isAccent: true),

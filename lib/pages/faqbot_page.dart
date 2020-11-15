@@ -1,3 +1,5 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -5,18 +7,25 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
 
 class FaqBotPage extends StatefulWidget {
+  final HomeBloc homeBloc;
+
+  const FaqBotPage({Key key, @required this.homeBloc}) : super(key: key);
   @override
   _FaqBotPageState createState() => _FaqBotPageState();
 }
 
 class _FaqBotPageState extends State<FaqBotPage> {
+  HomeBloc get homeBloc => widget.homeBloc;
   final List<FAQMessage> _messages = <FAQMessage>[];
   final TextEditingController _messageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: myWidgets.customAppBar(context: context, canGoBack: true),
+      appBar: myWidgets.customAppBar(
+          context: context,
+          canGoBack: true,
+          function: () => homeBloc.add(ToHomePage())),
       body: Column(
         children: [
           Flexible(

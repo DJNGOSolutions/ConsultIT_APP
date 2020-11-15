@@ -28,27 +28,17 @@ class BackToLogin extends AuthenticationEvent {
   String toString() => 'BackToLogin';
 }
 
-class BackNuevaMatriculaOptions extends AuthenticationEvent {
+class ToRegistrationForm extends AuthenticationEvent {
   @override
-  String toString() => 'BackNuevaMatriculaOptions';
+  String toString() => 'ToRegistrationForm';
 }
 
-class ToNuevaMatriculaForm extends AuthenticationEvent {
+class RegisterConsultant extends AuthenticationEvent {
   @override
-  String toString() => 'ToNuevaMatriculaForm';
+  String toString() => 'RegisterConsultant';
 }
 
-class ToNuevaMatriculaOptions extends AuthenticationEvent {
+class RegisterEntrepreneur extends AuthenticationEvent {
   @override
-  String toString() => 'ToNuevaMatriculaOptions';
-}
-
-class InfoFormSubmit extends AuthenticationEvent {
-  @override
-  String toString() => 'InfoFormSubmit';
-}
-
-class InfoFormCancel extends AuthenticationEvent {
-  @override
-  String toString() => 'InfoFormCancel';
+  String toString() => 'RegisterEntrepreneur';
 }

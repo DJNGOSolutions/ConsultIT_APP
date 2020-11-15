@@ -1,3 +1,5 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
@@ -6,17 +8,22 @@ import 'package:flutter/material.dart';
 class ConsultantDetailsPage extends StatelessWidget {
   final String heroTag, imgPath;
   final Consultant consultant;
+  final HomeBloc homeBloc;
   const ConsultantDetailsPage(
       {Key key,
       @required this.heroTag,
       @required this.imgPath,
-      @required this.consultant})
+      @required this.consultant,
+      @required this.homeBloc})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: myWidgets.customAppBar(canGoBack: true, context: context),
+        appBar: myWidgets.customAppBar(
+            canGoBack: true,
+            context: context,
+            function: () => homeBloc.add(ToConsultantsListPage())),
         body: Padding(
           padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 10),
           child: ListView(
@@ -286,14 +293,14 @@ class ConsultantDetailsPage extends StatelessWidget {
                       maxWidth: MediaQuery.of(context).size.width * 0.44,
                       context: context,
                       labelText: 'Contactar Asesor',
-                      route: null),
+                      function: null),
                   SizedBox(
                     height: 13.0,
                   ),
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.74,
                       context: context,
-                      route: 'Textiles+',
+                      function: null,
                       labelText: 'Enviar mi informacion de contacto',
                       isMain: false),
                   SizedBox(
@@ -302,7 +309,7 @@ class ConsultantDetailsPage extends StatelessWidget {
                   myWidgets.customButton(
                       maxWidth: MediaQuery.of(context).size.width * 0.44,
                       context: context,
-                      route: null,
+                      function: null,
                       labelText: 'Evaluar asesor',
                       isMain: false,
                       isAccent: true),

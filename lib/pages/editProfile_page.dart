@@ -1,3 +1,5 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -8,14 +10,22 @@ class EditProfilePage extends StatelessWidget {
   final Consultant consultant;
   final Entrepreneur entrepreneur;
   final String heroTag;
+  final HomeBloc homeBloc;
 
   const EditProfilePage(
-      {Key key, this.consultant, this.entrepreneur, @required this.heroTag})
+      {Key key,
+      this.consultant,
+      this.entrepreneur,
+      @required this.heroTag,
+      @required this.homeBloc})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myWidgets.customAppBar(context: context, canGoBack: true),
+      appBar: myWidgets.customAppBar(
+          context: context,
+          canGoBack: true,
+          function: () => homeBloc.add(ToProfilePage())),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -192,7 +202,7 @@ class EditProfilePage extends StatelessWidget {
                 child: myWidgets.customButton(
                     context: context,
                     labelText: 'Guardar',
-                    route: null,
+                    function: () => homeBloc.add(SaveNewProfileInfo()),
                     maxWidth: 65),
               ),
             ]),

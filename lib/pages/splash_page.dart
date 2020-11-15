@@ -1,10 +1,33 @@
-import 'dart:async';
-
-import 'package:consult_it_app/utils/router.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 enum DotType { square, circle, diamond, icon }
+
+class SplashPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                child: Image.asset(
+              "assets/images/logo.png",
+              width: 200,
+            )),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.25,
+            ),
+            Container(child: LoadingIndicator())
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class LoadingIndicator extends StatefulWidget {
   final Color dotOneColor;
@@ -15,9 +38,9 @@ class LoadingIndicator extends StatefulWidget {
   final Icon dotIcon;
 
   LoadingIndicator(
-      {this.dotOneColor = const Color.fromRGBO(95, 95, 196, 1),
-      this.dotTwoColor = const Color.fromRGBO(224, 220, 38, 1),
-      this.dotThreeColor = const Color.fromRGBO(13, 59, 108, 1),
+      {this.dotOneColor = Colors.lightBlue,
+      this.dotTwoColor = const Color.fromRGBO(0, 77, 125, 1),
+      this.dotThreeColor = const Color.fromRGBO(23, 17, 85, 1),
       this.duration = const Duration(milliseconds: 1000),
       this.dotType = DotType.circle,
       this.dotIcon = const Icon(Icons.blur_on)});
@@ -170,51 +193,6 @@ class Dot extends StatelessWidget {
                         : BoxShape.rectangle),
               ),
             ),
-    );
-  }
-}
-
-class SplashPage extends StatefulWidget {
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-    startTime();
-  }
-
-  startTime() async {
-    var duration = new Duration(seconds: 3);
-    return new Timer(duration, route);
-  }
-
-  route() {
-    Navigator.pushNamed(context, LOGIN_ROUTE);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                child: Image.asset(
-              "assets/images/logo.png",
-              width: 200,
-            )),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-            ),
-            Container(child: LoadingIndicator())
-          ],
-        ),
-      ),
     );
   }
 }

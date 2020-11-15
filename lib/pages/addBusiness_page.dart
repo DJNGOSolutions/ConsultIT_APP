@@ -1,18 +1,28 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import '../utils/widgets_lib.dart' as myWidgets;
 
 class AddBusinessPage extends StatefulWidget {
+  final HomeBloc homeBloc;
+
+  const AddBusinessPage({Key key, @required this.homeBloc}) : super(key: key);
   @override
   _AddBusinessPageState createState() => _AddBusinessPageState();
 }
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
+  HomeBloc get homeBloc => widget.homeBloc;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: myWidgets.customAppBar(context: context, canGoBack: true),
+            appBar: myWidgets.customAppBar(
+                context: context,
+                canGoBack: true,
+                function: () => homeBloc.add(ToHomePage())),
             body: ListView(
               children: [
                 Container(
@@ -142,7 +152,9 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                 ),
                 Center(
                   child: myWidgets.customButton(
-                      context: context, labelText: "Agregar", route: null),
+                      context: context,
+                      labelText: "Agregar",
+                      function: () => homeBloc.add(AddNewBusiness())),
                 ),
                 SizedBox(
                   height: 25,

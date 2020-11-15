@@ -1,9 +1,16 @@
+import 'package:consult_it_app/bloc/authentication_bloc.dart';
+import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:consult_it_app/utils/router.dart';
 
 class RegistrationPage extends StatefulWidget {
+  final AuthenticationBloc authenticationBloc;
+
+  const RegistrationPage({Key key, @required this.authenticationBloc})
+      : super(key: key);
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
@@ -12,6 +19,8 @@ class _RegistrationPageState extends State<RegistrationPage>
     with TickerProviderStateMixin {
   TabController tabController;
   int selectedIndex = 0;
+
+  AuthenticationBloc get authenticationBloc => widget.authenticationBloc;
 
   @override
   void initState() {
@@ -41,7 +50,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                 tooltip: 'Retroceder',
                 icon: Icon(Icons.arrow_back),
                 color: Color.fromRGBO(3, 90, 166, 1),
-                onPressed: () => Navigator.pushNamed(context, LOGIN_ROUTE)),
+                onPressed: () => authenticationBloc.add(BackToLogin())),
           ]),
       resizeToAvoidBottomPadding: true,
       body: SafeArea(
@@ -393,7 +402,9 @@ class _RegistrationPageState extends State<RegistrationPage>
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
             child: customButton(
-                context: context, labelText: 'Registrarse', route: HOME_ROUTE),
+                context: context,
+                labelText: 'Registrarse',
+                function: () => authenticationBloc.add(LoggedIn())),
           )
         ],
       ),
@@ -740,7 +751,9 @@ class _RegistrationPageState extends State<RegistrationPage>
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
             child: customButton(
-                context: context, labelText: 'Registrarse', route: HOME_ROUTE),
+                context: context,
+                labelText: 'Registrarse',
+                function: () => authenticationBloc.add(LoggedIn())),
           )
         ],
       ),
