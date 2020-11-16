@@ -191,14 +191,13 @@ List<Widget> _userMessage(context, FAQMessage message) {
 }
 
 // Campo para ingresar texto
-inputField(
+inputField(TextEditingController controller,
         {@required String hintText,
         @required String labelText,
         @required IconData icon,
         bool uppercase = true,
         bool bold = true,
-        bool obscure = false,
-        @required TextEditingController controller}) =>
+        bool obscure = false}) =>
     TextField(
       controller: controller,
       obscureText: obscure,

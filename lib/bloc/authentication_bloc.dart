@@ -27,7 +27,7 @@ class AuthenticationBloc
     if (event is LoggedIn) {
       yield AuthenticationLoading();
       // TODO: AUTENTICAR USUARIO
-
+      print('Usuario: ${event.username} \nContraseña: ${event.password}');
       yield AuthenticationAuthenticated();
     }
 

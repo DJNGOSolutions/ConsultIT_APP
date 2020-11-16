@@ -108,21 +108,19 @@ class EditProfilePage extends StatelessWidget {
                         ],
                       ),
                       // Nombre segun documento de identidad
-                      myWidgets.inputField(
+                      myWidgets.inputField(_nombreController,
                           hintText: 'Ingrese su(s) nombre(s)',
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _nombreController),
+                          bold: false),
                       // Apellidos segun documento de identidad
-                      myWidgets.inputField(
+                      myWidgets.inputField(_apellidoController,
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _apellidoController),
+                          bold: false),
                     ],
                   )),
               SizedBox(
@@ -171,36 +169,32 @@ class EditProfilePage extends StatelessWidget {
                       ],
                     ),
                     // Correo Electronico
-                    myWidgets.inputField(
+                    myWidgets.inputField(_correoController,
                         hintText: 'Ingrese su correo',
                         labelText: 'Correo electrónico',
                         icon: Icons.email,
                         uppercase: false,
-                        bold: false,
-                        controller: _correoController),
+                        bold: false),
                     // Telefono de contacto
-                    myWidgets.inputField(
+                    myWidgets.inputField(_telefonoController,
                         hintText: 'Ingrese su telefono de contacto',
                         labelText: 'Telefono de contacto',
                         icon: Icons.phone,
                         uppercase: false,
-                        bold: false,
-                        controller: _telefonoController), // Pais de residencia
-                    myWidgets.inputField(
+                        bold: false), // Pais de residencia
+                    myWidgets.inputField(_departamentoController,
                         hintText: 'Ingrese su departamento de residencía',
                         labelText: 'Departamento',
                         icon: Icons.location_on,
                         uppercase: false,
-                        bold: false,
-                        controller: _departamentoController),
+                        bold: false),
                     // Ciudad de residencia
-                    myWidgets.inputField(
+                    myWidgets.inputField(_municipioController,
                         hintText: 'Ingrese su municipio de residencía',
                         labelText: 'Municipio',
                         icon: Icons.location_city,
                         uppercase: false,
-                        bold: false,
-                        controller: _municipioController),
+                        bold: false),
                   ],
                 ),
               ),

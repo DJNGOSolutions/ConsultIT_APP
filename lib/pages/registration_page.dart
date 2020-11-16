@@ -216,45 +216,40 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Nombre segun documento de identidad
-                      inputField(
+                      inputField(_nombreController,
                           hintText: 'Ingrese su(s) nombre(s)',
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _nombreController),
+                          bold: false),
                       // Apellidos segun documento de identidad
-                      inputField(
+                      inputField(_apellidoController,
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _apellidoController),
+                          bold: false),
                       // Correo Electronico
-                      inputField(
+                      inputField(_correoController,
                           hintText: 'Ingrese su correo',
                           labelText: 'Correo electrónico',
                           icon: Icons.email,
                           uppercase: false,
-                          bold: false,
-                          controller: _correoController),
+                          bold: false),
                       // Telefono de contacto
-                      inputField(
+                      inputField(_telController,
                           hintText: 'Ingrese su telefono de contacto',
                           labelText: 'Telefono de contacto',
                           icon: Icons.phone,
                           uppercase: false,
-                          bold: false,
-                          controller: _telController),
+                          bold: false),
                       // Fecha de Nacimiento
-                      inputField(
+                      inputField(_fechaNacController,
                           hintText: 'Día/Mes/Año. Ej 07/09/1997',
                           labelText: 'Fecha de Nacimiento',
                           icon: Icons.calendar_today,
                           uppercase: false,
-                          bold: false,
-                          controller: _fechaNacController),
+                          bold: false),
                     ],
                   ),
                 ),
@@ -313,29 +308,26 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Pais de residencia
-                      inputField(
+                      inputField(_departamentoController,
                           hintText: 'Ingrese su departamento de residencía',
                           labelText: 'Departamento',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false,
-                          controller: _departamentoController),
+                          bold: false),
                       // Ciudad de residencia
-                      inputField(
+                      inputField(_municipioController,
                           hintText: 'Ingrese su municipio de residencía',
                           labelText: 'Municipio',
                           icon: Icons.location_city,
                           uppercase: false,
-                          bold: false,
-                          controller: _municipioController),
+                          bold: false),
                       // Codigo postal
-                      inputField(
+                      inputField(_codPostalController,
                           hintText: 'Ingrese su código postal',
                           labelText: 'Código postal',
                           icon: Icons.dialpad,
                           uppercase: false,
-                          bold: false,
-                          controller: _codPostalController),
+                          bold: false),
                     ],
                   ),
                 ),
@@ -394,31 +386,28 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Username
-                      inputField(
+                      inputField(_userController,
                           hintText: 'Ingrese su usuario',
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _userController),
+                          bold: false),
                       // Password
-                      inputField(
+                      inputField(_passwordController,
                           hintText: 'Ingrese su contraseña',
                           labelText: 'Contraseña',
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true,
-                          controller: _passwordController),
+                          obscure: true),
                       // Repeat password
-                      inputField(
+                      inputField(_passwordController2,
                           hintText: 'Repita su contraseña',
                           labelText: 'Repetir contraseña',
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true,
-                          controller: _passwordController2),
+                          obscure: true),
                     ],
                   ),
                 ),
@@ -495,45 +484,40 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Nombre segun documento de identidad
-                      inputField(
+                      inputField(_nombreController,
                           hintText: 'Ingrese su(s) nombre(s)',
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _nombreController),
+                          bold: false),
                       // Apellidos segun documento de identidad
-                      inputField(
+                      inputField(_apellidoController,
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _apellidoController),
+                          bold: false),
                       // Correo Electronico
-                      inputField(
+                      inputField(_correoController,
                           hintText: 'Ingrese su correo',
                           labelText: 'Correo electrónico',
                           icon: Icons.email,
                           uppercase: false,
-                          bold: false,
-                          controller: _correoController),
+                          bold: false),
                       // Telefono de contacto
-                      inputField(
+                      inputField(_telController,
                           hintText: 'Ingrese su telefono de contacto',
                           labelText: 'Telefono de contacto',
                           icon: Icons.phone,
                           uppercase: false,
-                          bold: false,
-                          controller: _telController),
+                          bold: false),
                       // Fecha de Nacimiento
-                      inputField(
+                      inputField(_fechaNacController,
                           hintText: 'Día/Mes/Año. Ej 07/09/1997',
                           labelText: 'Fecha de Nacimiento',
                           icon: Icons.calendar_today,
                           uppercase: false,
-                          bold: false,
-                          controller: _fechaNacController),
+                          bold: false),
                     ],
                   ),
                 ),
@@ -592,31 +576,29 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Pais de residencia
-                      inputField(
+                      inputField(_tituloProController,
                           hintText:
                               'Ej. Licenciado, Economista, Ingeniero, etc.',
                           labelText: 'Titulo profesional',
                           icon: Icons.picture_in_picture,
                           uppercase: false,
-                          bold: false,
-                          controller: _tituloProController),
+                          bold: false),
                       // Ciudad de residencia
                       inputField(
+                        _precioxhoraController,
                         hintText: 'Precio de preferencia por hora',
                         labelText: 'Precio base por hora de consulta',
                         icon: Icons.attach_money,
                         uppercase: false,
                         bold: false,
-                        controller: _precioxhoraController,
                       ),
                       // Codigo postal
-                      inputField(
+                      inputField(_giroController,
                           hintText: 'Ej. Tecnologia, startups, textiles, etc',
                           labelText: 'Giro de especializacion',
                           icon: Icons.keyboard,
                           uppercase: false,
-                          bold: false,
-                          controller: _giroController),
+                          bold: false),
                     ],
                   ),
                 ),
@@ -675,29 +657,26 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Pais de residencia
-                      inputField(
+                      inputField(_departamentoController,
                           hintText: 'Ingrese su Departamento de residencía',
                           labelText: 'Departamento',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false,
-                          controller: _departamentoController),
+                          bold: false),
                       // Ciudad de residencia
-                      inputField(
+                      inputField(_municipioController,
                           hintText: 'Ingrese su municipio de residencía',
                           labelText: 'Municipio',
                           icon: Icons.location_city,
                           uppercase: false,
-                          bold: false,
-                          controller: _municipioController),
+                          bold: false),
                       // Codigo postal
-                      inputField(
+                      inputField(_codPostalController,
                           hintText: 'Ingrese su código postal',
                           labelText: 'Código postal',
                           icon: Icons.dialpad,
                           uppercase: false,
-                          bold: false,
-                          controller: _codPostalController),
+                          bold: false),
                     ],
                   ),
                 ),
@@ -756,31 +735,30 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Username
-                      inputField(
+                      inputField(_nombreController,
                           hintText: 'Ingrese su usuario',
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false,
-                          controller: _nombreController),
+                          bold: false),
                       // Password
-                      inputField(
+                      inputField(_passwordController,
                           hintText: 'Ingrese su contraseña',
                           labelText: 'Contraseña',
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true,
-                          controller: _passwordController),
+                          obscure: true),
                       // Repeat password
                       inputField(
-                          hintText: 'Repita su contraseña',
-                          labelText: 'Repetir contraseña',
-                          icon: Icons.lock,
-                          uppercase: false,
-                          bold: false,
-                          obscure: true,
-                          controller: _passwordController2),
+                        _passwordController2,
+                        hintText: 'Repita su contraseña',
+                        labelText: 'Repetir contraseña',
+                        icon: Icons.lock,
+                        uppercase: false,
+                        bold: false,
+                        obscure: true,
+                      ),
                     ],
                   ),
                 ),

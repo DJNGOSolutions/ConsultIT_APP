@@ -113,14 +113,13 @@ class LoginPage extends StatelessWidget {
                                 blurRadius: 15.0,
                                 offset: Offset(0, 10))
                           ]),
-                      child: inputField(
+                      child: inputField(_usernameController,
                           hintText: 'Ingrese su usuario',
                           labelText: 'usuario',
                           icon: Icons.person,
                           uppercase: true,
                           bold: true,
-                          obscure: false,
-                          controller: _usernameController)),
+                          obscure: false)),
                 ),
               ),
               Align(
@@ -139,14 +138,13 @@ class LoginPage extends StatelessWidget {
                                 blurRadius: 15.0,
                                 offset: Offset(0, 10))
                           ]),
-                      child: inputField(
+                      child: inputField(_passwordController,
                           hintText: 'Ingrese su contraseña',
                           labelText: 'contraseña',
                           bold: true,
                           icon: Icons.lock,
                           uppercase: true,
-                          obscure: false,
-                          controller: _passwordController)),
+                          obscure: false)),
                 ),
               ),
               Align(
