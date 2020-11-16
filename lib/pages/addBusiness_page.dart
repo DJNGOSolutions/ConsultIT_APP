@@ -14,6 +14,24 @@ class AddBusinessPage extends StatefulWidget {
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
   HomeBloc get homeBloc => widget.homeBloc;
+  TextEditingController _nombreLegalController,
+      _nombreComercialController,
+      _direccionController,
+      _departamentoController,
+      _municipioController,
+      _giroController,
+      _sectorController,
+      _correoController,
+      _telController;
+
+  @override
+  void initState() {
+    _nombreLegalController = _nombreComercialController = _direccionController =
+        _departamentoController = _municipioController = _giroController =
+            _sectorController =
+                _correoController = _telController = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,63 +105,72 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                           labelText: 'Nombre legal de la empresa',
                           icon: Icons.business,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreLegalController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Nombre Comercial de la empresa',
                           icon: Icons.business,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreComercialController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Direccion de la empresa',
                           icon: Icons.map,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _direccionController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Departamento de la empresa',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _departamentoController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Municipio de la empresa',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _municipioController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Giro de la empresa',
                           icon: Icons.monetization_on,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _giroController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Sector de la empresa',
                           icon: Icons.attach_money,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _sectorController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Correo de la empresa',
                           icon: Icons.email,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _correoController),
                       // Nombre segun documento de identidad
                       myWidgets.inputField(
                           hintText: '',
                           labelText: 'Numero telefonico de la empresa',
                           icon: Icons.phone,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _telController),
                     ],
                   ),
                 ),

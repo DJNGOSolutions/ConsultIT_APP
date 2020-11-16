@@ -197,8 +197,10 @@ inputField(
         @required IconData icon,
         bool uppercase = true,
         bool bold = true,
-        bool obscure = false}) =>
+        bool obscure = false,
+        @required TextEditingController controller}) =>
     TextField(
+      controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
           prefixIcon: Icon(

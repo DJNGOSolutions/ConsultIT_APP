@@ -18,6 +18,8 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    TextEditingController _usernameController = TextEditingController(),
+        _passwordController = TextEditingController();
 
     final boxShadow = BoxShadow(
       color: Colors.grey,
@@ -117,7 +119,8 @@ class LoginPage extends StatelessWidget {
                           icon: Icons.person,
                           uppercase: true,
                           bold: true,
-                          obscure: false)),
+                          obscure: false,
+                          controller: _usernameController)),
                 ),
               ),
               Align(
@@ -142,7 +145,8 @@ class LoginPage extends StatelessWidget {
                           bold: true,
                           icon: Icons.lock,
                           uppercase: true,
-                          obscure: false)),
+                          obscure: false,
+                          controller: _passwordController)),
                 ),
               ),
               Align(
@@ -154,7 +158,9 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
-                          onTap: () => authenticationBloc.add(LoggedIn()),
+                          onTap: () => authenticationBloc.add(LoggedIn(
+                              username: _usernameController.text,
+                              password: _passwordController.text)),
                           child: Container(
                             constraints:
                                 BoxConstraints(minWidth: 100, maxWidth: 150),

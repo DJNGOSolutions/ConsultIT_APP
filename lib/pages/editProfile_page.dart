@@ -11,8 +11,14 @@ class EditProfilePage extends StatelessWidget {
   final Entrepreneur entrepreneur;
   final String heroTag;
   final HomeBloc homeBloc;
+  TextEditingController _nombreController = TextEditingController(),
+      _apellidoController = TextEditingController(),
+      _correoController = TextEditingController(),
+      _telefonoController = TextEditingController(),
+      _departamentoController = TextEditingController(),
+      _municipioController = TextEditingController();
 
-  const EditProfilePage(
+  EditProfilePage(
       {Key key,
       this.consultant,
       this.entrepreneur,
@@ -107,14 +113,16 @@ class EditProfilePage extends StatelessWidget {
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreController),
                       // Apellidos segun documento de identidad
                       myWidgets.inputField(
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _apellidoController),
                     ],
                   )),
               SizedBox(
@@ -168,28 +176,31 @@ class EditProfilePage extends StatelessWidget {
                         labelText: 'Correo electrónico',
                         icon: Icons.email,
                         uppercase: false,
-                        bold: false),
+                        bold: false,
+                        controller: _correoController),
                     // Telefono de contacto
                     myWidgets.inputField(
                         hintText: 'Ingrese su telefono de contacto',
                         labelText: 'Telefono de contacto',
                         icon: Icons.phone,
                         uppercase: false,
-                        bold: false), // Pais de residencia
+                        bold: false,
+                        controller: _telefonoController), // Pais de residencia
                     myWidgets.inputField(
                         hintText: 'Ingrese su departamento de residencía',
                         labelText: 'Departamento',
                         icon: Icons.location_on,
                         uppercase: false,
-                        bold: false),
+                        bold: false,
+                        controller: _departamentoController),
                     // Ciudad de residencia
                     myWidgets.inputField(
-                      hintText: 'Ingrese su municipio de residencía',
-                      labelText: 'Municipio',
-                      icon: Icons.location_city,
-                      uppercase: false,
-                      bold: false,
-                    ),
+                        hintText: 'Ingrese su municipio de residencía',
+                        labelText: 'Municipio',
+                        icon: Icons.location_city,
+                        uppercase: false,
+                        bold: false,
+                        controller: _municipioController),
                   ],
                 ),
               ),

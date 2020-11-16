@@ -17,6 +17,20 @@ class _RegistrationPageState extends State<RegistrationPage>
     with TickerProviderStateMixin {
   TabController tabController;
   int selectedIndex = 0;
+  TextEditingController _nombreController,
+      _apellidoController,
+      _fechaNacController,
+      _correoController,
+      _telController,
+      _departamentoController,
+      _municipioController,
+      _codPostalController,
+      _passwordController,
+      _passwordController2,
+      _userController,
+      _tituloProController,
+      _precioxhoraController,
+      _giroController;
 
   AuthenticationBloc get authenticationBloc => widget.authenticationBloc;
 
@@ -25,6 +39,12 @@ class _RegistrationPageState extends State<RegistrationPage>
     super.initState();
     tabController =
         TabController(length: 2, vsync: this, initialIndex: selectedIndex);
+    _nombreController = _apellidoController = _fechaNacController =
+        _correoController = _telController = _departamentoController =
+            _municipioController = _codPostalController = _passwordController =
+                _passwordController2 = _userController = _tituloProController =
+                    _precioxhoraController =
+                        _giroController = TextEditingController();
   }
 
   @override
@@ -201,35 +221,40 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreController),
                       // Apellidos segun documento de identidad
                       inputField(
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _apellidoController),
                       // Correo Electronico
                       inputField(
                           hintText: 'Ingrese su correo',
                           labelText: 'Correo electrónico',
                           icon: Icons.email,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _correoController),
                       // Telefono de contacto
                       inputField(
                           hintText: 'Ingrese su telefono de contacto',
                           labelText: 'Telefono de contacto',
                           icon: Icons.phone,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _telController),
                       // Fecha de Nacimiento
                       inputField(
                           hintText: 'Día/Mes/Año. Ej 07/09/1997',
                           labelText: 'Fecha de Nacimiento',
                           icon: Icons.calendar_today,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _fechaNacController),
                     ],
                   ),
                 ),
@@ -293,23 +318,24 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Departamento',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _departamentoController),
                       // Ciudad de residencia
                       inputField(
-                        hintText: 'Ingrese su municipio de residencía',
-                        labelText: 'Municipio',
-                        icon: Icons.location_city,
-                        uppercase: false,
-                        bold: false,
-                      ),
+                          hintText: 'Ingrese su municipio de residencía',
+                          labelText: 'Municipio',
+                          icon: Icons.location_city,
+                          uppercase: false,
+                          bold: false,
+                          controller: _municipioController),
                       // Codigo postal
                       inputField(
-                        hintText: 'Ingrese su código postal',
-                        labelText: 'Código postal',
-                        icon: Icons.dialpad,
-                        uppercase: false,
-                        bold: false,
-                      ),
+                          hintText: 'Ingrese su código postal',
+                          labelText: 'Código postal',
+                          icon: Icons.dialpad,
+                          uppercase: false,
+                          bold: false,
+                          controller: _codPostalController),
                     ],
                   ),
                 ),
@@ -373,7 +399,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _userController),
                       // Password
                       inputField(
                           hintText: 'Ingrese su contraseña',
@@ -381,7 +408,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true),
+                          obscure: true,
+                          controller: _passwordController),
                       // Repeat password
                       inputField(
                           hintText: 'Repita su contraseña',
@@ -389,7 +417,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true),
+                          obscure: true,
+                          controller: _passwordController2),
                     ],
                   ),
                 ),
@@ -402,7 +431,9 @@ class _RegistrationPageState extends State<RegistrationPage>
             child: customButton(
                 context: context,
                 labelText: 'Registrarse',
-                function: () => authenticationBloc.add(LoggedIn())),
+                function: () => authenticationBloc.add(LoggedIn(
+                    username: _userController.text,
+                    password: _passwordController.text))),
           )
         ],
       ),
@@ -469,35 +500,40 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Nombre(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreController),
                       // Apellidos segun documento de identidad
                       inputField(
                           hintText: 'Ingrese su(s) apellido(s)',
                           labelText: 'Apellido(s)',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _apellidoController),
                       // Correo Electronico
                       inputField(
                           hintText: 'Ingrese su correo',
                           labelText: 'Correo electrónico',
                           icon: Icons.email,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _correoController),
                       // Telefono de contacto
                       inputField(
                           hintText: 'Ingrese su telefono de contacto',
                           labelText: 'Telefono de contacto',
                           icon: Icons.phone,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _telController),
                       // Fecha de Nacimiento
                       inputField(
                           hintText: 'Día/Mes/Año. Ej 07/09/1997',
                           labelText: 'Fecha de Nacimiento',
                           icon: Icons.calendar_today,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _fechaNacController),
                     ],
                   ),
                 ),
@@ -562,7 +598,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Titulo profesional',
                           icon: Icons.picture_in_picture,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _tituloProController),
                       // Ciudad de residencia
                       inputField(
                         hintText: 'Precio de preferencia por hora',
@@ -570,15 +607,16 @@ class _RegistrationPageState extends State<RegistrationPage>
                         icon: Icons.attach_money,
                         uppercase: false,
                         bold: false,
+                        controller: _precioxhoraController,
                       ),
                       // Codigo postal
                       inputField(
-                        hintText: 'Ej. Tecnologia, startups, textiles, etc',
-                        labelText: 'Giro de especializacion',
-                        icon: Icons.keyboard,
-                        uppercase: false,
-                        bold: false,
-                      ),
+                          hintText: 'Ej. Tecnologia, startups, textiles, etc',
+                          labelText: 'Giro de especializacion',
+                          icon: Icons.keyboard,
+                          uppercase: false,
+                          bold: false,
+                          controller: _giroController),
                     ],
                   ),
                 ),
@@ -638,27 +676,28 @@ class _RegistrationPageState extends State<RegistrationPage>
                     children: [
                       // Pais de residencia
                       inputField(
-                          hintText: 'Ingrese su país de residencía',
-                          labelText: 'Pais',
+                          hintText: 'Ingrese su Departamento de residencía',
+                          labelText: 'Departamento',
                           icon: Icons.location_on,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _departamentoController),
                       // Ciudad de residencia
                       inputField(
-                        hintText: 'Ingrese su ciudad de residencía',
-                        labelText: 'Ciudad',
-                        icon: Icons.location_city,
-                        uppercase: false,
-                        bold: false,
-                      ),
+                          hintText: 'Ingrese su municipio de residencía',
+                          labelText: 'Municipio',
+                          icon: Icons.location_city,
+                          uppercase: false,
+                          bold: false,
+                          controller: _municipioController),
                       // Codigo postal
                       inputField(
-                        hintText: 'Ingrese su código postal',
-                        labelText: 'Código postal',
-                        icon: Icons.dialpad,
-                        uppercase: false,
-                        bold: false,
-                      ),
+                          hintText: 'Ingrese su código postal',
+                          labelText: 'Código postal',
+                          icon: Icons.dialpad,
+                          uppercase: false,
+                          bold: false,
+                          controller: _codPostalController),
                     ],
                   ),
                 ),
@@ -722,7 +761,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,
                           uppercase: false,
-                          bold: false),
+                          bold: false,
+                          controller: _nombreController),
                       // Password
                       inputField(
                           hintText: 'Ingrese su contraseña',
@@ -730,7 +770,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true),
+                          obscure: true,
+                          controller: _passwordController),
                       // Repeat password
                       inputField(
                           hintText: 'Repita su contraseña',
@@ -738,7 +779,8 @@ class _RegistrationPageState extends State<RegistrationPage>
                           icon: Icons.lock,
                           uppercase: false,
                           bold: false,
-                          obscure: true),
+                          obscure: true,
+                          controller: _passwordController2),
                     ],
                   ),
                 ),
@@ -751,7 +793,9 @@ class _RegistrationPageState extends State<RegistrationPage>
             child: customButton(
                 context: context,
                 labelText: 'Registrarse',
-                function: () => authenticationBloc.add(LoggedIn())),
+                function: () => authenticationBloc.add(LoggedIn(
+                    username: _userController.text,
+                    password: _passwordController.text))),
           )
         ],
       ),
