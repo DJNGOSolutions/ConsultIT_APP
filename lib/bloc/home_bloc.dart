@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
@@ -18,6 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(0);
     } else if (event is AddNewBusiness) {
       //TODO: Agregar comercio al servidor
+      print(
+          'Nombre Legal: ${event.nombreLegal} \nNombre Comercial: ${event.nombreComercial} \nDireccion: ${event.direccion} \nMunicipio: ${event.municipio} \nGiro: ${event.giro} \nSector: ${event.sector} \nCorreo: ${event.correo} \nTelefono: ${event.telefono}');
       yield OnHomePage(0);
     } else if (event is ToMyBusinessesList) {
       //TODO: Agregar peticion para obtener todos los negocios
@@ -50,6 +53,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is BottomBarPressed) {
       yield ChangeHomeContainer(event.currentIndex);
       yield OnHomePage(event.currentIndex);
+    } else if (event is RegisterConsultant) {
+      //TODO: Register Consultant to server
+      yield OnHomePage(0);
+    } else if (event is RegisterEntrepreneur) {
+      //TODO: Register Entrepreneur to server
+      yield OnHomePage(0);
     } else {
       throw UnimplementedError();
     }

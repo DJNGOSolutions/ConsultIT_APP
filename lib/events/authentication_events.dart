@@ -37,11 +37,61 @@ class ToRegistrationForm extends AuthenticationEvent {
 }
 
 class RegisterConsultant extends AuthenticationEvent {
+  final String nombres,
+      apellidos,
+      correo,
+      telefono,
+      fechaNac,
+      departamento,
+      municipio,
+      codPostal,
+      usuario,
+      contra,
+      titulo,
+      precioBase,
+      giro;
+
+  RegisterConsultant(
+      {@required this.nombres,
+      @required this.apellidos,
+      @required this.correo,
+      @required this.telefono,
+      @required this.fechaNac,
+      @required this.departamento,
+      @required this.municipio,
+      @required this.codPostal,
+      @required this.usuario,
+      @required this.contra,
+      @required this.titulo,
+      @required this.precioBase,
+      @required this.giro});
   @override
   String toString() => 'RegisterConsultant';
 }
 
 class RegisterEntrepreneur extends AuthenticationEvent {
+  final String nombres,
+      apellidos,
+      correo,
+      telefono,
+      fechaNac,
+      departamento,
+      municipio,
+      codPostal,
+      usuario,
+      contra;
+
+  RegisterEntrepreneur(
+      {@required this.nombres,
+      @required this.apellidos,
+      @required this.correo,
+      @required this.telefono,
+      @required this.fechaNac,
+      @required this.departamento,
+      @required this.municipio,
+      @required this.codPostal,
+      @required this.usuario,
+      @required this.contra});
   @override
   String toString() => 'RegisterEntrepreneur';
 }

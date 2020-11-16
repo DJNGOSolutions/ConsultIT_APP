@@ -24,6 +24,26 @@ class ToAddBusinessPage extends HomeEvent {
 }
 
 class AddNewBusiness extends HomeEvent {
+  final String nombreLegal,
+      nombreComercial,
+      direccion,
+      departamento,
+      municipio,
+      giro,
+      sector,
+      correo,
+      telefono;
+
+  AddNewBusiness(
+      {@required this.nombreLegal,
+      @required this.nombreComercial,
+      @required this.direccion,
+      @required this.departamento,
+      @required this.municipio,
+      @required this.giro,
+      @required this.sector,
+      @required this.correo,
+      @required this.telefono});
   @override
   String toString() => 'AddNewBusiness';
 }

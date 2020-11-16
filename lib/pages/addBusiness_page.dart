@@ -14,24 +14,15 @@ class AddBusinessPage extends StatefulWidget {
 
 class _AddBusinessPageState extends State<AddBusinessPage> {
   HomeBloc get homeBloc => widget.homeBloc;
-  TextEditingController _nombreLegalController,
-      _nombreComercialController,
-      _direccionController,
-      _departamentoController,
-      _municipioController,
-      _giroController,
-      _sectorController,
-      _correoController,
-      _telController;
-
-  @override
-  void initState() {
-    _nombreLegalController = _nombreComercialController = _direccionController =
-        _departamentoController = _municipioController = _giroController =
-            _sectorController =
-                _correoController = _telController = TextEditingController();
-    super.initState();
-  }
+  TextEditingController _nombreLegalController = TextEditingController(),
+      _nombreComercialController = TextEditingController(),
+      _direccionController = TextEditingController(),
+      _departamentoController = TextEditingController(),
+      _municipioController = TextEditingController(),
+      _giroController = TextEditingController(),
+      _sectorController = TextEditingController(),
+      _correoController = TextEditingController(),
+      _telController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +163,16 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                   child: myWidgets.customButton(
                       context: context,
                       labelText: "Agregar",
-                      function: () => homeBloc.add(AddNewBusiness())),
+                      function: () => homeBloc.add(AddNewBusiness(
+                          correo: _correoController.text,
+                          departamento: _departamentoController.text,
+                          direccion: _direccionController.text,
+                          giro: _giroController.text,
+                          municipio: _municipioController.text,
+                          nombreComercial: _nombreComercialController.text,
+                          nombreLegal: _nombreLegalController.text,
+                          sector: _sectorController.text,
+                          telefono: _telController.text))),
                 ),
                 SizedBox(
                   height: 25,

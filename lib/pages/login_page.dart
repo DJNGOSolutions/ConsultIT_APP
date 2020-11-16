@@ -9,17 +9,23 @@ import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final AuthenticationBloc authenticationBloc;
 
   const LoginPage({Key key, @required this.authenticationBloc})
       : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController _usernameController = TextEditingController(),
+      _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    TextEditingController _usernameController = TextEditingController(),
-        _passwordController = TextEditingController();
 
     final boxShadow = BoxShadow(
       color: Colors.grey,
@@ -144,7 +150,7 @@ class LoginPage extends StatelessWidget {
                           bold: true,
                           icon: Icons.lock,
                           uppercase: true,
-                          obscure: false)),
+                          obscure: true)),
                 ),
               ),
               Align(
@@ -156,7 +162,7 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         GestureDetector(
-                          onTap: () => authenticationBloc.add(LoggedIn(
+                          onTap: () => widget.authenticationBloc.add(LoggedIn(
                               username: _usernameController.text,
                               password: _passwordController.text)),
                           child: Container(
@@ -189,8 +195,8 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () =>
-                              authenticationBloc.add(ToRegistrationForm()),
+                          onTap: () => widget.authenticationBloc
+                              .add(ToRegistrationForm()),
                           child: Container(
                             constraints:
                                 BoxConstraints(minWidth: 100, maxWidth: 150),

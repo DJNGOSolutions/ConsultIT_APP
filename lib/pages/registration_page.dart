@@ -17,20 +17,20 @@ class _RegistrationPageState extends State<RegistrationPage>
     with TickerProviderStateMixin {
   TabController tabController;
   int selectedIndex = 0;
-  TextEditingController _nombreController,
-      _apellidoController,
-      _fechaNacController,
-      _correoController,
-      _telController,
-      _departamentoController,
-      _municipioController,
-      _codPostalController,
-      _passwordController,
-      _passwordController2,
-      _userController,
-      _tituloProController,
-      _precioxhoraController,
-      _giroController;
+  TextEditingController _nombreController = TextEditingController(),
+      _apellidoController = TextEditingController(),
+      _fechaNacController = TextEditingController(),
+      _correoController = TextEditingController(),
+      _telController = TextEditingController(),
+      _departamentoController = TextEditingController(),
+      _municipioController = TextEditingController(),
+      _codPostalController = TextEditingController(),
+      _passwordController = TextEditingController(),
+      _passwordController2 = TextEditingController(),
+      _userController = TextEditingController(),
+      _tituloProController = TextEditingController(),
+      _precioxhoraController = TextEditingController(),
+      _giroController = TextEditingController();
 
   AuthenticationBloc get authenticationBloc => widget.authenticationBloc;
 
@@ -39,12 +39,6 @@ class _RegistrationPageState extends State<RegistrationPage>
     super.initState();
     tabController =
         TabController(length: 2, vsync: this, initialIndex: selectedIndex);
-    _nombreController = _apellidoController = _fechaNacController =
-        _correoController = _telController = _departamentoController =
-            _municipioController = _codPostalController = _passwordController =
-                _passwordController2 = _userController = _tituloProController =
-                    _precioxhoraController =
-                        _giroController = TextEditingController();
   }
 
   @override
@@ -420,9 +414,17 @@ class _RegistrationPageState extends State<RegistrationPage>
             child: customButton(
                 context: context,
                 labelText: 'Registrarse',
-                function: () => authenticationBloc.add(LoggedIn(
-                    username: _userController.text,
-                    password: _passwordController.text))),
+                function: () => authenticationBloc.add(RegisterEntrepreneur(
+                    apellidos: _apellidoController.text,
+                    codPostal: _codPostalController.text,
+                    contra: _passwordController.text,
+                    correo: _correoController.text,
+                    departamento: _departamentoController.text,
+                    fechaNac: _fechaNacController.text,
+                    municipio: _municipioController.text,
+                    nombres: _nombreController.text,
+                    telefono: _telController.text,
+                    usuario: _userController.text))),
           )
         ],
       ),
@@ -771,9 +773,20 @@ class _RegistrationPageState extends State<RegistrationPage>
             child: customButton(
                 context: context,
                 labelText: 'Registrarse',
-                function: () => authenticationBloc.add(LoggedIn(
-                    username: _userController.text,
-                    password: _passwordController.text))),
+                function: () => authenticationBloc.add(RegisterConsultant(
+                    apellidos: _apellidoController.text,
+                    codPostal: _codPostalController.text,
+                    contra: _passwordController.text,
+                    correo: _correoController.text,
+                    departamento: _departamentoController.text,
+                    fechaNac: _fechaNacController.text,
+                    municipio: _municipioController.text,
+                    nombres: _nombreController.text,
+                    telefono: _telController.text,
+                    usuario: _userController.text,
+                    giro: _giroController.text,
+                    precioBase: _precioxhoraController.text,
+                    titulo: _tituloProController.text))),
           )
         ],
       ),
