@@ -36,6 +36,7 @@ class AuthenticationBloc
           username: event.username, password: event.password);
       if (userModel != null && !userModel.tipo.contains(' ')) {
         userRepository.user = userModel;
+        Fluttertoast.showToast(msg: 'Bienvenido/a');
         yield AuthenticationAuthenticated();
       } else {
         Fluttertoast.showToast(

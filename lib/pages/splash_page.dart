@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 enum DotType { square, circle, diamond, icon }
@@ -21,7 +21,18 @@ class SplashPage extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height * 0.25,
             ),
-            Container(child: LoadingIndicator())
+            Container(child: LoadingIndicator()),
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Container(
+                child: Text(
+                  'Cargando...',
+                  style: Styles.subHeaderTextStyle,
+                ),
+              ),
+            )
           ],
         ),
       ),

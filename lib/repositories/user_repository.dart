@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
-import 'package:consult_it_app/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

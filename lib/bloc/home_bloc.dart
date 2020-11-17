@@ -33,6 +33,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(0);
     } else if (event is ToConsultantsListPage) {
       //TODO: Agregar peticion para obtener a todos los consultores
+
       yield OnConsultantsList();
     } else if (event is ToConsultantDetailsPage) {
       //TODO: Agregar navegacion al perfil del consultor
