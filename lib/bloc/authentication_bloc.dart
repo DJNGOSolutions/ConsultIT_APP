@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
+import 'package:consult_it_app/utils/toast_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
 
 class AuthenticationBloc
@@ -28,7 +31,17 @@ class AuthenticationBloc
       yield AuthenticationLoading();
       // TODO: AUTENTICAR USUARIO
       print('Usuario: ${event.username} \nContraseña: ${event.password}');
-      yield AuthenticationAuthenticated();
+      //Autenticando credenciales ingresadas
+      final userModel = await userRepository.authenticate(
+          username: event.username, password: event.password);
+      if (userModel != null && !userModel.tipo.contains(' ')) {
+        userRepository.user = userModel;
+        yield AuthenticationAuthenticated();
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Error de autenticacion: ${userModel.tipo}');
+        yield AuthenticationUnauthenticated();
+      }
     }
 
     if (event is ToRegistrationForm) {
