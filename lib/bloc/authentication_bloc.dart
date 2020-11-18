@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
+import 'package:consult_it_app/utils/styles.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
 
@@ -26,20 +28,29 @@ class AuthenticationBloc
     }
 
     if (event is LoggedIn) {
-      yield AuthenticationLoading();
-      // TODO: AUTENTICAR USUARIO
-      print('Usuario: ${event.username} \nContraseña: ${event.password}');
-      //Autenticando credenciales ingresadas
-      final userModel = await userRepository.authenticate(
-          username: event.username, password: event.password);
-      if (userModel != null && !userModel.tipo.contains(' ')) {
-        userRepository.user = userModel;
-        Fluttertoast.showToast(msg: 'Bienvenido/a');
-        yield AuthenticationAuthenticated();
-      } else {
+      if (event.password.isEmpty || event.password.isEmpty) {
         Fluttertoast.showToast(
-            msg: 'Error de autenticacion: ${userModel.tipo}');
-        yield AuthenticationUnauthenticated();
+            msg: 'Usuario o contraseña incorrectos.',
+            backgroundColor: Colors.red);
+      } else {
+        yield AuthenticationLoading();
+        // TODO: AUTENTICAR USUARIO
+        print('Usuario: ${event.username} \nContraseña: ${event.password}');
+        //Autenticando credenciales ingresadas
+        final userModel = await userRepository.authenticate(
+            username: event.username, password: event.password);
+        if (userModel != null && !userModel.tipo.contains(' ')) {
+          userRepository.user = userModel;
+          Fluttertoast.showToast(
+              msg: 'Bienvenido/a',
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+          yield AuthenticationAuthenticated();
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Error de autenticacion: ${userModel.tipo}');
+          yield AuthenticationUnauthenticated();
+        }
       }
     }
 
