@@ -34,18 +34,53 @@ class UserRepository {
     return user;
   }
 
-  Future<bool> verifyFirstTime() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    if (_prefs.containsKey('isFirst')) {
-      if (_prefs.getBool('isFirst')) {
-        return true;
+  Future<ServerResponse> registerConsultant({
+    @required String username,
+    @required String email,
+    @required String password,
+    @required String type,
+    @required String firstName,
+    @required String lastName,
+    @required String birthdate,
+    @required String phoneNumber,
+    @required String state,
+    @required String city,
+    @required String postalAddress,
+    @required String photo,
+  }) async {
+    ServerResponse serverResponse = new ServerResponse();
+    try {
+      String url = NetworkUtils.path + 'user/signup';
+      final response = await http.post(url, body: {
+        "username": username,
+        "email": email,
+        "password": password,
+        "type": type,
+        "firstName": firstName,
+        "lastName": lastName,
+        "birthdate": birthdate,
+        "phoneNumber": phoneNumber,
+        "state": state,
+        "city": city,
+        "postalAddress": postalAddress,
+        "photo": photo,
+      });
+      if (response.statusCode == 201) {
+        serverResponse = ServerResponse.fromJson(json.decode(response.body));
+        serverResponse.statusCode = 201;
+      } else if (response.statusCode == 400) {
+        serverResponse = ServerResponse.fromJson(json.decode(response.body));
+        serverResponse.statusCode = 400;
       } else {
-        return false;
+        serverResponse.message = 'Error de conexion';
+        serverResponse.statusCode = 400;
       }
-    } else {
-      _prefs.setBool('isFirst', true);
-      return true;
+    } catch (e) {
+      print('ERROR: $TAG: registerConsultant: ' + e.toString());
+      serverResponse.statusCode = 1;
+      serverResponse.message = 'Error de conexion';
     }
+    return serverResponse;
   }
 
   void changeIsFirst(bool value) async {

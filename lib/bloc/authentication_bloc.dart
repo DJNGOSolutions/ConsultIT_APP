@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
-import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
-import 'package:consult_it_app/utils/toast_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
 
@@ -51,7 +49,32 @@ class AuthenticationBloc
     }
 
     if (event is RegisterConsultant) {
-      yield AuthenticationAuthenticated();
+      yield AuthenticationLoading();
+      final serverResponse = await userRepository.registerConsultant(
+          username: event.usuario,
+          email: event.correo,
+          password: event.contra,
+          type: 'consultant',
+          firstName: event.nombres,
+          lastName: event.apellidos,
+          birthdate: event.fechaNac,
+          phoneNumber: event.telefono,
+          state: event.departamento,
+          city: event.municipio,
+          postalAddress: event.codPostal,
+          photo: '');
+      if (serverResponse != null) {
+        if (serverResponse.statusCode == 201) {
+          Fluttertoast.showToast(msg: serverResponse.message);
+          yield AuthenticationAuthenticated();
+        } else {
+          Fluttertoast.showToast(msg: serverResponse.message);
+          yield AuthenticationUnauthenticated();
+        }
+      } else {
+        Fluttertoast.showToast(msg: 'Error de conexion');
+        yield AuthenticationUnauthenticated();
+      }
     }
 
     if (event is LoggedOut) {
