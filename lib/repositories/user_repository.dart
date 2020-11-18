@@ -42,6 +42,59 @@ class UserRepository {
     @required String firstName,
     @required String lastName,
     @required String birthdate,
+    @required String referencePrice,
+    @required String phoneNumber,
+    @required String consultantType,
+    @required String state,
+    @required String city,
+    @required String postalAddress,
+    @required String photo,
+  }) async {
+    ServerResponse serverResponse = new ServerResponse();
+    try {
+      String url = NetworkUtils.path + 'user/signup';
+      final response = await http.post(url, body: {
+        "username": username,
+        "email": email,
+        "password": password,
+        "type": type,
+        "firstName": firstName,
+        "lastName": lastName,
+        "birthdate": birthdate,
+        "referencePrice": referencePrice,
+        "phoneNumber": phoneNumber,
+        "consultantType": consultantType,
+        "state": state,
+        "city": city,
+        "postalAddress": postalAddress,
+        "photo": photo,
+      });
+      if (response.statusCode == 201) {
+        serverResponse = ServerResponse.fromJson(json.decode(response.body));
+        serverResponse.statusCode = 201;
+      } else if (response.statusCode == 400) {
+        serverResponse = ServerResponse.fromJson(json.decode(response.body));
+        serverResponse.statusCode = 400;
+      } else {
+        serverResponse.message = 'Error de conexion';
+        serverResponse.statusCode = 400;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: registerConsultant: ' + e.toString());
+      serverResponse.statusCode = 1;
+      serverResponse.message = 'Error de conexion';
+    }
+    return serverResponse;
+  }
+
+  Future<ServerResponse> registerEntrepreneur({
+    @required String username,
+    @required String email,
+    @required String password,
+    @required String type,
+    @required String firstName,
+    @required String lastName,
+    @required String birthdate,
     @required String phoneNumber,
     @required String state,
     @required String city,

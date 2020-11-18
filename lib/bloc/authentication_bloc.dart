@@ -62,7 +62,9 @@ class AuthenticationBloc
           state: event.departamento,
           city: event.municipio,
           postalAddress: event.codPostal,
-          photo: '');
+          photo: '',
+          consultantType: event.giro,
+          referencePrice: event.precioBase);
       if (serverResponse != null) {
         if (serverResponse.statusCode == 201) {
           Fluttertoast.showToast(msg: serverResponse.message);
@@ -76,7 +78,6 @@ class AuthenticationBloc
         yield AuthenticationUnauthenticated();
       }
     }
-
     if (event is LoggedOut) {
       yield AuthenticationLoading();
       // TODO: ELIMINAR TOKEN DE SESION
@@ -84,9 +85,34 @@ class AuthenticationBloc
     }
 
     if (event is RegisterEntrepreneur) {
-      yield AuthenticationAuthenticated();
+      yield AuthenticationLoading();
+      final serverResponse = await userRepository.registerEntrepreneur(
+        username: event.usuario,
+        email: event.correo,
+        password: event.contra,
+        type: 'entrepreneur',
+        firstName: event.nombres,
+        lastName: event.apellidos,
+        birthdate: event.fechaNac,
+        phoneNumber: event.telefono,
+        state: event.departamento,
+        city: event.municipio,
+        postalAddress: event.codPostal,
+        photo: '',
+      );
+      if (serverResponse != null) {
+        if (serverResponse.statusCode == 201) {
+          Fluttertoast.showToast(msg: serverResponse.message);
+          yield AuthenticationAuthenticated();
+        } else {
+          Fluttertoast.showToast(msg: serverResponse.message);
+          yield AuthenticationUnauthenticated();
+        }
+      } else {
+        Fluttertoast.showToast(msg: 'Error de conexion');
+        yield AuthenticationUnauthenticated();
+      }
     }
-
     if (event is BackToLogin) {
       yield AuthenticationUnauthenticated();
     }
