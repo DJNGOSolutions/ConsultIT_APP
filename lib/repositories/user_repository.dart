@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 class UserRepository {
   User user = new User();
   String TAG = 'UserRepository';
+  SharedPreferences _prefs;
 
   Future<User> authenticate(
       {@required String username, @required String password}) async {
@@ -21,7 +22,10 @@ class UserRepository {
       if (response.statusCode == 200) {
         //Mostrando mensaje de exito y asignamos la respuesta al usuario creado
         user = User.fromJson(json.decode(response.body));
+        _prefs = await SharedPreferences.getInstance();
+        await _prefs.setString('username', user.username);
         print('Username: ${user.username}');
+
         return user;
       } else {
         user.tipo = 'Error de Conexion';
@@ -69,9 +73,9 @@ class UserRepository {
         "postalAddress": postalAddress,
         "photo": photo,
       });
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         serverResponse = ServerResponse.fromJson(json.decode(response.body));
-        serverResponse.statusCode = 201;
+        serverResponse.statusCode = 200;
       } else if (response.statusCode == 400) {
         serverResponse = ServerResponse.fromJson(json.decode(response.body));
         serverResponse.statusCode = 400;
@@ -118,9 +122,9 @@ class UserRepository {
         "postalAddress": postalAddress,
         "photo": photo,
       });
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         serverResponse = ServerResponse.fromJson(json.decode(response.body));
-        serverResponse.statusCode = 201;
+        serverResponse.statusCode = 200;
       } else if (response.statusCode == 400) {
         serverResponse = ServerResponse.fromJson(json.decode(response.body));
         serverResponse.statusCode = 400;

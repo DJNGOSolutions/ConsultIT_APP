@@ -32,6 +32,7 @@ class AddNewBusiness extends HomeEvent {
       giro,
       sector,
       correo,
+      codPostal,
       telefono;
 
   AddNewBusiness(
@@ -43,6 +44,7 @@ class AddNewBusiness extends HomeEvent {
       @required this.giro,
       @required this.sector,
       @required this.correo,
+      @required this.codPostal,
       @required this.telefono});
   @override
   String toString() => 'AddNewBusiness';

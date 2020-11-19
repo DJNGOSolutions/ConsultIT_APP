@@ -1,14 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
+import 'package:consult_it_app/utils/network_utils.dart';
+import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc(HomeState initialState, {UserRepository userRepository})
+  final BusinessRepository businessRepository;
+  final UserRepository userRepository;
+  HomeBloc(HomeState initialState,
+      {@required this.businessRepository, @required this.userRepository})
       : super(initialState);
+  final TAG = "home_bloc: ";
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
@@ -21,7 +30,54 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       //TODO: Agregar comercio al servidor
       print(
           'Nombre Legal: ${event.nombreLegal} \nNombre Comercial: ${event.nombreComercial} \nDireccion: ${event.direccion} \nMunicipio: ${event.municipio} \nGiro: ${event.giro} \nSector: ${event.sector} \nCorreo: ${event.correo} \nTelefono: ${event.telefono}');
-      yield OnHomePage(0);
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+      final serverResponse = await businessRepository.addNewBusiness(
+          username: _prefs.getString('username'),
+          legalName: event.nombreLegal,
+          comercialName: event.nombreComercial,
+          email: event.correo,
+          phoneNumber: event.telefono,
+          address: event.direccion,
+          postalAddress: event.codPostal,
+          state: event.departamento,
+          city: event.municipio,
+          businessLine: event.giro,
+          businessSector: event.sector);
+      if (serverResponse != null) {
+        switch (serverResponse.statusCode) {
+          case 200:
+            Fluttertoast.showToast(
+                msg: 'Comercio agregado con exito',
+                backgroundColor: MyColors.mainColor,
+                textColor: MyColors.accentColor);
+            yield OnHomePage(0);
+            break;
+          case 400:
+            Fluttertoast.showToast(
+                msg: 'Sin conexion',
+                backgroundColor: MyColors.mainColor,
+                textColor: MyColors.accentColor);
+            yield OnAddBusinessPage();
+            break;
+          case 403:
+            print(TAG + 'SERVER ERROR: ${serverResponse.statusCode}');
+            yield OnAddBusinessPage();
+            break;
+          case 500:
+            Fluttertoast.showToast(
+                msg: 'Error interno del servidor, intente mas tarde.',
+                backgroundColor: Colors.red);
+            yield OnAddBusinessPage();
+            break;
+          default:
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Error de conexion con el servidor',
+            backgroundColor: Colors.red);
+        yield OnAddBusinessPage();
+      }
     } else if (event is ToMyBusinessesList) {
       //TODO: Agregar peticion para obtener todos los negocios
       yield OnMyBussinessesList();

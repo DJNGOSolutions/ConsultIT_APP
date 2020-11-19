@@ -22,6 +22,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
       _giroController = TextEditingController(),
       _sectorController = TextEditingController(),
       _correoController = TextEditingController(),
+      _codPostalController = TextEditingController(),
       _telController = TextEditingController();
 
   @override
@@ -126,6 +127,13 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                           uppercase: false,
                           bold: false),
                       // Nombre segun documento de identidad
+                      myWidgets.inputField(_municipioController,
+                          hintText: '',
+                          labelText: 'Codigo postal de la empresa',
+                          icon: Icons.dialpad_outlined,
+                          uppercase: false,
+                          bold: false),
+                      // Nombre segun documento de identidad
                       myWidgets.inputField(_giroController,
                           hintText: '',
                           labelText: 'Giro de la empresa',
@@ -172,6 +180,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                           nombreComercial: _nombreComercialController.text,
                           nombreLegal: _nombreLegalController.text,
                           sector: _sectorController.text,
+                          codPostal: _codPostalController.text,
                           telefono: _telController.text))),
                 ),
                 SizedBox(
