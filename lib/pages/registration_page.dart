@@ -737,7 +737,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                   child: Column(
                     children: [
                       // Username
-                      inputField(_nombreController,
+                      inputField(_userController,
                           hintText: 'Ingrese su usuario',
                           labelText: 'Nombre de usuario',
                           icon: Icons.person_outline,

@@ -44,5 +44,21 @@ class Consultant {
       @required this.consultantType,
       @required this.state,
       @required this.city,
-      @required this.user});
+      this.user});
+
+  factory Consultant.fromJson(Map<String, dynamic> json) {
+    return Consultant(
+        firstname: json['firstName'].toString() ?? '',
+        lastName: json['lastName'].toString() ?? '',
+        deegre: json['deegre'].toString() ?? '',
+        photo: json['photo'].toString() ?? '',
+        birthdate: json['birthdate'].toString() ?? '',
+        referencePrice: json['referencePrice'],
+        historicAveragePrice: json['historicAveragePrice'],
+        phoneNumber: json['phoneNumber'].toString() ?? '',
+        averageRating: json['averageRating'],
+        consultantType: json['consultantType'].toString() ?? '',
+        state: json['state'].toString() ?? '',
+        city: json['city'].toString() ?? '');
+  }
 }

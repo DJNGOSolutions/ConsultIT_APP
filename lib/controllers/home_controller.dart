@@ -33,8 +33,9 @@ class _HomeControllerState extends State<HomeController> {
   @override
   void initState() {
     _homeBloc = HomeBloc(OnHomePage(0),
-        userRepository: new UserRepository(),
-        businessRepository: new BusinessRepository());
+        userRepository: authenticationBloc.userRepository,
+        businessRepository: new BusinessRepository(),
+        consultantRepository: authenticationBloc.consultantRepository);
     super.initState();
   }
 

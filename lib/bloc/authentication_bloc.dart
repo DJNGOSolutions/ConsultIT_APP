@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -10,8 +11,10 @@ import 'package:meta/meta.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository userRepository;
+  final ConsultantRepository consultantRepository;
 
-  AuthenticationBloc({@required this.userRepository})
+  AuthenticationBloc(
+      {@required this.userRepository, @required this.consultantRepository})
       : super(AuthenticationUninitialized());
 
   AuthenticationState get initialState => AuthenticationUninitialized();
@@ -34,21 +37,41 @@ class AuthenticationBloc
             backgroundColor: Colors.red);
       } else {
         yield AuthenticationLoading();
-        // TODO: AUTENTICAR USUARIO
         print('Usuario: ${event.username} \nContraseña: ${event.password}');
         //Autenticando credenciales ingresadas
         final userModel = await userRepository.authenticate(
             username: event.username, password: event.password);
         if (userModel != null && !userModel.tipo.contains(' ')) {
           userRepository.user = userModel;
-          Fluttertoast.showToast(
-              msg: 'Bienvenido/a',
-              backgroundColor: MyColors.mainColor,
-              textColor: MyColors.accentColor);
-          yield AuthenticationAuthenticated();
+          if (userModel.tipo.toUpperCase() == 'Consultant'.toUpperCase()) {
+            final consultantModel = await consultantRepository
+                .findConsultantByUsername(username: userModel.username);
+            if (consultantModel != null) {
+              consultantModel.user = userModel;
+              consultantRepository.consultant = consultantModel;
+              Fluttertoast.showToast(
+                  msg:
+                      'Bienvenido/a ${consultantModel.firstname} ${consultantModel.lastName}',
+                  backgroundColor: MyColors.mainColor,
+                  textColor: MyColors.accentColor);
+              yield AuthenticationAuthenticated();
+            } else {
+              Fluttertoast.showToast(
+                  msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
+                  backgroundColor: MyColors.mainColor,
+                  textColor: MyColors.accentColor);
+              yield AuthenticationUnauthenticated();
+            }
+          } else {
+            Fluttertoast.showToast(
+                msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
+                backgroundColor: MyColors.mainColor,
+                textColor: MyColors.accentColor);
+            yield AuthenticationUnauthenticated();
+          }
         } else {
           Fluttertoast.showToast(
-              msg: 'Error de autenticacion: ${userModel.tipo}');
+              msg: 'Error de autenticacion del perfil de ${userModel.tipo}');
           yield AuthenticationUnauthenticated();
         }
       }
@@ -74,19 +97,25 @@ class AuthenticationBloc
           city: event.municipio,
           postalAddress: event.codPostal,
           photo: '',
+          historicAveragePrice: 0,
           consultantType: event.giro,
           referencePrice: event.precioBase);
       if (serverResponse != null) {
-        if (serverResponse.statusCode == 201) {
-          Fluttertoast.showToast(msg: serverResponse.message);
-          yield AuthenticationAuthenticated();
+        if (serverResponse.statusCode == 200) {
+          Fluttertoast.showToast(
+              msg: serverResponse.message,
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+          yield AuthenticationUnauthenticated();
         } else {
-          Fluttertoast.showToast(msg: serverResponse.message);
+          Fluttertoast.showToast(
+              msg: serverResponse.message, backgroundColor: Colors.red);
           yield AuthenticationUnauthenticated();
         }
       } else {
-        Fluttertoast.showToast(msg: 'Error de conexion');
-        yield AuthenticationUnauthenticated();
+        Fluttertoast.showToast(
+            msg: 'Error de conexion', backgroundColor: Colors.red);
+        yield RegistrationForm();
       }
     }
     if (event is LoggedOut) {
@@ -112,16 +141,21 @@ class AuthenticationBloc
         photo: '',
       );
       if (serverResponse != null) {
-        if (serverResponse.statusCode == 201) {
-          Fluttertoast.showToast(msg: serverResponse.message);
-          yield AuthenticationAuthenticated();
-        } else {
-          Fluttertoast.showToast(msg: serverResponse.message);
+        if (serverResponse.statusCode == 200) {
+          Fluttertoast.showToast(
+              msg: serverResponse.message,
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
           yield AuthenticationUnauthenticated();
+        } else {
+          Fluttertoast.showToast(
+              msg: serverResponse.message, backgroundColor: Colors.red);
+          yield RegistrationForm();
         }
       } else {
-        Fluttertoast.showToast(msg: 'Error de conexion');
-        yield AuthenticationUnauthenticated();
+        Fluttertoast.showToast(
+            msg: 'Error de conexion', backgroundColor: Colors.red);
+        yield RegistrationForm();
       }
     }
     if (event is BackToLogin) {

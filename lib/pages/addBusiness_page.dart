@@ -127,7 +127,7 @@ class _AddBusinessPageState extends State<AddBusinessPage> {
                           uppercase: false,
                           bold: false),
                       // Nombre segun documento de identidad
-                      myWidgets.inputField(_municipioController,
+                      myWidgets.inputField(_codPostalController,
                           hintText: '',
                           labelText: 'Codigo postal de la empresa',
                           icon: Icons.dialpad_outlined,

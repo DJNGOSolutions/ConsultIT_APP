@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
+import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
@@ -14,9 +15,13 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final BusinessRepository businessRepository;
   final UserRepository userRepository;
-  HomeBloc(HomeState initialState,
-      {@required this.businessRepository, @required this.userRepository})
-      : super(initialState);
+  final ConsultantRepository consultantRepository;
+  HomeBloc(
+    HomeState initialState, {
+    @required this.businessRepository,
+    @required this.userRepository,
+    @required this.consultantRepository,
+  }) : super(initialState);
   final TAG = "home_bloc: ";
 
   @override
@@ -28,10 +33,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(0);
     } else if (event is AddNewBusiness) {
       //TODO: Agregar comercio al servidor
-      print(
-          'Nombre Legal: ${event.nombreLegal} \nNombre Comercial: ${event.nombreComercial} \nDireccion: ${event.direccion} \nMunicipio: ${event.municipio} \nGiro: ${event.giro} \nSector: ${event.sector} \nCorreo: ${event.correo} \nTelefono: ${event.telefono}');
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
 
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      String user = _prefs.getString('username');
+      print(
+          'Username: $user Nombre Legal: ${event.nombreLegal} \nNombre Comercial: ${event.nombreComercial} \nDireccion: ${event.direccion} \nMunicipio: ${event.municipio} \nGiro: ${event.giro} \nSector: ${event.sector} \nCorreo: ${event.correo} \nTelefono: ${event.telefono}');
       final serverResponse = await businessRepository.addNewBusiness(
           username: _prefs.getString('username'),
           legalName: event.nombreLegal,
@@ -51,6 +57,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 msg: 'Comercio agregado con exito',
                 backgroundColor: MyColors.mainColor,
                 textColor: MyColors.accentColor);
+            //TODO: Actualizar businesses para el user
             yield OnHomePage(0);
             break;
           case 400:

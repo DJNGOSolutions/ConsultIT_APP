@@ -4,6 +4,7 @@ import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/pages/login_page.dart';
 import 'package:consult_it_app/pages/registration_page.dart';
 import 'package:consult_it_app/pages/splash_page.dart';
+import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    _authenticationBloc = AuthenticationBloc(userRepository: UserRepository());
+    _authenticationBloc = AuthenticationBloc(
+        userRepository: UserRepository(),
+        consultantRepository: ConsultantRepository());
     _authenticationBloc.add(AppStarted());
     super.initState();
   }

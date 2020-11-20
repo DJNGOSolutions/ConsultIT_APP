@@ -1,15 +1,18 @@
 import 'dart:convert';
 
+import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+const String TAG = 'UserRepository';
+
 class UserRepository {
   User user = new User();
-  String TAG = 'UserRepository';
   SharedPreferences _prefs;
+  Entrepreneur entrepreneur;
 
   Future<User> authenticate(
       {@required String username, @required String password}) async {
@@ -38,22 +41,22 @@ class UserRepository {
     return user;
   }
 
-  Future<ServerResponse> registerConsultant({
-    @required String username,
-    @required String email,
-    @required String password,
-    @required String type,
-    @required String firstName,
-    @required String lastName,
-    @required String birthdate,
-    @required String referencePrice,
-    @required String phoneNumber,
-    @required String consultantType,
-    @required String state,
-    @required String city,
-    @required String postalAddress,
-    @required String photo,
-  }) async {
+  Future<ServerResponse> registerConsultant(
+      {@required String username,
+      @required String email,
+      @required String password,
+      @required String type,
+      @required String firstName,
+      @required String lastName,
+      @required String birthdate,
+      @required String referencePrice,
+      @required String phoneNumber,
+      @required String consultantType,
+      @required String state,
+      @required String city,
+      @required String postalAddress,
+      @required String photo,
+      @required double historicAveragePrice}) async {
     ServerResponse serverResponse = new ServerResponse();
     try {
       String url = NetworkUtils.path + 'user/signup';
@@ -70,6 +73,7 @@ class UserRepository {
         "consultantType": consultantType,
         "state": state,
         "city": city,
+        "historicAveragePrice": historicAveragePrice,
         "postalAddress": postalAddress,
         "photo": photo,
       });
