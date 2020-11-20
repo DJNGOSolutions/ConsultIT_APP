@@ -10,7 +10,6 @@ import 'package:consult_it_app/pages/editProfile_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/profile_page.dart';
-import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +35,7 @@ class _HomeControllerState extends State<HomeController> {
   void initState() {
     _homeBloc = HomeBloc(OnHomePage(0),
         userRepository: authenticationBloc.userRepository,
-        businessRepository: new BusinessRepository(),
+        businessRepository: authenticationBloc.businessRepository,
         consultantRepository: authenticationBloc.consultantRepository,
         entrepreneurRepository: authenticationBloc.entrepreneurRepository);
     super.initState();

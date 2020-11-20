@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -58,5 +59,24 @@ class BusinessRepository {
       serverResponse.message = 'Error de conexion con la aplicacion';
     }
     return serverResponse;
+  }
+
+  Future<List<Business>> findAllBusinesses({@required username}) async {
+    try {
+      String url = NetworkUtils.path + 'entrepreneur/findallbusinesses';
+
+      final response = await http.post(url, body: {
+        "username": username,
+      });
+
+      if (response.statusCode == 200) {
+        //TODO: Parse list of businesses
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: findConsultantByUsername: ' + e.toString());
+      return null;
+    }
   }
 }
