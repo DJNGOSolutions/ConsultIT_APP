@@ -3,6 +3,7 @@ import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
+import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
@@ -12,17 +13,19 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+const String TAG = "HomeBloc";
+
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final BusinessRepository businessRepository;
   final UserRepository userRepository;
   final ConsultantRepository consultantRepository;
-  HomeBloc(
-    HomeState initialState, {
-    @required this.businessRepository,
-    @required this.userRepository,
-    @required this.consultantRepository,
-  }) : super(initialState);
-  final TAG = "home_bloc: ";
+  final EntrepreneurRepository entrepreneurRepository;
+  HomeBloc(HomeState initialState,
+      {@required this.businessRepository,
+      @required this.userRepository,
+      @required this.consultantRepository,
+      @required this.entrepreneurRepository})
+      : super(initialState);
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {

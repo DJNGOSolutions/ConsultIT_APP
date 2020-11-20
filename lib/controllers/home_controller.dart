@@ -17,7 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeController extends StatefulWidget {
   final AuthenticationBloc authenticationBloc;
-  final int userType; // 0: Consaultant || 1: Entrepreneur
+  final int userType; // 0: Consultant || 1: Entrepreneur
 
   const HomeController(
       {Key key, @required this.authenticationBloc, @required this.userType})
@@ -30,13 +30,15 @@ class _HomeControllerState extends State<HomeController> {
   // ignore: close_sinks
   HomeBloc _homeBloc;
   AuthenticationBloc get authenticationBloc => widget.authenticationBloc;
+  int get userType => widget.userType;
 
   @override
   void initState() {
     _homeBloc = HomeBloc(OnHomePage(0),
         userRepository: authenticationBloc.userRepository,
         businessRepository: new BusinessRepository(),
-        consultantRepository: authenticationBloc.consultantRepository);
+        consultantRepository: authenticationBloc.consultantRepository,
+        entrepreneurRepository: authenticationBloc.entrepreneurRepository);
     super.initState();
   }
 
@@ -126,7 +128,13 @@ class _HomeControllerState extends State<HomeController> {
           consultant: consultant,
           homeBloc: _homeBloc);
     } else if (state is OnProfilePage) {
-      return ProfilePage(homeBloc: _homeBloc);
+      if (userType == 0) {
+        //Cargar perfil de consultant
+        return ProfilePage(homeBloc: _homeBloc);
+      } else {
+        //Cargar perfil de entrepreneur
+        return ProfilePage(homeBloc: _homeBloc);
+      }
     } else if (state is OnEditProfilePage) {
       return EditProfilePage(heroTag: 'Image', homeBloc: _homeBloc);
     } else if (state is OnFAQBotPage) {

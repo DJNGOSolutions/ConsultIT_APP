@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
@@ -15,11 +16,13 @@ class AuthenticationBloc
   final UserRepository userRepository;
   final ConsultantRepository consultantRepository;
   final EntrepreneurRepository entrepreneurRepository;
+  final BusinessRepository businessRepository;
 
   AuthenticationBloc(
       {@required this.userRepository,
       @required this.consultantRepository,
-      @required this.entrepreneurRepository})
+      @required this.entrepreneurRepository,
+      @required this.businessRepository})
       : super(AuthenticationUninitialized());
 
   AuthenticationState get initialState => AuthenticationUninitialized();
@@ -46,12 +49,16 @@ class AuthenticationBloc
         //Autenticando credenciales ingresadas
         final userModel = await userRepository.authenticate(
             username: event.username, password: event.password);
+        //Se verifica si el valor del usuario es diferente de null y si el tipo es valido
         if (userModel != null && !userModel.tipo.contains(' ')) {
+          //Se le asigna el valor a la variable del repositorio
           userRepository.user = userModel;
           if (userModel.tipo.toUpperCase() == 'Consultant'.toUpperCase()) {
+            //Si es consultor se obtiene la informacion del consultor
             final consultantModel = await consultantRepository
                 .findOneByUsername(username: userModel.username);
             if (consultantModel != null) {
+              //Si la peticion del consultor es valida se da accesso a la app
               consultantModel.user = userModel;
               consultantRepository.consultant = consultantModel;
               Fluttertoast.showToast(
@@ -61,6 +68,7 @@ class AuthenticationBloc
                   textColor: MyColors.accentColor);
               yield AuthenticationAuthenticated(0);
             } else {
+              //Si hay error al obtener la informacion del consultor
               Fluttertoast.showToast(
                   msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
                   backgroundColor: MyColors.mainColor,
@@ -68,11 +76,15 @@ class AuthenticationBloc
               yield AuthenticationUnauthenticated();
             }
           } else {
+            //Si el usuario no es consultor entonces se entiende que es entrepreneur
+            //Se obtiene la informacion del entrepreneur
             final entrepreneurModel = await entrepreneurRepository
                 .findOneByUsername(username: userModel.username);
             if (entrepreneurModel != null) {
+              //Si la informacion para el entrepreneur no es null se le asigna al valor del repositorio
               entrepreneurModel.user = userModel;
               entrepreneurRepository.entrepreneur = entrepreneurModel;
+              //Si es un entrepreneur valido se obtiene la lista de negocios correspondientes a ese usuario
               Fluttertoast.showToast(
                   msg:
                       'Bienvenido/a ${entrepreneurModel.firstName} ${entrepreneurModel.lastName}',
@@ -80,6 +92,7 @@ class AuthenticationBloc
                   textColor: MyColors.accentColor);
               yield AuthenticationAuthenticated(1);
             } else {
+              //Error al obtener la informacion del entrepreneur
               Fluttertoast.showToast(
                   msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
                   backgroundColor: MyColors.mainColor,
