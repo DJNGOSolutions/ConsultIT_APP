@@ -1,20 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
+import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository userRepository;
   final ConsultantRepository consultantRepository;
+  final EntrepreneurRepository entrepreneurRepository;
 
   AuthenticationBloc(
-      {@required this.userRepository, @required this.consultantRepository})
+      {@required this.userRepository,
+      @required this.consultantRepository,
+      @required this.entrepreneurRepository})
       : super(AuthenticationUninitialized());
 
   AuthenticationState get initialState => AuthenticationUninitialized();
@@ -45,7 +50,7 @@ class AuthenticationBloc
           userRepository.user = userModel;
           if (userModel.tipo.toUpperCase() == 'Consultant'.toUpperCase()) {
             final consultantModel = await consultantRepository
-                .findConsultantByUsername(username: userModel.username);
+                .findOneByUsername(username: userModel.username);
             if (consultantModel != null) {
               consultantModel.user = userModel;
               consultantRepository.consultant = consultantModel;
@@ -54,7 +59,7 @@ class AuthenticationBloc
                       'Bienvenido/a ${consultantModel.firstname} ${consultantModel.lastName}',
                   backgroundColor: MyColors.mainColor,
                   textColor: MyColors.accentColor);
-              yield AuthenticationAuthenticated();
+              yield AuthenticationAuthenticated(0);
             } else {
               Fluttertoast.showToast(
                   msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
@@ -63,11 +68,24 @@ class AuthenticationBloc
               yield AuthenticationUnauthenticated();
             }
           } else {
-            Fluttertoast.showToast(
-                msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
-                backgroundColor: MyColors.mainColor,
-                textColor: MyColors.accentColor);
-            yield AuthenticationUnauthenticated();
+            final entrepreneurModel = await entrepreneurRepository
+                .findOneByUsername(username: userModel.username);
+            if (entrepreneurModel != null) {
+              entrepreneurModel.user = userModel;
+              entrepreneurRepository.entrepreneur = entrepreneurModel;
+              Fluttertoast.showToast(
+                  msg:
+                      'Bienvenido/a ${entrepreneurModel.firstName} ${entrepreneurModel.lastName}',
+                  backgroundColor: MyColors.mainColor,
+                  textColor: MyColors.accentColor);
+              yield AuthenticationAuthenticated(1);
+            } else {
+              Fluttertoast.showToast(
+                  msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
+                  backgroundColor: MyColors.mainColor,
+                  textColor: MyColors.accentColor);
+              yield AuthenticationUnauthenticated();
+            }
           }
         } else {
           Fluttertoast.showToast(
@@ -78,7 +96,6 @@ class AuthenticationBloc
     }
 
     if (event is ToRegistrationForm) {
-      // TODO: ENVIAR AL SERVIDOR INFORMACION DEL USUARIO
       yield RegistrationForm();
     }
 
@@ -119,8 +136,8 @@ class AuthenticationBloc
       }
     }
     if (event is LoggedOut) {
-      yield AuthenticationLoading();
-      // TODO: ELIMINAR TOKEN DE SESION
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      _prefs.clear();
       yield AuthenticationUnauthenticated();
     }
 

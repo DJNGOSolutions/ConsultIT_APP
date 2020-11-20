@@ -5,6 +5,7 @@ import 'package:consult_it_app/pages/login_page.dart';
 import 'package:consult_it_app/pages/registration_page.dart';
 import 'package:consult_it_app/pages/splash_page.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
+import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     _authenticationBloc = AuthenticationBloc(
         userRepository: UserRepository(),
-        consultantRepository: ConsultantRepository());
+        consultantRepository: ConsultantRepository(),
+        entrepreneurRepository: EntrepreneurRepository());
     _authenticationBloc.add(AppStarted());
     super.initState();
   }
@@ -74,6 +76,7 @@ class _MyAppState extends State<MyApp> {
     } else if (state is AuthenticationAuthenticated) {
       return HomeController(
         authenticationBloc: _authenticationBloc,
+        userType: state.userType,
       );
     } else if (state is AuthenticationUnauthenticated) {
       return LoginPage(

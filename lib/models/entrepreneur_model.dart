@@ -1,19 +1,5 @@
-//Informacion del entrepreneur
 import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
-/**
-User user;
-String firstName;
-String lastName;
-String photo;
-DateTime birthDate; 
-String phoneNumber;
-String postalAddress;
-String state;
-String city;
-List<Business> businesses;
- */
-
 import 'package:flutter/material.dart';
 
 class Entrepreneur {
@@ -21,7 +7,7 @@ class Entrepreneur {
   String firstName;
   String lastName;
   String photo;
-  DateTime birthDate;
+  String birthDate;
   String phoneNumber;
   String postalAddress;
   String state;
@@ -30,7 +16,7 @@ class Entrepreneur {
 
   Entrepreneur(
       {@required this.birthDate,
-      @required this.businesses,
+      this.businesses,
       @required this.city,
       @required this.firstName,
       @required this.lastName,
@@ -38,5 +24,18 @@ class Entrepreneur {
       @required this.photo,
       @required this.postalAddress,
       @required this.state,
-      @required this.user});
+      this.user});
+
+  factory Entrepreneur.fromJson(Map<String, dynamic> json) {
+    return Entrepreneur(
+        birthDate: json['birthdate'].toString(),
+        businesses: [],
+        city: json['city'].toString(),
+        firstName: json['firstName'].toString(),
+        lastName: json['lastName'].toString(),
+        phoneNumber: json['phoneNumber'].toString(),
+        photo: json['photo'].toString(),
+        postalAddress: json['postalAddress'].toString(),
+        state: json['state'].toString());
+  }
 }

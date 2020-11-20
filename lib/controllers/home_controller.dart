@@ -11,15 +11,16 @@ import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
 import 'package:consult_it_app/pages/profile_page.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
-import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeController extends StatefulWidget {
   final AuthenticationBloc authenticationBloc;
+  final int userType; // 0: Consaultant || 1: Entrepreneur
 
-  const HomeController({Key key, @required this.authenticationBloc})
+  const HomeController(
+      {Key key, @required this.authenticationBloc, @required this.userType})
       : super(key: key);
   @override
   _HomeControllerState createState() => _HomeControllerState();
