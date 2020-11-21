@@ -12,11 +12,9 @@ class EntrepreneurRepository {
 
   Future<Entrepreneur> findOneByUsername({@required username}) async {
     try {
-      String url = NetworkUtils.path + 'entrepreneur/findonebyusername';
-
-      final response = await http.post(url, body: {
-        "username": username,
-      });
+      String url = NetworkUtils.path +
+          'entrepreneur/findonebyusername?username=$username';
+      final response = await http.get(url);
       if (response.statusCode == 200) {
         entrepreneur = Entrepreneur.fromJson(json.decode(response.body));
         return entrepreneur;
@@ -25,6 +23,42 @@ class EntrepreneurRepository {
       }
     } catch (e) {
       print('ERROR: $TAG: findConsultantByUsername: ' + e.toString());
+      return null;
+    }
+  }
+
+  Future<ServerResponse> updateProfile(
+      {@required String id,
+      @required String firstName,
+      @required String lastName,
+      @required String photo,
+      @required String birthdate,
+      @required String phoneNumber,
+      @required String postalAddress,
+      @required String state,
+      @required String city}) async {
+    try {
+      String url = NetworkUtils.path + 'entrepreneur/update';
+      final response = await http.post(url, body: {
+        "_id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "photo": photo,
+        "birthdate": birthdate,
+        "phoneNumber": phoneNumber,
+        "postalAddress": postalAddress,
+        "state": state,
+        "city": city
+      });
+      if (response != null) {
+        ServerResponse serverResponse =
+            ServerResponse.fromJson(json.decode(response.body));
+        return serverResponse;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: updateProfile: ' + e.toString());
       return null;
     }
   }

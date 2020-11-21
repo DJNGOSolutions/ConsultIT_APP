@@ -42,6 +42,47 @@ class ConsultantRepository {
       }
     } catch (e) {
       print('ERROR: $TAG: findAllConsultants: ' + e.toString());
+      return null;
+    }
+  }
+
+  Future<ServerResponse> updateProfile(
+      {@required String id,
+      @required String firstName,
+      @required String lastName,
+      @required String photo,
+      @required String birthdate,
+      @required String degree,
+      @required double referencePrice,
+      @required String phoneNumber,
+      @required String consultantType,
+      @required String state,
+      @required String city}) async {
+    try {
+      String url = NetworkUtils.path + 'consultant/update';
+      final response = await http.post(url, body: {
+        "_id": id,
+        "firstName": firstName,
+        "lastName": lastName,
+        "photo": photo,
+        "birthdate": birthdate,
+        "degree": degree,
+        "referencePrice": referencePrice,
+        "phoneNumber": phoneNumber,
+        "consultantType": consultantType,
+        "state": state,
+        "city": city
+      });
+      if (response != null) {
+        ServerResponse serverResponse =
+            ServerResponse.fromJson(json.decode(response.body));
+        return serverResponse;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: updateProfile: ' + e.toString());
+      return null;
     }
   }
 }
