@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Business {
   String legalName;
   String comercialName;
@@ -11,14 +9,35 @@ class Business {
   String businessLine;
   String businessSector;
 
-  Business(
-      {@required this.legalName,
-      this.comercialName = "",
-      @required this.address,
-      @required this.businessLine,
-      @required this.businessSector,
-      @required this.city,
-      @required this.email,
-      @required this.phoneNumber,
-      @required this.state});
+  Business(business) {
+    legalName = business['legalName'];
+    comercialName = business['comercialName'];
+    email = business['email'];
+    phoneNumber = business['phoneNumber'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+    legalName = business['legalName'];
+  }
+}
+
+class Businesses {
+  static List<Business> _myBusinesses = [];
+
+  Businesses.fromJson(Map<String, dynamic> parsedJson) {
+    if (parsedJson != null &&
+        parsedJson.toString() != 'null' &&
+        parsedJson.isNotEmpty) {
+      dynamic parsedBusinesses = parsedJson['businesses'];
+      for (var i = 0; i < parsedBusinesses.length; i++) {
+        Business business = Business(parsedBusinesses[i]);
+        _myBusinesses.add(business);
+      }
+    }
+  }
+
+  static List<Business> get myBusinesses => _myBusinesses ?? [];
 }

@@ -70,12 +70,17 @@ class BusinessRepository {
       });
 
       if (response.statusCode == 200) {
-        //TODO: Parse list of businesses
+        if (response.body == 'null' || response.body == null) {
+          return null;
+        } else {
+          Businesses.fromJson(json.decode(response.body));
+          return Businesses.myBusinesses;
+        }
       } else {
         return null;
       }
     } catch (e) {
-      print('ERROR: $TAG: findConsultantByUsername: ' + e.toString());
+      print('ERROR: $TAG: findAllBusinesses: ' + e.toString());
       return null;
     }
   }

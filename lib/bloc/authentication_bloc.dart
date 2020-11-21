@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
@@ -83,14 +84,24 @@ class AuthenticationBloc
             if (entrepreneurModel != null) {
               //Si la informacion para el entrepreneur no es null se le asigna al valor del repositorio
               entrepreneurModel.user = userModel;
-              entrepreneurRepository.entrepreneur = entrepreneurModel;
               //Si es un entrepreneur valido se obtiene la lista de negocios correspondientes a ese usuario
-              Fluttertoast.showToast(
-                  msg:
-                      'Bienvenido/a ${entrepreneurModel.firstName} ${entrepreneurModel.lastName}',
-                  backgroundColor: MyColors.mainColor,
-                  textColor: MyColors.accentColor);
-              yield AuthenticationAuthenticated(1);
+              List<Business> myBusinesses = await businessRepository
+                  .findAllBusinesses(username: userModel.username);
+              if (myBusinesses != null) {
+                entrepreneurModel.businesses = myBusinesses;
+                entrepreneurRepository.entrepreneur = entrepreneurModel;
+                Fluttertoast.showToast(
+                    msg:
+                        'Bienvenido/a ${entrepreneurModel.firstName} ${entrepreneurModel.lastName}',
+                    backgroundColor: MyColors.mainColor,
+                    textColor: MyColors.accentColor);
+                yield AuthenticationAuthenticated(1);
+              } else {
+                Fluttertoast.showToast(
+                    msg: 'Error al obtener sus comercios',
+                    backgroundColor: Colors.red);
+                yield AuthenticationUnauthenticated();
+              }
             } else {
               //Error al obtener la informacion del entrepreneur
               Fluttertoast.showToast(
