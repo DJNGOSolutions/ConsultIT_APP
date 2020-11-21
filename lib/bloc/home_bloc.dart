@@ -99,8 +99,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(0);
     } else if (event is ToConsultantsListPage) {
       //TODO: Agregar peticion para obtener a todos los consultores
+      final serverResponse = await consultantRepository.findAllConsultants();
 
-      yield OnConsultantsList();
+      if (serverResponse != null) {
+        if (serverResponse.length > 0) {
+          yield OnConsultantsList(consultants: serverResponse);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'No se encontraron consultores en este momento.');
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg: 'Error de conexion, verifique su conexion a internet',
+            backgroundColor: Colors.red);
+        yield OnHomePage(0);
+      }
     } else if (event is ToConsultantDetailsPage) {
       //TODO: Agregar navegacion al perfil del consultor
       yield OnConsultantsProfilePage();

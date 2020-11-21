@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
@@ -7,13 +8,15 @@ import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 class ConsultantsListPage extends StatelessWidget {
   final String heroTag, imgPath, optionName;
   final HomeBloc homeBloc;
+  final List<Consultant> consultant;
 
   const ConsultantsListPage(
       {Key key,
       @required this.heroTag,
       @required this.imgPath,
       @required this.optionName,
-      @required this.homeBloc})
+      @required this.homeBloc,
+      @required this.consultant})
       : super(key: key);
 
   @override

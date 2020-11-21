@@ -32,6 +32,22 @@ class Consultant {
       @required this.city,
       this.user});
 
+  factory Consultant.fromJsonObject(consultant) {
+    return Consultant(
+        firstname: consultant['firstname'].toString(),
+        lastName: consultant['lastName'].toString(),
+        deegre: consultant['deegre'].toString(),
+        photo: consultant['photo'].toString(),
+        birthdate: consultant['birthdate'].toString(),
+        referencePrice: consultant['referencePrice'],
+        historicAveragePrice: consultant['historicAveragePrice'],
+        phoneNumber: consultant['phoneNumber'].toString(),
+        averageRating: consultant['averageRating'],
+        consultantType: consultant['consultantType'].toString(),
+        state: consultant['state'].toString(),
+        city: consultant['city'].toString());
+  }
+
   factory Consultant.fromJson(Map<String, dynamic> json) {
     return Consultant(
         firstname: json['firstName'].toString() ?? '',
@@ -47,4 +63,22 @@ class Consultant {
         state: json['state'].toString() ?? '',
         city: json['city'].toString() ?? '');
   }
+}
+
+class AllConsultants {
+  static List<Consultant> _allConsultants;
+
+  AllConsultants.fromJson(Map<String, dynamic> parsedJson) {
+    if (parsedJson != null &&
+        parsedJson.toString() != 'null' &&
+        parsedJson.isNotEmpty) {
+      dynamic parsedConsultants = parsedJson['consultants'];
+      for (var i = 0; i < parsedConsultants.length; i++) {
+        Consultant consultant = Consultant.fromJsonObject(parsedConsultants[i]);
+        _allConsultants.add(consultant);
+      }
+    }
+  }
+
+  static List<Consultant> get allConsultants => _allConsultants;
 }

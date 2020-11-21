@@ -151,7 +151,7 @@ class AuthenticationBloc
         } else {
           Fluttertoast.showToast(
               msg: serverResponse.message, backgroundColor: Colors.red);
-          yield AuthenticationUnauthenticated();
+          yield RegistrationForm();
         }
       } else {
         Fluttertoast.showToast(

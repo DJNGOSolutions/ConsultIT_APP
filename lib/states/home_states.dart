@@ -1,4 +1,6 @@
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class HomeState extends Equatable {}
 
@@ -31,6 +33,9 @@ class OnWebBrowser extends HomeState {
 }
 
 class OnConsultantsList extends HomeState {
+  final List<Consultant> consultants;
+
+  OnConsultantsList({@required this.consultants});
   @override
   String toString() => 'ConsultantsList';
 }

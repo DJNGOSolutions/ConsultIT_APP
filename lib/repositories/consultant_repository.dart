@@ -28,4 +28,20 @@ class ConsultantRepository {
       return null;
     }
   }
+
+  Future<List<Consultant>> findAllConsultants({page = 0, limit = 100}) async {
+    try {
+      String url =
+          NetworkUtils.path + 'consultant/findAll?page=$page&limit=$limit';
+      final response = await http.get(url);
+      if (response != null) {
+        AllConsultants.fromJson(json.decode(response.body));
+        return AllConsultants.allConsultants;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: findAllConsultants: ' + e.toString());
+    }
+  }
 }

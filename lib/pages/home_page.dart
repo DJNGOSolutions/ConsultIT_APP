@@ -245,6 +245,7 @@ class _HomePageState extends State<HomePage> {
             imgPath: 'assets/images/icons/BookProfesionals.png',
             optionName: 'Cartera de asesores',
             homeBloc: _homeBloc,
+            consultant: [],
           ));
     } else if (widget.currentIndex == 2) {
       return Container(

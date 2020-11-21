@@ -100,6 +100,7 @@ class _HomeControllerState extends State<HomeController> {
         imgPath: 'assets/images/icons/BookProfesionals.png',
         optionName: 'Cartera de asesores',
         homeBloc: _homeBloc,
+        consultant: state.consultants ?? [],
       );
     } else if (state is OnConsultantsProfilePage) {
       Consultant consultant = new Consultant(
