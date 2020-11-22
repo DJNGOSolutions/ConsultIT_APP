@@ -425,7 +425,7 @@ Widget staffItem(
     @required Consultant consultant,
     @required HomeBloc bloc,
     String heroTag = 'Imagen'}) {
-  heroTag = heroTag + consultant.user.id;
+  heroTag = heroTag + consultant.birthdate + consultant.firstname;
   return Center(
     child: Hero(
       tag: heroTag,
@@ -450,11 +450,10 @@ Widget staffItem(
                       width: 65,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(75.0),
-                        color: MyColors.accentColor.withOpacity(0.6),
                         image: DecorationImage(
-                            image: consultant.photo == ''
-                                ? AssetImage('asssets/images/icons/profile.png')
-                                : NetworkImage(consultant.photo),
+                            image: isNotEmptyOrNull(consultant.photo)
+                                ? NetworkImage(consultant.photo)
+                                : AssetImage('assets/images/icons/profile.png'),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -478,7 +477,10 @@ Widget staffItem(
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
-                          child: Text(consultant.deegre ?? '',
+                          child: Text(
+                              isNotEmptyOrNull(consultant.deegre)
+                                  ? consultant.deegre
+                                  : 'Asesor Profesional',
                               style: Styles.bodyTextStyleNonBold
                                   .apply(color: MyColors.secondaryColor)),
                         ),
@@ -516,4 +518,12 @@ Widget staffItem(
       ),
     ),
   );
+}
+
+bool isNotEmptyOrNull(String word) {
+  if (word != null && word != '' && word != ' ' && word != 'null') {
+    return true;
+  } else {
+    return false;
+  }
 }

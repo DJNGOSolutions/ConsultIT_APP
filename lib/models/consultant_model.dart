@@ -54,6 +54,7 @@ class AllConsultants {
   static List<Consultant> _allConsultants = [];
 
   AllConsultants.fromJson(Map<String, dynamic> parsedJson) {
+    allConsultants.clear();
     if (parsedJson != null && parsedJson.toString() != 'null') {
       List<dynamic> parsedConsultants = parsedJson['consultants'];
       for (var i = 0; i < parsedConsultants.length; i++) {

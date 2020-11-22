@@ -21,59 +21,66 @@ class ConsultantsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: (consultant.length > 0 && consultant != null)
-            ? ListView(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                children: <Widget>[
-                    SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Hero(
-                          tag: heroTag,
-                          child: Container(
-                            height: 50.0,
-                            width: 50.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(imgPath),
-                                  fit: BoxFit.contain),
+    return Scaffold(
+        appBar: myWidgets.customAppBar(
+            context: context,
+            canGoBack: true,
+            function: () => homeBloc.add(ToHomePage())),
+        body: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: (consultant.length > 0 && consultant != null)
+                ? ListView(
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    children: <Widget>[
+                        SizedBox(height: 10.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Hero(
+                              tag: heroTag,
+                              child: Container(
+                                height: 50.0,
+                                width: 50.0,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(imgPath),
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 18.0),
+                              child: Text(optionName,
+                                  style: Styles.headerTextStyle),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child:
-                              Text(optionName, style: Styles.headerTextStyle),
+                        SizedBox(height: 10.0),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: consultant.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return myWidgets.staffItem(
+                                  context: context,
+                                  bloc: homeBloc,
+                                  consultant: consultant[index]);
+                            }),
+                        SizedBox(
+                          height: 40.0,
                         )
-                      ],
+                      ])
+                : Center(
+                    child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                    child: Text(
+                      'No se encontro ningun consultor por el momento...',
+                      textAlign: TextAlign.center,
+                      style: Styles.bodyTextStyle.apply(
+                        color: MyColors.mainColor,
+                      ),
                     ),
-                    SizedBox(height: 10.0),
-                    ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                      return myWidgets.staffItem(
-                          context: context,
-                          bloc: homeBloc,
-                          consultant: consultant[index]);
-                    }),
-                    SizedBox(
-                      height: 40.0,
-                    )
-                  ])
-            : Center(
-                child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Text(
-                  'No se encontro ningun consultor por el momento...',
-                  textAlign: TextAlign.center,
-                  style: Styles.bodyTextStyle.apply(
-                    color: MyColors.mainColor,
-                  ),
-                ),
-              )));
+                  ))));
   }
 }
