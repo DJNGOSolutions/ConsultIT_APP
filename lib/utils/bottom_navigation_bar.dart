@@ -73,15 +73,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         BubbleBottomBarItem(
             backgroundColor: MyColors.secondaryColor,
             icon: Icon(
-              Icons.people,
+              Icons.history,
               color: Colors.black,
             ),
             activeIcon: Icon(
-              Icons.people,
+              Icons.history,
               color: MyColors.mainColor,
             ),
             title: Text(
-              "Asesores",
+              "Historial",
               style: Styles.bodyTextStyle.apply(color: MyColors.mainColor),
             )),
         BubbleBottomBarItem(

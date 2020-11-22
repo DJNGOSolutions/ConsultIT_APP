@@ -7,6 +7,7 @@ import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/profile_Page.dart';
+import 'package:consult_it_app/pages/transactionsHistory_page.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/bottom_navigation_bar.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -264,12 +265,8 @@ class _HomePageState extends State<HomePage> {
       return Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: ConsultantsListPage(
-            heroTag: 'ConsultantName',
-            imgPath: 'assets/images/icons/BookProfesionals.png',
-            optionName: 'Cartera de asesores',
+          child: TransactionsHistory(
             homeBloc: _homeBloc,
-            consultant: [],
           ));
     } else if (widget.currentIndex == 2) {
       return Container(
