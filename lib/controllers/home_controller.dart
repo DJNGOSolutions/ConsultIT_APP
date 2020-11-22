@@ -104,29 +104,10 @@ class _HomeControllerState extends State<HomeController> {
         consultant: state.consultants ?? [],
       );
     } else if (state is OnConsultantsProfilePage) {
-      Consultant consultant = new Consultant(
-          firstname: 'Fernando',
-          lastName: 'Hernandez',
-          deegre: 'Licenciado en Ciencias de la Economia',
-          photo:
-              'https://content.thriveglobal.com/wp-content/uploads/2018/12/profile21.jpg',
-          birthdate: '08/05/1993',
-          referencePrice: 4.50,
-          historicAveragePrice: 6.50,
-          phoneNumber: '6547 8897',
-          averageRating: 4.8,
-          consultantType: 'Fintech',
-          state: 'La Libertad',
-          city: 'Antiguo Cuscatlan',
-          user: User(
-              username: 'FernandoHdz',
-              email: 'fer.hndz@gmail.com',
-              password: '*********',
-              tipo: '0'));
       return ConsultantDetailsPage(
           heroTag: 'ProfileImageRonald Vega',
           imgPath: 'assets/images/icons/profile.png',
-          consultant: consultant,
+          consultant: state.consultant,
           homeBloc: _homeBloc);
     } else if (state is OnProfilePage) {
       if (userType == 0) {

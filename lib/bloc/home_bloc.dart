@@ -31,6 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
+    print(event.toString());
     if (event is ToAddBusinessPage) {
       //TODO: Ir a pantalla de agregar comercio
       yield OnAddBusinessPage();

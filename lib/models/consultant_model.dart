@@ -1,6 +1,6 @@
 //Informacion que necesito enviar
 import 'package:consult_it_app/models/user_model.dart';
-import 'package:flutter/material.dart';
+import 'package:date_format/date_format.dart';
 
 class Consultant {
   User user;
@@ -59,10 +59,16 @@ class AllConsultants {
       List<dynamic> parsedConsultants = parsedJson['consultants'];
       for (var i = 0; i < parsedConsultants.length; i++) {
         Consultant consultant = Consultant.fromJson(parsedConsultants[i]);
+        consultant.birthdate = convertDateFromString(consultant.birthdate);
         _allConsultants.add(consultant);
         print('Consultor $i: ${consultant.firstname}');
       }
     }
+  }
+
+  String convertDateFromString(String strDate) {
+    DateTime todayDate = DateTime.parse(strDate);
+    return (formatDate(todayDate, [dd, '/', mm, '/', yyyy]));
   }
 
   static List<Consultant> get allConsultants => _allConsultants;

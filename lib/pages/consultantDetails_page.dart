@@ -77,11 +77,9 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
+                            left: 12.0, top: 4.0, bottom: 4.0),
                         child: Text(
-                            consultant.firstname.toUpperCase() +
-                                ' ' +
-                                consultant.lastName.toUpperCase(),
+                            consultant.firstname + ' ' + consultant.lastName,
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -92,8 +90,11 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.deegre.toUpperCase(),
+                            left: 12.0, top: 4.0, bottom: 4.0),
+                        child: Text(
+                            myWidgets.isNotEmptyOrNull(consultant.deegre)
+                                ? consultant.deegre
+                                : 'Asesor Económico',
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -104,8 +105,8 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.state.toUpperCase(),
+                            left: 12.0, top: 4.0, bottom: 4.0),
+                        child: Text(consultant.state,
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -116,8 +117,8 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.birthdate.toUpperCase(),
+                            left: 12.0, top: 4.0, bottom: 4.0),
+                        child: Text(consultant.birthdate,
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -159,7 +160,7 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
+                            left: 12.0, top: 4.0, bottom: 4.0),
                         child: Text(
                             '\$ ${consultant.referencePrice.toString()}',
                             style: Styles.bodyTextStyle
@@ -172,7 +173,7 @@ class ConsultantDetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
+                            left: 12.0, top: 4.0, bottom: 4.0),
                         child: Text(consultant.averageRating.toString(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
@@ -194,8 +195,12 @@ class ConsultantDetailsPage extends StatelessWidget {
                           )),
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.consultantType.toUpperCase(),
+                            left: 12.0, top: 4.0, bottom: 4.0),
+                        child: Text(
+                            myWidgets
+                                    .isNotEmptyOrNull(consultant.consultantType)
+                                ? consultant.consultantType
+                                : 'Financiero',
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -207,85 +212,95 @@ class ConsultantDetailsPage extends StatelessWidget {
               SizedBox(
                 height: 25.0,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color.fromRGBO(143, 148, 251, .2),
-                          blurRadius: 20.0,
-                          offset: Offset(0, 10))
-                    ]),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20.0),
-                      Center(
-                        child: Text(
-                          'Informacion de contacto'.toUpperCase(),
-                          style: Styles.subHeaderTextStyle
-                              .apply(color: MyColors.mainColor),
-                        ),
-                      ),
-                      SizedBox(height: 10.0),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Row(
-                            children: [
-                              Text('Numero de telefono'.toUpperCase(),
-                                  style: Styles.bodyTextStyle),
-                              SizedBox(
-                                width: 4.0,
+              consultant.user != null
+                  ? Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color.fromRGBO(143, 148, 251, .2),
+                                blurRadius: 20.0,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: 20.0),
+                            Center(
+                              child: Text(
+                                'Informacion de contacto'.toUpperCase(),
+                                style: Styles.subHeaderTextStyle
+                                    .apply(color: MyColors.mainColor),
                               ),
-                              Icon(
-                                Icons.phone,
-                                size: 18,
-                              )
-                            ],
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.phoneNumber.toUpperCase(),
-                            style: Styles.bodyTextStyle
-                                .apply(color: MyColors.secondaryColor)),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Row(
-                          children: [
-                            Text('Correo'.toUpperCase(),
-                                style: Styles.bodyTextStyle),
+                            ),
+                            SizedBox(height: 10.0),
+                            Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: Row(
+                                  children: [
+                                    Text('Numero de telefono'.toUpperCase(),
+                                        style: Styles.bodyTextStyle),
+                                    SizedBox(
+                                      width: 4.0,
+                                    ),
+                                    Icon(
+                                      Icons.phone,
+                                      size: 18,
+                                    )
+                                  ],
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 12.0, top: 4.0, bottom: 4.0),
+                              child: Text(
+                                  myWidgets.isNotEmptyOrNull(
+                                          consultant.phoneNumber)
+                                      ? consultant.phoneNumber
+                                      : '',
+                                  style: Styles.bodyTextStyle
+                                      .apply(color: MyColors.secondaryColor)),
+                            ),
                             SizedBox(
-                              width: 4.0,
+                              height: 10.0,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 4.0),
-                              child: Icon(
-                                Icons.email_rounded,
-                                size: 18,
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Row(
+                                children: [
+                                  Text('Correo'.toUpperCase(),
+                                      style: Styles.bodyTextStyle),
+                                  SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 4.0),
+                                    child: Icon(
+                                      Icons.email_rounded,
+                                      size: 18,
+                                    ),
+                                  )
+                                ],
                               ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 12.0, top: 4.0, bottom: 4.0),
+                              child: Text(
+                                  myWidgets.isNotEmptyOrNull(
+                                          consultant.user.email)
+                                      ? consultant.user?.email
+                                      : '',
+                                  style: Styles.bodyTextStyle
+                                      .apply(color: MyColors.secondaryColor)),
+                            ),
+                            SizedBox(
+                              height: 13.0,
                             )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(consultant.user.email,
-                            style: Styles.bodyTextStyle
-                                .apply(color: MyColors.secondaryColor)),
-                      ),
-                      SizedBox(
-                        height: 13.0,
-                      )
-                    ]),
-              ),
+                          ]),
+                    )
+                  : SizedBox(),
               SizedBox(height: 30.0),
               Column(
                 children: [
