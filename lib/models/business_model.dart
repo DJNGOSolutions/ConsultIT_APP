@@ -26,10 +26,10 @@ class Businesses {
   static List<Business> _myBusinesses = [];
 
   Businesses.fromJson(Map<String, dynamic> parsedJson) {
+    _myBusinesses.clear();
     if (parsedJson != null &&
         parsedJson.toString() != 'null' &&
         parsedJson.isNotEmpty) {
-      _myBusinesses.clear();
       dynamic parsedBusinesses = parsedJson['businesses'];
       for (var i = 0; i < parsedBusinesses.length; i++) {
         Business business = Business(parsedBusinesses[i]);

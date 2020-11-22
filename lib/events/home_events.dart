@@ -1,5 +1,6 @@
 import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
+import 'package:consult_it_app/states/home_states.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -75,9 +76,10 @@ class ToConsultantDetailsPage extends HomeEvent {
 }
 
 class ToWebView extends HomeEvent {
+  final HomeState nextState;
   final String query;
 
-  ToWebView({@required this.query});
+  ToWebView({@required this.query, @required this.nextState});
   @override
   String toString() => 'ToWebView';
 }

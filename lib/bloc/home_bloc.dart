@@ -118,8 +118,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is ToConsultantDetailsPage) {
       yield OnConsultantsProfilePage(consultant: event.consultant);
     } else if (event is ToWebView) {
-      _launchUrl(query: event.query);
-      yield OnWebBrowser();
+      _launchUrl(sector: event.query);
+      yield event.nextState;
     } else if (event is ToProfilePage) {
       yield OnProfilePage();
     } else if (event is ToEditProfilePage) {
@@ -144,16 +144,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<void> _launchUrl({@required String query}) async {
-    String url = 'https://www.google.com/search?q=';
-    String finalUrl =
-        'oportunidad de mercado para empresas de ' + query + ' en El Salvador';
-    finalUrl = finalUrl.replaceAll(" ", '+');
-    url = url + finalUrl;
-    if (await canLaunch(url)) {
-      await launch(url, forceWebView: true, forceSafariVC: true);
+  Future<void> _launchUrl({@required String sector}) async {
+    String googleUrl = 'https://www.google.com/search?q=';
+    String search =
+        'oportunidad de mercado para empresas de ' + sector + ' en El Salvador';
+    String finalUrl = googleUrl + search.replaceAll(" ", '+');
+    if (await canLaunch(finalUrl)) {
+      await launch(finalUrl, forceWebView: true, forceSafariVC: true);
     } else {
-      throw 'Could not launch $url';
+      throw 'Could not launch $finalUrl';
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/business_model.dart';
+import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
@@ -281,9 +282,8 @@ class BusinessProfilePage extends StatelessWidget {
                       maxWidth: MediaQuery.of(context).size.width * 0.73,
                       context: context,
                       function: () => homeBloc.add(ToWebView(
-                          query: 'oportunidad de mercado para empresas de ' +
-                              'Textiles' +
-                              ' en El Salvador')),
+                          query: business.businessSector,
+                          nextState: OnMyBusinessDetails(business: business))),
                       labelText: 'Consultar situacion del mercado',
                       isMain: false),
                   SizedBox(
