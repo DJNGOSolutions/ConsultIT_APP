@@ -1,18 +1,20 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
 
 class BusinessProfilePage extends StatelessWidget {
-  final String heroTag, imgPath, businessName;
+  final String heroTag, imgPath;
   final HomeBloc homeBloc;
+  final Business business;
   const BusinessProfilePage(
       {Key key,
       @required this.heroTag,
-      @required this.imgPath,
-      @required this.businessName,
-      @required this.homeBloc})
+      @required this.homeBloc,
+      @required this.business,
+      @required this.imgPath})
       : super(key: key);
 
   @override
@@ -70,7 +72,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('Variedades unicas'.toUpperCase(),
+                        child: Text(business.legalName ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -82,7 +84,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(businessName.toUpperCase(),
+                        child: Text(business.comercialName ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -104,7 +106,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('Textiles'.toUpperCase(),
+                        child: Text(business.businessSector ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -127,7 +129,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('Venta de ropa online'.toUpperCase(),
+                        child: Text(business.businessLine ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -184,7 +186,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('info@ventatextiles.com'.toUpperCase(),
+                        child: Text(business.email ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -206,7 +208,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('2258 9711'.toUpperCase(),
+                        child: Text(business.phoneNumber ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -232,8 +234,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text(
-                            'Edificio abedros, local 12-D'.toUpperCase(),
+                        child: Text(business.address ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -245,7 +246,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('La Libertad'.toUpperCase(),
+                        child: Text(business.state ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),
@@ -257,7 +258,7 @@ class BusinessProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 12.0, top: 2.0, bottom: 4.0),
-                        child: Text('Antiguo Cuscatlan'.toUpperCase(),
+                        child: Text(business.city ?? ''.toUpperCase(),
                             style: Styles.bodyTextStyle
                                 .apply(color: MyColors.secondaryColor)),
                       ),

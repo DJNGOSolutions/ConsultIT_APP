@@ -94,8 +94,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       //TODO: Agregar peticion para obtener todos los negocios
       yield OnMyBussinessesList();
     } else if (event is ToMyBusinessDetailsPage) {
-      //TODO: Agregar peticion para obtener detalles de una emprresa
-      yield OnMyBusinessDetails();
+      yield OnMyBusinessDetails(business: event.business);
     } else if (event is ToEditBusinessPage) {
       //TODO: Agregar estado para pantalla donde se edita la informacion del negocio
       yield OnHomePage(0);

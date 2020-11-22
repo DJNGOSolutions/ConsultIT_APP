@@ -147,8 +147,6 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemCount: entrepreneur.businesses.length,
                       itemBuilder: (BuildContext context, int index) {
-                        print(
-                            'index: $index business: ${entrepreneur.businesses[index].comercialName}');
                         return Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: myWidgets.businessWidget(

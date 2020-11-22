@@ -11,11 +11,10 @@ class ConsultantRepository {
 
   Future<Consultant> findOneByUsername({@required username}) async {
     try {
-      String url = NetworkUtils.path + 'consultant/findonebyusername';
+      String url =
+          NetworkUtils.path + 'consultant/findonebyusername?username=$username';
 
-      final response = await http.post(url, body: {
-        "username": username,
-      });
+      final response = await http.get(url);
 
       if (response.statusCode == 200) {
         consultant = Consultant.fromJson(json.decode(response.body));

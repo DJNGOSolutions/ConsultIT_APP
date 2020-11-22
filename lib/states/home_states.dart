@@ -1,3 +1,4 @@
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class OnMyBussinessesList extends HomeState {
 }
 
 class OnMyBusinessDetails extends HomeState {
+  final Business business;
+
+  OnMyBusinessDetails({@required this.business});
   @override
   String toString() => 'MyBusinessDetails';
 }

@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/models/business_model.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
+import 'package:consult_it_app/models/entrepreneur_model.dart';
+import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
@@ -160,6 +163,9 @@ class AuthenticationBloc
       }
     }
     if (event is LoggedOut) {
+      userRepository.user = User();
+      entrepreneurRepository.entrepreneur = Entrepreneur();
+      consultantRepository.consultant = Consultant();
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       _prefs.clear();
       yield AuthenticationUnauthenticated();

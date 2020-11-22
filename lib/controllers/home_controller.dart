@@ -90,10 +90,11 @@ class _HomeControllerState extends State<HomeController> {
       );
     } else if (state is OnMyBusinessDetails) {
       return BusinessProfilePage(
-          imgPath: 'assets/images/icons/FolderDataColor.png',
-          heroTag: 'BusinessImage',
-          businessName: 'Venta de textiles S.A. de C.V.',
-          homeBloc: _homeBloc);
+        imgPath: 'assets/images/icons/FolderDataColor.png',
+        heroTag: 'BusinessImage',
+        homeBloc: _homeBloc,
+        business: state.business,
+      );
     } else if (state is OnConsultantsList) {
       return ConsultantsListPage(
         heroTag: 'ConsultantName',

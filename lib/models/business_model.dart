@@ -14,13 +14,11 @@ class Business {
     comercialName = business['comercialName'];
     email = business['email'];
     phoneNumber = business['phoneNumber'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
-    legalName = business['legalName'];
+    address = business['address'];
+    state = business['state'];
+    city = business['city'];
+    businessLine = business['businessLine'];
+    businessSector = business['businessSector'];
   }
 }
 
@@ -31,6 +29,7 @@ class Businesses {
     if (parsedJson != null &&
         parsedJson.toString() != 'null' &&
         parsedJson.isNotEmpty) {
+      _myBusinesses.clear();
       dynamic parsedBusinesses = parsedJson['businesses'];
       for (var i = 0; i < parsedBusinesses.length; i++) {
         Business business = Business(parsedBusinesses[i]);
