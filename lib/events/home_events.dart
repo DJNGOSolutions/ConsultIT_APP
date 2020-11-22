@@ -1,3 +1,4 @@
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,9 @@ class ToMyBusinessesList extends HomeEvent {
 }
 
 class ToMyBusinessDetailsPage extends HomeEvent {
+  final Business business;
+
+  ToMyBusinessDetailsPage({@required this.business});
   @override
   String toString() => 'ToMyBusinessDetailsPage';
 }

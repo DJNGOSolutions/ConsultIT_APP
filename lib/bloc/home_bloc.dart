@@ -20,6 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserRepository userRepository;
   final ConsultantRepository consultantRepository;
   final EntrepreneurRepository entrepreneurRepository;
+
   HomeBloc(HomeState initialState,
       {@required this.businessRepository,
       @required this.userRepository,
@@ -151,7 +152,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     finalUrl = finalUrl.replaceAll(" ", '+');
     url = url + finalUrl;
     if (await canLaunch(url)) {
-      await launch(url, forceWebView: true);
+      await launch(url, forceWebView: true, forceSafariVC: true);
     } else {
       throw 'Could not launch $url';
     }

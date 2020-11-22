@@ -27,7 +27,7 @@ class EntrepreneurRepository {
     }
   }
 
-  Future<ServerResponse> updateProfile(
+  Future<Entrepreneur> updateProfile(
       {@required String id,
       @required String firstName,
       @required String lastName,
@@ -39,7 +39,7 @@ class EntrepreneurRepository {
       @required String city}) async {
     try {
       String url = NetworkUtils.path + 'entrepreneur/update';
-      final response = await http.post(url, body: {
+      final response = await http.put(url, body: {
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,
@@ -50,9 +50,9 @@ class EntrepreneurRepository {
         "state": state,
         "city": city
       });
-      if (response != null) {
-        ServerResponse serverResponse =
-            ServerResponse.fromJson(json.decode(response.body));
+      if (response != null && response.statusCode == 200) {
+        Entrepreneur serverResponse =
+            Entrepreneur.fromJson(json.decode(response.body));
         return serverResponse;
       } else {
         return null;

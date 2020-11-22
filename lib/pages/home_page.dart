@@ -2,6 +2,9 @@ import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
+import 'package:consult_it_app/models/entrepreneur_model.dart';
+import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/profile_Page.dart';
 import 'package:consult_it_app/states/home_states.dart';
@@ -30,9 +33,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex;
   HomeBloc get _homeBloc => widget.homeBloc;
+  User user;
+  Entrepreneur entrepreneur;
+  Consultant consultant;
+
   @override
   void initState() {
     _currentIndex = widget.currentIndex;
+    user = _homeBloc.userRepository.user;
+    if (user.tipo.toUpperCase() == "consultant".toUpperCase()) {
+      consultant = _homeBloc.consultantRepository.consultant;
+    } else {
+      entrepreneur = _homeBloc.entrepreneurRepository.entrepreneur;
+    }
     super.initState();
   }
 
@@ -125,22 +138,22 @@ class _HomePageState extends State<HomePage> {
                     child: myWidgets.addBusinessWidget(),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: myWidgets.businessWidget(
-                      businessName: "Venta de textiles s.a. de c.v.",
-                      context: context,
-                      function: () =>
-                          widget.homeBloc.add(ToMyBusinessDetailsPage())),
-                ),
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 8.0),
-                //   child: myWidgets.businessWidget(
-                //       businessName: "Tienda de ropa online",
-                //       businessImage: "assets/images/icons/OnlineShoping.png",
-                //       context: context,
-                //       routeName: BUSINESS_PROFILE_PAGE),
-                // ),
+                entrepreneur.businesses.length > 0
+                    ? ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: myWidgets.businessWidget(
+                              businessName:
+                                  entrepreneur.businesses[index].comercialName,
+                              context: context,
+                              function: () => widget.homeBloc.add(
+                                  ToMyBusinessDetailsPage(
+                                      business:
+                                          entrepreneur.businesses[index]))),
+                        );
+                      })
+                    : SizedBox()
               ],
             ),
           )
@@ -231,8 +244,9 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         child: ListView(
           children: [
-            _buildMyBusinessSection(context),
-            _buildMoreOptionsSection(context)
+            entrepreneur != null
+                ? _buildEntrepreneurHome(context, entrepreneur)
+                : _buildConsultantHome(context, consultant),
           ],
         ),
       );
@@ -258,11 +272,21 @@ class _HomePageState extends State<HomePage> {
         width: MediaQuery.of(context).size.width,
         child: ListView(
           children: [
-            _buildMyBusinessSection(context),
-            _buildMoreOptionsSection(context)
+            entrepreneur != null
+                ? _buildEntrepreneurHome(context, entrepreneur)
+                : _buildConsultantHome(context, consultant),
           ],
         ),
       );
     }
+  }
+
+  _buildEntrepreneurHome(BuildContext context, Entrepreneur entrepreneur) {
+    _buildMyBusinessSection(context);
+    _buildMoreOptionsSection(context);
+  }
+
+  _buildConsultantHome(BuildContext context, Consultant consultant) {
+    _buildMoreOptionsSection(context);
   }
 }

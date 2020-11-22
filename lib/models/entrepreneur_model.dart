@@ -15,15 +15,15 @@ class Entrepreneur {
   List<Business> businesses;
 
   Entrepreneur(
-      {@required this.birthDate,
+      {this.birthDate,
       this.businesses,
-      @required this.city,
-      @required this.firstName,
-      @required this.lastName,
-      @required this.phoneNumber,
-      @required this.photo,
-      @required this.postalAddress,
-      @required this.state,
+      this.city,
+      this.firstName,
+      this.lastName,
+      this.phoneNumber,
+      this.photo,
+      this.postalAddress,
+      this.state,
       this.user});
 
   factory Entrepreneur.fromJson(Map<String, dynamic> json) {

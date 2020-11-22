@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/models/business_model.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
@@ -62,6 +63,7 @@ class AuthenticationBloc
               //Si la peticion del consultor es valida se da accesso a la app
               consultantModel.user = userModel;
               consultantRepository.consultant = consultantModel;
+              final Consultant consultant = consultantRepository.consultant;
               Fluttertoast.showToast(
                   msg:
                       'Bienvenido/a ${consultantModel.firstname} ${consultantModel.lastName}',
@@ -97,6 +99,7 @@ class AuthenticationBloc
                     textColor: MyColors.accentColor);
                 yield AuthenticationAuthenticated(1);
               } else {
+                print('Error al obtener sus comercios');
                 Fluttertoast.showToast(
                     msg: 'Error al obtener sus comercios',
                     backgroundColor: Colors.red);

@@ -201,7 +201,6 @@ inputField(TextEditingController controller,
     TextField(
       controller: controller,
       onSubmitted: (value) => controller.text = value,
-      onChanged: (value) => print(controller.text),
       obscureText: obscure,
       decoration: InputDecoration(
           prefixIcon: Icon(

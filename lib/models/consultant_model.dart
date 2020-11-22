@@ -18,18 +18,18 @@ class Consultant {
   String city;
 
   Consultant(
-      {@required this.firstname,
-      @required this.lastName,
-      @required this.deegre,
-      @required this.photo,
-      @required this.birthdate,
-      @required this.referencePrice,
-      @required this.historicAveragePrice,
-      @required this.phoneNumber,
-      @required this.averageRating,
-      @required this.consultantType,
-      @required this.state,
-      @required this.city,
+      {this.firstname,
+      this.lastName,
+      this.deegre,
+      this.photo,
+      this.birthdate,
+      this.referencePrice,
+      this.historicAveragePrice,
+      this.phoneNumber,
+      this.averageRating,
+      this.consultantType,
+      this.state,
+      this.city,
       this.user});
 
   factory Consultant.fromJsonObject(consultant) {
