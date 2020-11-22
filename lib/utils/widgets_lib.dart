@@ -454,7 +454,10 @@ Widget staffItem(
                         borderRadius: BorderRadius.circular(75.0),
                         color: MyColors.accentColor.withOpacity(0.6),
                         image: DecorationImage(
-                            image: NetworkImage(imgPath), fit: BoxFit.cover),
+                            image: imgPath == ''
+                                ? AssetImage('asssets/images/icons/profile.png')
+                                : NetworkImage(imgPath),
+                            fit: BoxFit.cover),
                       ),
                     ),
                   ),

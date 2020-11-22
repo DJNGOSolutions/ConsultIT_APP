@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
@@ -101,9 +102,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is ToConsultantsListPage) {
       //TODO: Agregar peticion para obtener a todos los consultores
       final serverResponse = await consultantRepository.findAllConsultants();
-
       if (serverResponse != null) {
         if (serverResponse.length > 0) {
+          print('Consultores(${serverResponse.length}) obtenidos con exito');
           yield OnConsultantsList(consultants: serverResponse);
         } else {
           Fluttertoast.showToast(

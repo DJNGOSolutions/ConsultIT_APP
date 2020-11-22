@@ -32,22 +32,6 @@ class Consultant {
       this.city,
       this.user});
 
-  factory Consultant.fromJsonObject(consultant) {
-    return Consultant(
-        firstname: consultant['firstname'].toString(),
-        lastName: consultant['lastName'].toString(),
-        deegre: consultant['deegre'].toString(),
-        photo: consultant['photo'].toString(),
-        birthdate: consultant['birthdate'].toString(),
-        referencePrice: consultant['referencePrice'],
-        historicAveragePrice: consultant['historicAveragePrice'],
-        phoneNumber: consultant['phoneNumber'].toString(),
-        averageRating: consultant['averageRating'],
-        consultantType: consultant['consultantType'].toString(),
-        state: consultant['state'].toString(),
-        city: consultant['city'].toString());
-  }
-
   factory Consultant.fromJson(Map<String, dynamic> json) {
     return Consultant(
         firstname: json['firstName'].toString() ?? '',
@@ -55,10 +39,11 @@ class Consultant {
         deegre: json['deegre'].toString() ?? '',
         photo: json['photo'].toString() ?? '',
         birthdate: json['birthdate'].toString() ?? '',
-        referencePrice: json['referencePrice'],
-        historicAveragePrice: json['historicAveragePrice'],
+        referencePrice: double.parse(json['referencePrice'].toString()),
+        historicAveragePrice:
+            double.parse(json['historicAveragePrice'].toString()),
         phoneNumber: json['phoneNumber'].toString() ?? '',
-        averageRating: json['averageRating'],
+        averageRating: double.parse(json['averageRating'].toString()),
         consultantType: json['consultantType'].toString() ?? '',
         state: json['state'].toString() ?? '',
         city: json['city'].toString() ?? '');
@@ -66,16 +51,15 @@ class Consultant {
 }
 
 class AllConsultants {
-  static List<Consultant> _allConsultants;
+  static List<Consultant> _allConsultants = [];
 
   AllConsultants.fromJson(Map<String, dynamic> parsedJson) {
-    if (parsedJson != null &&
-        parsedJson.toString() != 'null' &&
-        parsedJson.isNotEmpty) {
-      dynamic parsedConsultants = parsedJson['consultants'];
+    if (parsedJson != null && parsedJson.toString() != 'null') {
+      List<dynamic> parsedConsultants = parsedJson['consultants'];
       for (var i = 0; i < parsedConsultants.length; i++) {
-        Consultant consultant = Consultant.fromJsonObject(parsedConsultants[i]);
+        Consultant consultant = Consultant.fromJson(parsedConsultants[i]);
         _allConsultants.add(consultant);
+        print('Consultor $i: ${consultant.firstname}');
       }
     }
   }

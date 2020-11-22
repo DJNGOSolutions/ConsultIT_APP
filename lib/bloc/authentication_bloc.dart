@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/models/business_model.dart';
-import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
@@ -47,7 +46,6 @@ class AuthenticationBloc
             backgroundColor: Colors.red);
       } else {
         yield AuthenticationLoading();
-        print('Usuario: ${event.username} \nContraseña: ${event.password}');
         //Autenticando credenciales ingresadas
         final userModel = await userRepository.authenticate(
             username: event.username, password: event.password);
@@ -63,7 +61,6 @@ class AuthenticationBloc
               //Si la peticion del consultor es valida se da accesso a la app
               consultantModel.user = userModel;
               consultantRepository.consultant = consultantModel;
-              final Consultant consultant = consultantRepository.consultant;
               Fluttertoast.showToast(
                   msg:
                       'Bienvenido/a ${consultantModel.firstname} ${consultantModel.lastName}',
