@@ -63,13 +63,7 @@ class ConsultantsListPage extends StatelessWidget {
                           return myWidgets.staffItem(
                               context: context,
                               bloc: homeBloc,
-                              staffName:
-                                  '${consultant[index].firstname} ${consultant[index]..lastName}',
-                              staffPosition:
-                                  '${consultant[index].deegre ?? ''}',
-                              staffNumber:
-                                  '${consultant[index].phoneNumber ?? ''}',
-                              imgPath: '${consultant[index].photo}');
+                              consultant: consultant[index]);
                         }),
                         SizedBox(
                           height: 40.0,

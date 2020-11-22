@@ -63,11 +63,10 @@ class BusinessRepository {
 
   Future<List<Business>> findAllBusinesses({@required username}) async {
     try {
-      String url = NetworkUtils.path + 'entrepreneur/findallbusinesses';
+      String url = NetworkUtils.path +
+          'entrepreneur/findallbusinesses?username=$username';
 
-      final response = await http.post(url, body: {
-        "username": username,
-      });
+      final response = await http.get(url);
 
       if (response.statusCode == 200) {
         if (response.body == 'null' || response.body == null) {

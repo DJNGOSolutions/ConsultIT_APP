@@ -41,6 +41,10 @@ class OnConsultantsList extends HomeState {
 }
 
 class OnConsultantsProfilePage extends HomeState {
+  final Consultant consultant;
+
+  OnConsultantsProfilePage({@required this.consultant});
+
   @override
   String toString() => 'OnConsultantsProfilePage';
 }

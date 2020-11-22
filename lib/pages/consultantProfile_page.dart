@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
@@ -10,8 +11,12 @@ String imgPath =
 class ConsultantProfilePage extends StatelessWidget {
   final String heroTag;
   final HomeBloc homeBloc;
+  final Consultant consultant;
   const ConsultantProfilePage(
-      {Key key, this.heroTag = 'Image', @required this.homeBloc})
+      {Key key,
+      this.heroTag = 'Image',
+      @required this.homeBloc,
+      @required this.consultant})
       : super(key: key);
 
   @override
@@ -48,11 +53,11 @@ class ConsultantProfilePage extends StatelessWidget {
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  'Fernando Velasquez',
+                  '${consultant.firstname} ${consultant.lastName}',
                   style: Styles.headerTextStyle.apply(fontSizeFactor: 1.3),
                 ),
                 SizedBox(height: 5.0),
-                Text('Asesor Profesional'.toUpperCase(),
+                Text(consultant.deegre ?? ''.toUpperCase(),
                     style: Styles.bodyTextStyle),
                 SizedBox(height: 20.0),
                 Row(
@@ -70,7 +75,7 @@ class ConsultantProfilePage extends StatelessWidget {
                                     left: 8.0,
                                     right: 8.0,
                                     bottom: 2.0),
-                                child: Text('FerVelasquez',
+                                child: Text(consultant.user.username,
                                     style: Styles.headerTextStyle),
                               ),
                               Text('usuario'.toUpperCase(),
@@ -90,7 +95,7 @@ class ConsultantProfilePage extends StatelessWidget {
                                     left: 8.0,
                                     right: 8.0,
                                     bottom: 2.0),
-                                child: Text('7855 9711',
+                                child: Text(consultant.phoneNumber,
                                     style: Styles.headerTextStyle),
                               ),
                               Text('Teléfono'.toUpperCase(),
@@ -117,7 +122,7 @@ class ConsultantProfilePage extends StatelessWidget {
                                     left: 8.0,
                                     right: 8.0,
                                     bottom: 2.0),
-                                child: Text('\$7.50',
+                                child: Text('\$${consultant.referencePrice}',
                                     style: Styles.headerTextStyle),
                               ),
                               Text('Precio por hora'.toUpperCase(),
@@ -138,10 +143,11 @@ class ConsultantProfilePage extends StatelessWidget {
                                     right: 8.0,
                                     bottom: 2.0),
                                 child: FittedBox(
-                                  child: Text('4.8 / 5.0',
-                                      style: Styles.headerTextStyle.apply(
-                                        fontSizeFactor: 1.1,
-                                      )),
+                                  child:
+                                      Text('${consultant.averageRating} / 5.0',
+                                          style: Styles.headerTextStyle.apply(
+                                            fontSizeFactor: 1.1,
+                                          )),
                                 ),
                               ),
                               Text('Rating'.toUpperCase(),
@@ -160,12 +166,12 @@ class ConsultantProfilePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
-                            child: Text('Tecnologia e Inovación',
+                            child: Text(consultant.consultantType,
                                 style: Styles.headerTextStyle),
                           ),
                         ],
                       ),
-                      Text('Especialidad en'.toUpperCase(),
+                      Text('Especialidad en '.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: Styles.bodyTextStyle)
                     ]),

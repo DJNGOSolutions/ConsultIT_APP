@@ -117,8 +117,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield OnHomePage(0);
       }
     } else if (event is ToConsultantDetailsPage) {
-      //TODO: Agregar navegacion al perfil del consultor
-      yield OnConsultantsProfilePage();
+      yield OnConsultantsProfilePage(consultant: event.consultant);
     } else if (event is ToWebView) {
       _launchUrl(query: event.query);
       yield OnWebBrowser();

@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -421,19 +422,16 @@ Widget actionWidget({
 
 Widget staffItem(
     {@required BuildContext context,
-    String staffName = '',
-    String staffPosition,
-    String staffNumber,
-    String imgPath,
+    @required Consultant consultant,
     @required HomeBloc bloc,
-    //TODO: @required Consultant consultant,
     String heroTag = 'Imagen'}) {
-  heroTag = heroTag + staffName;
+  heroTag = heroTag + consultant.user.id;
   return Center(
     child: Hero(
       tag: heroTag,
       child: GestureDetector(
-        onTap: (() => {bloc.add(ToConsultantDetailsPage())}),
+        onTap: (() =>
+            {bloc.add(ToConsultantDetailsPage(consultant: consultant))}),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.15,
           width: MediaQuery.of(context).size.width,
@@ -454,9 +452,9 @@ Widget staffItem(
                         borderRadius: BorderRadius.circular(75.0),
                         color: MyColors.accentColor.withOpacity(0.6),
                         image: DecorationImage(
-                            image: imgPath == ''
+                            image: consultant.photo == ''
                                 ? AssetImage('asssets/images/icons/profile.png')
-                                : NetworkImage(imgPath),
+                                : NetworkImage(consultant.photo),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -474,17 +472,19 @@ Widget staffItem(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
-                          child: Text(staffName, style: Styles.headerTextStyle),
+                          child: Text(
+                              '${consultant.firstname} ${consultant.lastName}',
+                              style: Styles.headerTextStyle),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
-                          child: Text(staffPosition,
+                          child: Text(consultant.deegre ?? '',
                               style: Styles.bodyTextStyleNonBold
                                   .apply(color: MyColors.secondaryColor)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
-                          child: Text(staffNumber,
+                          child: Text(consultant.phoneNumber ?? '',
                               style: Styles.subHeaderTextStyle),
                         ),
                         Center(

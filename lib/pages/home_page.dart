@@ -33,9 +33,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex;
   HomeBloc get _homeBloc => widget.homeBloc;
-  User user;
-  Entrepreneur entrepreneur;
-  Consultant consultant;
+  User user = User();
+  Entrepreneur entrepreneur = Entrepreneur();
+  Consultant consultant = Consultant();
+  bool isEntrepreneur = false;
 
   @override
   void initState() {
@@ -45,7 +46,9 @@ class _HomePageState extends State<HomePage> {
       consultant = _homeBloc.consultantRepository.consultant;
     } else {
       entrepreneur = _homeBloc.entrepreneurRepository.entrepreneur;
+      isEntrepreneur = true;
     }
+    print('Es ${user.tipo.toString()}');
     super.initState();
   }
 
@@ -138,9 +141,14 @@ class _HomePageState extends State<HomePage> {
                     child: myWidgets.addBusinessWidget(),
                   ),
                 ),
-                entrepreneur.businesses.length > 0
-                    ? ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
+                Container(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: entrepreneur.businesses.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        print(
+                            'index: $index business: ${entrepreneur.businesses[index].comercialName}');
                         return Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: myWidgets.businessWidget(
@@ -152,8 +160,8 @@ class _HomePageState extends State<HomePage> {
                                       business:
                                           entrepreneur.businesses[index]))),
                         );
-                      })
-                    : SizedBox()
+                      }),
+                )
               ],
             ),
           )
@@ -237,19 +245,23 @@ class _HomePageState extends State<HomePage> {
         ],
       );
 
-  Widget _buildHomeContainer(BuildContext context) {
+  _buildHomeContainer(BuildContext context) {
     if (widget.currentIndex == 0) {
-      return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: ListView(
-          children: [
-            entrepreneur != null
-                ? _buildEntrepreneurHome(context, entrepreneur)
-                : _buildConsultantHome(context, consultant),
-          ],
-        ),
-      );
+      return isEntrepreneur
+          ? Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: ListView(
+                children: _buildEntrepreneurHome(context, entrepreneur),
+              ),
+            )
+          : Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: ListView(
+                children: [_buildConsultantHome(context, consultant)],
+              ),
+            );
     } else if (widget.currentIndex == 1) {
       return Container(
           height: MediaQuery.of(context).size.height,
@@ -281,9 +293,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  _buildEntrepreneurHome(BuildContext context, Entrepreneur entrepreneur) {
-    _buildMyBusinessSection(context);
-    _buildMoreOptionsSection(context);
+  List<Widget> _buildEntrepreneurHome(
+      BuildContext context, Entrepreneur entrepreneur) {
+    return [
+      _buildMyBusinessSection(context),
+      _buildMoreOptionsSection(context)
+    ];
   }
 
   _buildConsultantHome(BuildContext context, Consultant consultant) {

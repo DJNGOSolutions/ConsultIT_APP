@@ -1,4 +1,5 @@
 import 'package:consult_it_app/models/business_model.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +66,10 @@ class ToConsultantsListPage extends HomeEvent {
 }
 
 class ToConsultantDetailsPage extends HomeEvent {
+  final Consultant consultant;
+
+  ToConsultantDetailsPage({@required this.consultant});
+
   @override
   String toString() => 'ToConsultantsListPage';
 }
