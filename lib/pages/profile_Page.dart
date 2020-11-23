@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
@@ -7,11 +8,25 @@ import 'package:flutter/material.dart';
 String imgPath =
     'https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final String heroTag;
   final HomeBloc homeBloc;
   const ProfilePage({Key key, this.heroTag = 'Image', @required this.homeBloc})
       : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  Entrepreneur entrepreneur = Entrepreneur();
+  HomeBloc get homeBloc => widget.homeBloc;
+
+  @override
+  void initState() {
+    entrepreneur = homeBloc.entrepreneurRepository.entrepreneur;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +46,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Hero(
-                    tag: heroTag,
+                    tag: widget.heroTag,
                     child: Container(
                       width: 150,
                       height: 150,
@@ -50,7 +65,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Ronald Vega',
+                    '${entrepreneur.firstName} ${entrepreneur.lastName}',
                     style: Styles.headerTextStyle.apply(fontSizeFactor: 1.3),
                   ),
                   SizedBox(height: 5.0),
@@ -72,7 +87,7 @@ class ProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('RonaldVega14',
+                                  child: Text(entrepreneur.user.username,
                                       style: Styles.headerTextStyle),
                                 ),
                                 Text('usuario'.toUpperCase(),
@@ -92,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('6313 9711',
+                                  child: Text(entrepreneur.phoneNumber ?? '',
                                       style: Styles.headerTextStyle),
                                 ),
                                 Text('Teléfono'.toUpperCase(),
@@ -119,7 +134,7 @@ class ProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('La Libertad',
+                                  child: Text(entrepreneur.state ?? '',
                                       style: Styles.headerTextStyle),
                                 ),
                                 Text('Departamento'.toUpperCase(),
@@ -139,7 +154,7 @@ class ProfilePage extends StatelessWidget {
                                       left: 8.0,
                                       right: 8.0,
                                       bottom: 2.0),
-                                  child: Text('Antiguo Cuscatlan',
+                                  child: Text(entrepreneur.city ?? '',
                                       textAlign: TextAlign.center,
                                       style: Styles.headerTextStyle),
                                 ),
@@ -159,7 +174,7 @@ class ProfilePage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(
                                   top: 8.0, left: 8.0, right: 8.0, bottom: 2.0),
-                              child: Text('07/09/1997',
+                              child: Text(entrepreneur.birthDate ?? '',
                                   style: Styles.headerTextStyle),
                             ),
                           ],
@@ -172,7 +187,7 @@ class ProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       context: context,
                       labelText: 'Editar Perfil',
-                      function: () => homeBloc.add(ToEditProfilePage()))
+                      function: () => widget.homeBloc.add(ToEditProfilePage()))
                 ],
               ),
             ))

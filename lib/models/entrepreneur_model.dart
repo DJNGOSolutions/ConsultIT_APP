@@ -1,5 +1,6 @@
 import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 
 class Entrepreneur {
@@ -27,8 +28,13 @@ class Entrepreneur {
       this.user});
 
   factory Entrepreneur.fromJson(Map<String, dynamic> json) {
+    String convertDateFromString(String strDate) {
+      DateTime todayDate = DateTime.parse(strDate);
+      return (formatDate(todayDate, [dd, '/', mm, '/', yyyy]));
+    }
+
     return Entrepreneur(
-        birthDate: json['birthdate'].toString(),
+        birthDate: convertDateFromString(json['birthdate'].toString()),
         businesses: [],
         city: json['city'].toString(),
         firstName: json['firstName'].toString(),

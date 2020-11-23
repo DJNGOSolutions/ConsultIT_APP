@@ -8,16 +8,28 @@ import 'package:flutter/material.dart';
 String imgPath =
     'https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png';
 
-class ConsultantProfilePage extends StatelessWidget {
+class ConsultantProfilePage extends StatefulWidget {
   final String heroTag;
   final HomeBloc homeBloc;
-  final Consultant consultant;
-  const ConsultantProfilePage(
-      {Key key,
-      this.heroTag = 'Image',
-      @required this.homeBloc,
-      @required this.consultant})
-      : super(key: key);
+  const ConsultantProfilePage({
+    Key key,
+    this.heroTag = 'Image',
+    @required this.homeBloc,
+  }) : super(key: key);
+
+  @override
+  _ConsultantProfilePageState createState() => _ConsultantProfilePageState();
+}
+
+class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
+  Consultant consultant = new Consultant();
+  HomeBloc get homeBloc => widget.homeBloc;
+
+  @override
+  void initState() {
+    consultant = homeBloc.consultantRepository.consultant;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +46,7 @@ class ConsultantProfilePage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Hero(
-                  tag: heroTag,
+                  tag: widget.heroTag,
                   child: Container(
                     width: 150,
                     height: 150,
@@ -182,7 +194,8 @@ class ConsultantProfilePage extends StatelessWidget {
                     myWidgets.customButton(
                         context: context,
                         labelText: 'Editar Perfil',
-                        function: () => homeBloc.add(ToEditProfilePage())),
+                        function: () =>
+                            widget.homeBloc.add(ToEditProfilePage())),
                     myWidgets.customButton(
                         isMain: false,
                         context: context,

@@ -2,36 +2,90 @@ import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/entrepreneur_model.dart';
+import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 
-class EditProfilePage extends StatelessWidget {
-  final Consultant consultant;
-  final Entrepreneur entrepreneur;
+class EditProfilePage extends StatefulWidget {
   final String heroTag;
   final HomeBloc homeBloc;
+
+  EditProfilePage({Key key, @required this.heroTag, @required this.homeBloc})
+      : super(key: key);
+
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _nombreController = TextEditingController(),
       _apellidoController = TextEditingController(),
       _correoController = TextEditingController(),
       _telefonoController = TextEditingController(),
       _departamentoController = TextEditingController(),
       _municipioController = TextEditingController();
+  User user = User();
+  Consultant consultant = Consultant();
+  Entrepreneur entrepreneur = Entrepreneur();
 
-  EditProfilePage(
-      {Key key,
-      this.consultant,
-      this.entrepreneur,
-      @required this.heroTag,
-      @required this.homeBloc})
-      : super(key: key);
+  HomeBloc get homeBloc => widget.homeBloc;
+
+  @override
+  void initState() {
+    user = homeBloc.userRepository.user;
+    if (user.tipo.toUpperCase() == 'Consultant'.toUpperCase()) {
+      consultant = homeBloc.consultantRepository.consultant;
+      if (myWidgets.isNotEmptyOrNull(consultant.firstname)) {
+        _nombreController.text = consultant.firstname;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.lastName)) {
+        _apellidoController.text = consultant.lastName;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.user.email)) {
+        _correoController.text = consultant.user.email;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.phoneNumber)) {
+        _telefonoController.text = consultant.phoneNumber;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.state)) {
+        _departamentoController.text = consultant.state;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.city)) {
+        _municipioController.text = consultant.city;
+      }
+    } else {
+      entrepreneur = homeBloc.entrepreneurRepository.entrepreneur;
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.firstName)) {
+        _nombreController.text = entrepreneur.firstName;
+      }
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.lastName)) {
+        _apellidoController.text = entrepreneur.lastName;
+      }
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.user.email)) {
+        _correoController.text = entrepreneur.user.email;
+      }
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.phoneNumber)) {
+        _telefonoController.text = entrepreneur.phoneNumber;
+      }
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.state)) {
+        _departamentoController.text = entrepreneur.state;
+      }
+      if (myWidgets.isNotEmptyOrNull(entrepreneur.city)) {
+        _municipioController.text = entrepreneur.city;
+      }
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myWidgets.customAppBar(
           context: context,
           canGoBack: true,
-          function: () => homeBloc.add(ToProfilePage())),
+          function: () => widget.homeBloc.add(ToProfilePage())),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -44,7 +98,7 @@ class EditProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Hero(
-                      tag: heroTag,
+                      tag: widget.heroTag,
                       child: Container(
                         height: 50.0,
                         width: 50.0,
@@ -207,7 +261,7 @@ class EditProfilePage extends StatelessWidget {
                 child: myWidgets.customButton(
                     context: context,
                     labelText: 'Guardar',
-                    function: () => homeBloc.add(SaveNewProfileInfo()),
+                    function: () => widget.homeBloc.add(SaveNewProfileInfo()),
                     maxWidth: 65),
               ),
             ]),

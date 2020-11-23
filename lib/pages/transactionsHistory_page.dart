@@ -1,9 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
-import 'package:consult_it_app/events/home_events.dart';
-import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 
 class TransactionsHistory extends StatelessWidget {
   final HomeBloc homeBloc;
