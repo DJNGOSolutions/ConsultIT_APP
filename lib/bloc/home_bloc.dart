@@ -1,17 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:consult_it_app/events/authentication_events.dart';
 import 'package:consult_it_app/events/home_events.dart';
-import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/home_states.dart';
-import 'package:consult_it_app/utils/network_utils.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,13 +30,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     print(event.toString());
     if (event is ToAddBusinessPage) {
-      //TODO: Ir a pantalla de agregar comercio
       yield OnAddBusinessPage();
     } else if (event is ToHomePage) {
       yield OnHomePage(0);
     } else if (event is AddNewBusiness) {
-      //TODO: Agregar comercio al servidor
-
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String user = _prefs.getString('username');
       print(
@@ -60,11 +53,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (serverResponse != null) {
         switch (serverResponse.statusCode) {
           case 200:
-            Fluttertoast.showToast(
-                msg: 'Comercio agregado con exito',
-                backgroundColor: MyColors.mainColor,
-                textColor: MyColors.accentColor);
-            //TODO: Actualizar businesses para el user
+            final businesses = await businessRepository.findAllBusinesses(
+                username: _prefs.getString('username'));
+            if (businesses != null) {
+              entrepreneurRepository.entrepreneur.businesses = businesses;
+              Fluttertoast.showToast(
+                  msg: 'Comercio agregado con exito',
+                  backgroundColor: MyColors.mainColor,
+                  textColor: MyColors.accentColor);
+            } else {
+              Fluttertoast.showToast(
+                  toastLength: Toast.LENGTH_LONG,
+                  msg:
+                      'Error al actualizar tus comercios, inicie sesion nuevamente para observar los cambios',
+                  backgroundColor: Colors.red);
+            }
             yield OnHomePage(0);
             break;
           case 400:
@@ -101,7 +104,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       //TODO: Agregar estado para pantalla donde se edita la informacion del negocio
       yield OnHomePage(0);
     } else if (event is ToConsultantsListPage) {
-      //TODO: Agregar peticion para obtener a todos los consultores
       final serverResponse = await consultantRepository.findAllConsultants();
       if (serverResponse != null) {
         if (serverResponse.length > 0) {
@@ -196,12 +198,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is BottomBarPressed) {
       yield ChangeHomeContainer(event.currentIndex);
       yield OnHomePage(event.currentIndex);
-    } else if (event is RegisterConsultant) {
-      //TODO: Register Consultant to server
-      yield OnHomePage(0);
-    } else if (event is RegisterEntrepreneur) {
-      //TODO: Register Entrepreneur to server
-      yield OnHomePage(0);
     } else {
       throw UnimplementedError();
     }

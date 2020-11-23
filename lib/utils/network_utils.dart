@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-
 class NetworkUtils {
   static final String path = "http://consultit.nelsoncaastro.me/api/";
 }

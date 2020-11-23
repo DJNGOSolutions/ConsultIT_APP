@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:neumorphic/neumorphic.dart';
 
-// TODO: Agregar menu lateral
 Widget customAppBar(
         {@required BuildContext context,
         bool canGoBack = false,
@@ -364,7 +363,6 @@ Widget businessWidget(
   );
 }
 
-// TODO: Agregar navegacion a nueva ruta (Crear un router para esta navegacion).
 Widget actionWidget({
   @required String action,
   String actionImagePath = 'assets/images/icons/FolderDataColor.png',
