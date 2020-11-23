@@ -11,6 +11,7 @@ import 'package:consult_it_app/utils/network_utils.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -122,11 +123,72 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       _launchUrl(sector: event.query);
       yield event.nextState;
     } else if (event is ToProfilePage) {
-      yield OnProfilePage();
+      yield OnHomePage(2);
     } else if (event is ToEditProfilePage) {
       yield OnEditProfilePage();
     } else if (event is SaveNewProfileInfo) {
-      yield OnHomePage(0);
+      if (event.isEntrepreneur) {
+        final response = await entrepreneurRepository.updateProfile(
+            id: userRepository.user.id,
+            firstName: event.firstName,
+            lastName: event.lastName,
+            photo: '',
+            phoneNumber: event.phoneNumber,
+            state: event.state,
+            city: event.city);
+        if (response != null) {
+          entrepreneurRepository.entrepreneur.firstName = response.firstName;
+          entrepreneurRepository.entrepreneur.lastName = response.lastName;
+          entrepreneurRepository.entrepreneur.phoneNumber =
+              response.phoneNumber;
+          entrepreneurRepository.entrepreneur.state = response.state;
+          entrepreneurRepository.entrepreneur.city = response.city;
+          Fluttertoast.showToast(
+              msg: 'Perfil Actualizado con exito',
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+
+          yield OnHomePage(2);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Error de conexion al actualizar el perfil',
+              backgroundColor: Colors.red);
+        }
+      } else {
+        final response = await consultantRepository.updateProfile(
+            id: userRepository.user.id,
+            firstName: event.firstName,
+            lastName: event.lastName,
+            degree: event.degree,
+            referencePrice: event.referencePrice,
+            phoneNumber: event.phoneNumber,
+            consultantType: event.consultantType,
+            state: event.state,
+            city: event.city);
+        if (response != null) {
+          consultantRepository.consultant.firstname = response.firstname;
+          consultantRepository.consultant.lastName = response.lastName;
+          consultantRepository.consultant.deegre = response.deegre;
+          consultantRepository.consultant.referencePrice =
+              response.referencePrice;
+          consultantRepository.consultant.firstname = response.firstname;
+          consultantRepository.consultant.phoneNumber = response.phoneNumber;
+          consultantRepository.consultant.consultantType =
+              response.consultantType;
+          consultantRepository.consultant.state = response.state;
+          consultantRepository.consultant.city = response.city;
+          Fluttertoast.showToast(
+              msg: 'Perfil Actualizado con exito',
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+
+          yield OnHomePage(2);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Error de conexion al actualizar el perfil',
+              backgroundColor: Colors.red);
+        }
+      }
     } else if (event is ToFAQBotPage) {
       yield OnFAQBotPage();
     } else if (event is ToAnalizeMarketPage) {

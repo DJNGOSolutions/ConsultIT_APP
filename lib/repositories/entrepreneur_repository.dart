@@ -29,24 +29,21 @@ class EntrepreneurRepository {
 
   Future<Entrepreneur> updateProfile(
       {@required String id,
-      @required String firstName,
-      @required String lastName,
-      @required String photo,
-      @required String birthdate,
-      @required String phoneNumber,
-      @required String postalAddress,
-      @required String state,
-      @required String city}) async {
+      String firstName,
+      String lastName,
+      String photo,
+      String birthdate,
+      String phoneNumber,
+      String postalAddress,
+      String state,
+      String city}) async {
     try {
       String url = NetworkUtils.path + 'entrepreneur/update';
       final response = await http.put(url, body: {
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,
-        "photo": photo,
-        "birthdate": birthdate,
         "phoneNumber": phoneNumber,
-        "postalAddress": postalAddress,
         "state": state,
         "city": city
       });

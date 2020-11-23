@@ -21,13 +21,16 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _nombreController = TextEditingController(),
       _apellidoController = TextEditingController(),
-      _correoController = TextEditingController(),
       _telefonoController = TextEditingController(),
       _departamentoController = TextEditingController(),
+      _tituloProfController = TextEditingController(),
+      _avgPrecioController = TextEditingController(),
+      _especializacionController = TextEditingController(),
       _municipioController = TextEditingController();
   User user = User();
   Consultant consultant = Consultant();
   Entrepreneur entrepreneur = Entrepreneur();
+  bool isEntrepreneur = true;
 
   HomeBloc get homeBloc => widget.homeBloc;
 
@@ -35,15 +38,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     user = homeBloc.userRepository.user;
     if (user.tipo.toUpperCase() == 'Consultant'.toUpperCase()) {
+      isEntrepreneur = false;
       consultant = homeBloc.consultantRepository.consultant;
       if (myWidgets.isNotEmptyOrNull(consultant.firstname)) {
         _nombreController.text = consultant.firstname;
       }
       if (myWidgets.isNotEmptyOrNull(consultant.lastName)) {
         _apellidoController.text = consultant.lastName;
-      }
-      if (myWidgets.isNotEmptyOrNull(consultant.user.email)) {
-        _correoController.text = consultant.user.email;
       }
       if (myWidgets.isNotEmptyOrNull(consultant.phoneNumber)) {
         _telefonoController.text = consultant.phoneNumber;
@@ -54,6 +55,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       if (myWidgets.isNotEmptyOrNull(consultant.city)) {
         _municipioController.text = consultant.city;
       }
+      if (myWidgets.isNotEmptyOrNull(consultant.deegre)) {
+        _tituloProfController.text = consultant.deegre;
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.referencePrice.toString())) {
+        _avgPrecioController.text = consultant.referencePrice.toString();
+      }
+      if (myWidgets.isNotEmptyOrNull(consultant.consultantType)) {
+        _especializacionController.text = consultant.consultantType;
+      }
     } else {
       entrepreneur = homeBloc.entrepreneurRepository.entrepreneur;
       if (myWidgets.isNotEmptyOrNull(entrepreneur.firstName)) {
@@ -61,9 +71,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
       if (myWidgets.isNotEmptyOrNull(entrepreneur.lastName)) {
         _apellidoController.text = entrepreneur.lastName;
-      }
-      if (myWidgets.isNotEmptyOrNull(entrepreneur.user.email)) {
-        _correoController.text = entrepreneur.user.email;
       }
       if (myWidgets.isNotEmptyOrNull(entrepreneur.phoneNumber)) {
         _telefonoController.text = entrepreneur.phoneNumber;
@@ -222,13 +229,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ],
                     ),
-                    // Correo Electronico
-                    myWidgets.inputField(_correoController,
-                        hintText: 'Ingrese su correo',
-                        labelText: 'Correo electrónico',
-                        icon: Icons.email,
-                        uppercase: false,
-                        bold: false),
                     // Telefono de contacto
                     myWidgets.inputField(_telefonoController,
                         hintText: 'Ingrese su telefono de contacto',
@@ -255,13 +255,96 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 15.0,
               ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color.fromRGBO(143, 148, 251, .2),
+                          blurRadius: 20.0,
+                          offset: Offset(0, 10))
+                    ]),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Flexible(
+                          fit: FlexFit.loose,
+                          flex: 2,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Icon(Icons.verified,
+                                size: 28, color: Color.fromRGBO(3, 90, 166, 1)),
+                          ),
+                        ),
+                        Flexible(
+                          fit: FlexFit.loose,
+                          flex: 6,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              'INFORMACION DE CONSULTOR',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: Fonts.primaryFont,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Telefono de contacto
+                    myWidgets.inputField(_tituloProfController,
+                        hintText: 'Ingrese su titulo profesional',
+                        labelText: 'Titulo profesional',
+                        icon: Icons.picture_in_picture,
+                        uppercase: false,
+                        bold: false), // Pais de residencia
+                    myWidgets.inputField(_avgPrecioController,
+                        hintText: 'Ingrese el precio de referencia por hora',
+                        labelText: 'Precio de referencia por hora',
+                        icon: Icons.monetization_on,
+                        uppercase: false,
+                        bold: false),
+                    // Ciudad de residencia
+                    myWidgets.inputField(_especializacionController,
+                        hintText: 'Giro de especializacion',
+                        labelText: 'Giro de Especializacion',
+                        icon: Icons.keyboard,
+                        uppercase: false,
+                        bold: false),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15.0),
               // Fin de datos de usuario
               Container(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 60.0),
                 child: myWidgets.customButton(
                     context: context,
                     labelText: 'Guardar',
-                    function: () => widget.homeBloc.add(SaveNewProfileInfo()),
+                    function: () => widget.homeBloc.add(isEntrepreneur
+                        ? SaveNewProfileInfo(
+                            city: _municipioController.text,
+                            firstName: _nombreController.text,
+                            lastName: _apellidoController.text,
+                            phoneNumber: _telefonoController.text,
+                            state: _departamentoController.text,
+                            isEntrepreneur: isEntrepreneur)
+                        : SaveNewProfileInfo(
+                            referencePrice: _avgPrecioController.text,
+                            consultantType: _especializacionController.text,
+                            degree: _tituloProfController.text,
+                            city: _municipioController.text,
+                            firstName: _nombreController.text,
+                            lastName: _apellidoController.text,
+                            phoneNumber: _telefonoController.text,
+                            state: _departamentoController.text,
+                            isEntrepreneur: isEntrepreneur)),
                     maxWidth: 65),
               ),
             ]),

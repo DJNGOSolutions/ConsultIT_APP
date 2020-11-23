@@ -5,6 +5,7 @@ import 'package:consult_it_app/events/home_events.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
+import 'package:consult_it_app/pages/consultantProfile_page.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/profile_Page.dart';
 import 'package:consult_it_app/pages/transactionsHistory_page.dart';
@@ -244,6 +245,82 @@ class _HomePageState extends State<HomePage> {
         ],
       );
 
+  _buildConsultantOptionsSection(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.only(top: 12.0, right: 0.0, left: 20.0),
+            child: Row(
+              children: [
+                Flexible(
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image:
+                                AssetImage('assets/images/icons/Manager.png'))),
+                  ),
+                  flex: 1,
+                  fit: FlexFit.loose,
+                ),
+                Flexible(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Consultas',
+                          style: Styles.headerTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  flex: 7,
+                  fit: FlexFit.tight,
+                )
+              ],
+            ),
+          ),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                myWidgets.actionWidget(
+                    function: () =>
+                        widget.homeBloc.add(ToConsultantsListPage()),
+                    action: "Mis comercios asesorados",
+                    context: context,
+                    actionImagePath: "assets/images/icons/FolderDataColor.png"),
+                SizedBox(
+                  height: 10.0,
+                ),
+                myWidgets.actionWidget(
+                    function: () => widget.homeBloc.add(ToAnalizeMarketPage()),
+                    action: "Analizar Mercado",
+                    context: context,
+                    actionImagePath:
+                        "assets/images/icons/MarketFluctuation.png"),
+                SizedBox(
+                  height: 10.0,
+                ),
+                myWidgets.actionWidget(
+                    function: () => widget.homeBloc.add(ToMyBusinessesList()),
+                    action: "Consultar valoraciones del perfil",
+                    context: context,
+                    actionImagePath: "assets/images/icons/DataAnalytic.png"),
+                SizedBox(
+                  height: 30.0,
+                ),
+              ],
+            ),
+          )
+        ],
+      );
+
   _buildHomeContainer(BuildContext context) {
     if (widget.currentIndex == 0) {
       return isEntrepreneur
@@ -258,9 +335,8 @@ class _HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: ListView(
-                children: [_buildConsultantHome(context, consultant)],
-              ),
-            );
+                children: _buildConsultantHome(context, consultant),
+              ));
     } else if (widget.currentIndex == 1) {
       return Container(
           height: MediaQuery.of(context).size.height,
@@ -272,17 +348,18 @@ class _HomePageState extends State<HomePage> {
       return Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: ProfilePage(homeBloc: widget.homeBloc));
+          child: widget.homeBloc.userRepository.user.tipo.toUpperCase() ==
+                  'Consultant'.toUpperCase()
+              ? ConsultantProfilePage(homeBloc: widget.homeBloc)
+              : ProfilePage(homeBloc: widget.homeBloc));
     } else {
       return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: ListView(
-          children: [
-            entrepreneur != null
-                ? _buildEntrepreneurHome(context, entrepreneur)
-                : _buildConsultantHome(context, consultant),
-          ],
+          children: isEntrepreneur
+              ? _buildEntrepreneurHome(context, entrepreneur)
+              : _buildConsultantHome(context, consultant),
         ),
       );
     }
@@ -296,7 +373,8 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  _buildConsultantHome(BuildContext context, Consultant consultant) {
-    _buildMoreOptionsSection(context);
+  List<Widget> _buildConsultantHome(
+      BuildContext context, Consultant consultant) {
+    return [_buildConsultantOptionsSection(context)];
   }
 }

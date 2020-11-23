@@ -57,6 +57,9 @@ class AddNewBusiness extends HomeEvent {
 }
 
 class ToEditBusinessPage extends HomeEvent {
+  final Business business;
+
+  ToEditBusinessPage({@required this.business});
   @override
   String toString() => 'ToEditBusinessPage';
 }
@@ -95,6 +98,27 @@ class ToProfilePage extends HomeEvent {
 }
 
 class SaveNewProfileInfo extends HomeEvent {
+  final String firstName,
+      lastName,
+      phoneNumber,
+      state,
+      city,
+      degree,
+      consultantType,
+      referencePrice;
+  final bool isEntrepreneur;
+
+  SaveNewProfileInfo({
+    @required this.firstName,
+    @required this.lastName,
+    @required this.phoneNumber,
+    this.degree,
+    this.referencePrice,
+    this.consultantType,
+    @required this.state,
+    @required this.isEntrepreneur,
+    @required this.city,
+  });
   @override
   String toString() => 'SaveNewProfileInfo';
 }

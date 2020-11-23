@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/utils/network_utils.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,6 @@ const String TAG = 'UserRepository';
 class UserRepository {
   User user = new User();
   SharedPreferences _prefs;
-  Entrepreneur entrepreneur;
 
   Future<User> authenticate(
       {@required String username, @required String password}) async {

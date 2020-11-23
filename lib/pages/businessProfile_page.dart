@@ -274,7 +274,8 @@ class BusinessProfilePage extends StatelessWidget {
                   myWidgets.customButton(
                       context: context,
                       labelText: 'Editar comercio',
-                      function: () => homeBloc.add(ToEditBusinessPage())),
+                      function: () =>
+                          homeBloc.add(ToEditBusinessPage(business: business))),
                   SizedBox(
                     height: 13.0,
                   ),

@@ -36,7 +36,7 @@ class Consultant {
     return Consultant(
         firstname: json['firstName'].toString() ?? '',
         lastName: json['lastName'].toString() ?? '',
-        deegre: json['deegre'].toString() ?? '',
+        deegre: json['degree'].toString() ?? '',
         photo: json['photo'].toString() ?? '',
         birthdate: json['birthdate'].toString() ?? '',
         referencePrice: double.parse(json['referencePrice'].toString()),

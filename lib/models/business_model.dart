@@ -7,9 +7,11 @@ class Business {
   String state;
   String city;
   String businessLine;
+  String id;
   String businessSector;
 
   Business(business) {
+    id = business['_id'];
     legalName = business['legalName'];
     comercialName = business['comercialName'];
     email = business['email'];

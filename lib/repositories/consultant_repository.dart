@@ -20,6 +20,7 @@ class ConsultantRepository {
         consultant = Consultant.fromJson(json.decode(response.body));
         return consultant;
       } else {
+        print(response.toString());
         return null;
       }
     } catch (e) {
@@ -45,26 +46,22 @@ class ConsultantRepository {
     }
   }
 
-  Future<ServerResponse> updateProfile(
+  Future<Consultant> updateProfile(
       {@required String id,
       @required String firstName,
       @required String lastName,
-      @required String photo,
-      @required String birthdate,
       @required String degree,
-      @required double referencePrice,
+      @required String referencePrice,
       @required String phoneNumber,
       @required String consultantType,
       @required String state,
       @required String city}) async {
     try {
       String url = NetworkUtils.path + 'consultant/update';
-      final response = await http.post(url, body: {
+      final response = await http.put(url, body: {
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,
-        "photo": photo,
-        "birthdate": birthdate,
         "degree": degree,
         "referencePrice": referencePrice,
         "phoneNumber": phoneNumber,
@@ -73,8 +70,8 @@ class ConsultantRepository {
         "city": city
       });
       if (response != null) {
-        ServerResponse serverResponse =
-            ServerResponse.fromJson(json.decode(response.body));
+        Consultant serverResponse =
+            Consultant.fromJson(json.decode(response.body));
         return serverResponse;
       } else {
         return null;

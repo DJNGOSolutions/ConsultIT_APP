@@ -69,7 +69,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                   style: Styles.headerTextStyle.apply(fontSizeFactor: 1.3),
                 ),
                 SizedBox(height: 5.0),
-                Text(consultant.deegre ?? ''.toUpperCase(),
+                Text(consultant.deegre.toUpperCase() ?? ''.toUpperCase(),
                     style: Styles.bodyTextStyle),
                 SizedBox(height: 20.0),
                 Row(
@@ -183,7 +183,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                           ),
                         ],
                       ),
-                      Text('Especialidad en '.toUpperCase(),
+                      Text('Sector de especialidad'.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: Styles.bodyTextStyle)
                     ]),

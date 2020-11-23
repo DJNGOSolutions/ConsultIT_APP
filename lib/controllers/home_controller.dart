@@ -1,7 +1,5 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
-import 'package:consult_it_app/models/consultant_model.dart';
-import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/consultantDetails_page.dart';
@@ -109,14 +107,6 @@ class _HomeControllerState extends State<HomeController> {
           imgPath: 'assets/images/icons/profile.png',
           consultant: state.consultant,
           homeBloc: _homeBloc);
-    } else if (state is OnProfilePage) {
-      if (userType == 0) {
-        //Cargar perfil de consultant
-        return ProfilePage(homeBloc: _homeBloc);
-      } else {
-        //Cargar perfil de entrepreneur
-        return ProfilePage(homeBloc: _homeBloc);
-      }
     } else if (state is OnEditProfilePage) {
       return EditProfilePage(heroTag: 'Image', homeBloc: _homeBloc);
     } else if (state is OnFAQBotPage) {
