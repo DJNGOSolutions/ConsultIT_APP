@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
+import 'package:consult_it_app/pages/AnalizeMarket_page.dart';
 import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/businessesList_page.dart';
@@ -119,6 +120,12 @@ class _HomeControllerState extends State<HomeController> {
     } else if (state is OnFAQBotPage) {
       return FaqBotPage(
         homeBloc: _homeBloc,
+      );
+    } else if (state is OnAnalizeMarket) {
+      return AnalizeMarketPage(
+        homeBloc: _homeBloc,
+        heroTag: 'AnalizeMarket',
+        optionName: 'Analizar mercado internacional',
       );
     } else if (state is OnMyBussinessesList) {
       return BusinessesListPage(

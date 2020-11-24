@@ -56,23 +56,31 @@ class _BusinessesListPageState extends State<BusinessesListPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Hero(
-                              tag: widget.heroTag,
-                              child: Container(
-                                height: 50.0,
-                                width: 50.0,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/icons/DataAnalytic.png'),
-                                      fit: BoxFit.contain),
+                            Flexible(
+                              child: Hero(
+                                tag: widget.heroTag,
+                                child: Container(
+                                  height: 50.0,
+                                  width: 50.0,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/icons/DataAnalytic.png'),
+                                        fit: BoxFit.contain),
+                                  ),
                                 ),
                               ),
+                              flex: 2,
+                              fit: FlexFit.tight,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Text(widget.optionName,
-                                  style: Styles.headerTextStyle),
+                            Flexible(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: Text(widget.optionName.toUpperCase(),
+                                    style: Styles.headerTextStyle),
+                              ),
+                              flex: 9,
+                              fit: FlexFit.tight,
                             )
                           ],
                         ),

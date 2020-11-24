@@ -34,7 +34,7 @@ class Consultant {
 
   factory Consultant.fromJson(Map<String, dynamic> json) {
     return Consultant(
-        user: User.fromJson(json['user']),
+        user: User.fromJson(json),
         firstname: json['firstName'].toString() ?? '',
         lastName: json['lastName'].toString() ?? '',
         deegre: json['degree'].toString() ?? '',
@@ -57,7 +57,7 @@ class AllConsultants {
   AllConsultants.fromJson(Map<String, dynamic> parsedJson) {
     allConsultants.clear();
     if (parsedJson != null && parsedJson.toString() != 'null') {
-      List<dynamic> parsedConsultants = parsedJson['consultants'];
+      List<dynamic> parsedConsultants = parsedJson['newconsultants'];
       for (var i = 0; i < parsedConsultants.length; i++) {
         Consultant consultant = Consultant.fromJson(parsedConsultants[i]);
         consultant.birthdate = convertDateFromString(consultant.birthdate);
