@@ -5,9 +5,6 @@ import 'package:consult_it_app/utils/styles.dart';
 import 'package:consult_it_app/utils/widgets_lib.dart' as myWidgets;
 import 'package:flutter/material.dart';
 
-String imgPath =
-    'https://www.seekpng.com/png/detail/966-9665493_my-profile-icon-blank-profile-image-circle.png';
-
 class ProfilePage extends StatefulWidget {
   final String heroTag;
   final HomeBloc homeBloc;
@@ -51,9 +48,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 150,
                       height: 150,
                       decoration: BoxDecoration(
-                          color: MyColors.secondaryColor,
+                          color: MyColors.mainColor.withOpacity(0.8),
                           image: DecorationImage(
-                              image: NetworkImage(imgPath), fit: BoxFit.cover),
+                              image:
+                                  myWidgets.isNotEmptyOrNull(entrepreneur.photo)
+                                      ? NetworkImage(entrepreneur.photo)
+                                      : AssetImage(
+                                          'assets/images/icons/profile.png'),
+                              fit: BoxFit.cover),
                           borderRadius: BorderRadius.all(Radius.circular(75.0)),
                           boxShadow: [
                             BoxShadow(

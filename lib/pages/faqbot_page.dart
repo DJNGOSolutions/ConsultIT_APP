@@ -1,5 +1,7 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/consultant_model.dart';
+import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
@@ -16,6 +18,22 @@ class FaqBotPage extends StatefulWidget {
 
 class _FaqBotPageState extends State<FaqBotPage> {
   HomeBloc get homeBloc => widget.homeBloc;
+  bool isEntrepreneur = true;
+  Entrepreneur entrepreneur = Entrepreneur();
+  Consultant consultant = Consultant();
+
+  @override
+  void initState() {
+    if (homeBloc.userRepository.user.tipo.toUpperCase() ==
+        'Consultant'.toUpperCase()) {
+      consultant = homeBloc.consultantRepository.consultant;
+      isEntrepreneur = false;
+    } else {
+      entrepreneur = homeBloc.entrepreneurRepository.entrepreneur;
+    }
+    super.initState();
+  }
+
   final List<FAQMessage> _messages = <FAQMessage>[];
   final TextEditingController _messageController = TextEditingController();
   @override
@@ -82,8 +100,12 @@ class _FaqBotPageState extends State<FaqBotPage> {
       Fluttertoast.showToast(
           msg: "El mensaje no puede estar vacío", fontSize: 16);
     } else {
-      FAQMessage faqMessage =
-          new FAQMessage(message: text, sender: "Ronald Vega", type: true);
+      FAQMessage faqMessage = new FAQMessage(
+          message: text,
+          sender: isEntrepreneur
+              ? '${entrepreneur.firstName} ${entrepreneur.lastName}'
+              : '${consultant.firstname} ${consultant.lastName}',
+          type: true);
       setState(() {
         _messages.add(faqMessage);
       });

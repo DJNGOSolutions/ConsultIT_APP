@@ -278,8 +278,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     String googleUrl = 'https://www.google.com/search?q=';
     String search;
     isNotEmptyOrNull(city)
-        ? search =
-            'oportunidad de mercado para empresas de ' + sector + ' en $city'
+        ? search = 'oportunidad de mercado para empresas del sector ' +
+            sector +
+            ' en $city'
         : search = 'oportunidad de mercado para empresas de ' +
             sector +
             ' en El Salvador';
