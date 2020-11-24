@@ -81,8 +81,12 @@ class _MyAppState extends State<MyApp> {
         userType: state.userType,
       );
     } else if (state is AuthenticationUnauthenticated) {
-      return LoginPage(
-        authenticationBloc: _authenticationBloc,
+      return Scaffold(
+        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomPadding: false,
+        body: LoginPage(
+          authenticationBloc: _authenticationBloc,
+        ),
       );
     } else if (state is AuthenticationLoading) {
       return Scaffold(

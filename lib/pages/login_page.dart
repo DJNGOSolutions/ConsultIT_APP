@@ -46,192 +46,200 @@ class _LoginPageState extends State<LoginPage> {
       color: kNeumorphicColor,
     );
 
-    return Material(
-      child: Stack(
-        children: <Widget>[
-          Align(
-            child: ClipShadowPath(
-              shadow: boxShadow,
-              clipper: TopRightNeuClipperBtm(),
-              child: widthNeuContainer,
-            ),
-          ),
-          Align(
-            alignment: Alignment(30, -1),
-            child: ClipShadowPath(
-              shadow: boxShadow,
-              clipper: TopRightNeuClipper(),
-              child: widthNeuContainer,
-            ),
-          ),
-          Align(
-            alignment: Alignment(0, 30.5),
-            child: ClipShadowPath(
-              shadow: boxShadow,
-              clipper: BottomLeftNeuClipperBtm(),
-              child: heightNeuContainer,
-            ),
-          ),
-          Align(
-            alignment: Alignment(0, 80.5),
-            child: ClipShadowPath(
-              shadow: boxShadow,
-              clipper: BottomLeftNeuClipper(),
-              child: heightNeuContainer,
-            ),
-          ),
-          Column(
-            children: [
+    final bottom = MediaQuery.of(context).viewInsets.bottom;
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.only(bottom: bottom),
+        child: Material(
+          child: Stack(
+            children: <Widget>[
               Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 140, bottom: 40),
-                  child: Material(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.transparent,
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 180,
-                            width: 250,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/logo.png'))),
-                          ),
-                        ],
-                      )),
+                child: ClipShadowPath(
+                  shadow: boxShadow,
+                  clipper: TopRightNeuClipperBtm(),
+                  child: widthNeuContainer,
                 ),
               ),
               Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 30),
-                  child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
+                alignment: Alignment(30, -1),
+                child: ClipShadowPath(
+                  shadow: boxShadow,
+                  clipper: TopRightNeuClipper(),
+                  child: widthNeuContainer,
+                ),
+              ),
+              Align(
+                alignment: Alignment(0, 30.5),
+                child: ClipShadowPath(
+                  shadow: boxShadow,
+                  clipper: BottomLeftNeuClipperBtm(),
+                  child: heightNeuContainer,
+                ),
+              ),
+              Align(
+                alignment: Alignment(0, 80.5),
+                child: ClipShadowPath(
+                  shadow: boxShadow,
+                  clipper: BottomLeftNeuClipper(),
+                  child: heightNeuContainer,
+                ),
+              ),
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 140, bottom: 40),
+                      child: Material(
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: MyColors.mainColor.withOpacity(0.3),
-                                blurRadius: 15.0,
-                                offset: Offset(0, 10))
-                          ]),
-                      child: inputField(_usernameController,
-                          hintText: 'Ingrese su usuario',
-                          labelText: 'usuario',
-                          icon: Icons.person,
-                          uppercase: true,
-                          bold: true,
-                          obscure: false)),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 30),
-                  child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: MyColors.mainColor.withOpacity(0.3),
-                                blurRadius: 15.0,
-                                offset: Offset(0, 10))
-                          ]),
-                      child: inputField(_passwordController,
-                          hintText: 'Ingrese su contraseña',
-                          labelText: 'contraseña',
-                          bold: true,
-                          icon: Icons.lock,
-                          uppercase: true,
-                          obscure: true)),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 80.0, left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () => widget.authenticationBloc.add(LoggedIn(
-                              username: _usernameController.text,
-                              password: _passwordController.text)),
-                          child: Container(
-                            constraints:
-                                BoxConstraints(minWidth: 100, maxWidth: 150),
-                            height: 45,
-                            padding: EdgeInsets.symmetric(horizontal: 25),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.mainColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color:
-                                          MyColors.mainColor.withOpacity(0.4),
-                                      blurRadius: 20.0,
-                                      offset: Offset(0, 10))
-                                ]),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  'Ingresar'.toUpperCase(),
-                                  style: TextStyle(
-                                      fontFamily: Fonts.secondaryFont,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400),
+                          color: Colors.transparent,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 180,
+                                width: 250,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/images/logo.png'))),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 30),
+                      child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: MyColors.mainColor.withOpacity(0.3),
+                                    blurRadius: 15.0,
+                                    offset: Offset(0, 10))
+                              ]),
+                          child: inputField(_usernameController,
+                              hintText: 'Ingrese su usuario',
+                              labelText: 'usuario',
+                              icon: Icons.person,
+                              uppercase: true,
+                              bold: true,
+                              obscure: false)),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 30),
+                      child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: MyColors.mainColor.withOpacity(0.3),
+                                    blurRadius: 15.0,
+                                    offset: Offset(0, 10))
+                              ]),
+                          child: inputField(_passwordController,
+                              hintText: 'Ingrese su contraseña',
+                              labelText: 'contraseña',
+                              bold: true,
+                              icon: Icons.lock,
+                              uppercase: true,
+                              obscure: true)),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 80.0, left: 20, right: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () => widget.authenticationBloc.add(
+                                  LoggedIn(
+                                      username: _usernameController.text,
+                                      password: _passwordController.text)),
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    minWidth: 100, maxWidth: 150),
+                                height: 45,
+                                padding: EdgeInsets.symmetric(horizontal: 25),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: MyColors.mainColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: MyColors.mainColor
+                                              .withOpacity(0.4),
+                                          blurRadius: 20.0,
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Center(
+                                  child: FittedBox(
+                                    child: Text(
+                                      'Ingresar'.toUpperCase(),
+                                      style: TextStyle(
+                                          fontFamily: Fonts.secondaryFont,
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => widget.authenticationBloc
-                              .add(ToRegistrationForm()),
-                          child: Container(
-                            constraints:
-                                BoxConstraints(minWidth: 100, maxWidth: 150),
-                            height: 45,
-                            padding: EdgeInsets.symmetric(horizontal: 25),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: MyColors.secondaryColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: MyColors.secondaryColor
-                                          .withOpacity(0.4),
-                                      blurRadius: 20.0,
-                                      offset: Offset(0, 10))
-                                ]),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  'Registrarse'.toUpperCase(),
-                                  style: TextStyle(
-                                      fontFamily: Fonts.secondaryFont,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w400),
+                            GestureDetector(
+                              onTap: () => widget.authenticationBloc
+                                  .add(ToRegistrationForm()),
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    minWidth: 100, maxWidth: 150),
+                                height: 45,
+                                padding: EdgeInsets.symmetric(horizontal: 25),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: MyColors.secondaryColor,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: MyColors.secondaryColor
+                                              .withOpacity(0.4),
+                                          blurRadius: 20.0,
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Center(
+                                  child: FittedBox(
+                                    child: Text(
+                                      'Registrarse'.toUpperCase(),
+                                      style: TextStyle(
+                                          fontFamily: Fonts.secondaryFont,
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )),
+                          ],
+                        )),
+                  )
+                ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

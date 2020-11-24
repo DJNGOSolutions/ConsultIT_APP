@@ -109,14 +109,12 @@ class AuthenticationBloc
               //Error al obtener la informacion del entrepreneur
               Fluttertoast.showToast(
                   msg: 'Error de autenticacion del perfil de ${userModel.tipo}',
-                  backgroundColor: MyColors.mainColor,
-                  textColor: MyColors.accentColor);
+                  backgroundColor: Colors.red);
               yield AuthenticationUnauthenticated();
             }
           }
         } else {
-          Fluttertoast.showToast(
-              msg: 'Error de autenticacion del perfil de ${userModel.tipo}');
+          Fluttertoast.showToast(msg: 'Error de conexion');
           yield AuthenticationUnauthenticated();
         }
       }
