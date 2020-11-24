@@ -550,8 +550,7 @@ Widget businessItem(
                       width: 65,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(
-                                'assets/images/icons/MarketFluctuation.png'),
+                            image: AssetImage('assets/images/icons/Edit.png'),
                             fit: BoxFit.contain),
                       ),
                     ),
