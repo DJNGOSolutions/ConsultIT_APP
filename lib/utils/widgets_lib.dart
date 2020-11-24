@@ -1,5 +1,6 @@
 import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/events/home_events.dart';
+import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/faqmessage_model.dart';
 import 'package:consult_it_app/utils/styles.dart';
@@ -487,6 +488,93 @@ Widget staffItem(
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
                           child: Text(consultant.phoneNumber ?? '',
+                              style: Styles.subHeaderTextStyle),
+                        ),
+                        Center(
+                          child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 1.0,
+                              color: MyColors.secondaryColor),
+                        )
+                      ],
+                    ),
+                  )),
+              Flexible(
+                  flex: 2,
+                  fit: FlexFit.tight,
+                  child: Center(
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 22.0),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: MyColors.mainColor,
+                        ),
+                      ),
+                    ),
+                  ))
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget businessItem(
+    {@required BuildContext context,
+    @required Business business,
+    @required HomeBloc bloc,
+    String heroTag = 'Imagen'}) {
+  heroTag = heroTag + business.legalName;
+  return Center(
+    child: Hero(
+      tag: heroTag,
+      child: GestureDetector(
+        onTap: (() => {bloc.add(ToFCNPage(business: business))}),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Flexible(
+                flex: 3,
+                fit: FlexFit.loose,
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Center(
+                    child: Container(
+                      height: 45,
+                      width: 65,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                'assets/images/icons/MarketFluctuation.png'),
+                            fit: BoxFit.contain),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Flexible(
+                  flex: 11,
+                  fit: FlexFit.tight,
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text('${business.legalName}',
+                              style: Styles.headerTextStyle),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1.0),
+                          child: Text(business.comercialName ?? '',
                               style: Styles.subHeaderTextStyle),
                         ),
                         Center(

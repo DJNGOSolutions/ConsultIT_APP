@@ -19,6 +19,9 @@ class OnAddBusinessPage extends HomeState {
 }
 
 class OnMyBussinessesList extends HomeState {
+  final List<Business> businesses;
+
+  OnMyBussinessesList({@required this.businesses});
   @override
   String toString() => 'MyBussinessesList';
 }
@@ -87,4 +90,12 @@ class ChangeHomeContainer extends HomeState {
   ChangeHomeContainer(this.currentIndex);
   @override
   String toString() => 'ChangeHomeContainer';
+}
+
+class OnFCNPage extends HomeState {
+  final Business business;
+
+  OnFCNPage({@required this.business});
+  @override
+  String toString() => 'OnFCNPage';
 }

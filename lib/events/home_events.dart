@@ -13,6 +13,9 @@ class ToHomePage extends HomeEvent {
 }
 
 class ToMyBusinessesList extends HomeEvent {
+  final List<Business> businesses;
+
+  ToMyBusinessesList({@required this.businesses});
   @override
   String toString() => 'ToMyBusinessesList';
 }
@@ -176,4 +179,13 @@ class BottomBarPressed extends HomeEvent {
   BottomBarPressed(this.currentIndex);
   @override
   String toString() => 'BottomBarPressed';
+}
+
+class ToFCNPage extends HomeEvent {
+  final Business business;
+
+  ToFCNPage({@required this.business});
+
+  @override
+  String toString() => 'ToFCNPage';
 }

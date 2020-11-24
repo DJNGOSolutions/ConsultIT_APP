@@ -97,8 +97,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield OnAddBusinessPage();
       }
     } else if (event is ToMyBusinessesList) {
-      //TODO: Agregar peticion para obtener todos los negocios
-      yield OnMyBussinessesList();
+      yield OnMyBussinessesList(businesses: event.businesses);
     } else if (event is ToMyBusinessDetailsPage) {
       yield OnMyBusinessDetails(business: event.business);
     } else if (event is ToEditBusinessPage) {
@@ -267,6 +266,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is BottomBarPressed) {
       yield ChangeHomeContainer(event.currentIndex);
       yield OnHomePage(event.currentIndex);
+    } else if (event is ToFCNPage) {
+      yield OnFCNPage(business: event.business);
     } else {
       throw UnimplementedError();
     }

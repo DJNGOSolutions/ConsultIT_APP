@@ -110,16 +110,6 @@ class _HomePageState extends State<HomePage> {
                           style: Styles.headerTextStyle,
                         ),
                       ),
-                      Tooltip(
-                          message: "Ver todos mis comercios",
-                          child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_forward,
-                                color: MyColors.mainColor,
-                              ),
-                              onPressed:
-                                  null) //Navigator.pushNamed(context, MY_BUSINESS_PAGE)),
-                          )
                     ],
                   ),
                   flex: 7,
@@ -173,7 +163,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.only(top: 12.0, right: 0.0, left: 20.0),
+            padding: const EdgeInsets.only(
+                top: 12.0, right: 0.0, left: 20.0, bottom: 4.0),
             child: Row(
               children: [
                 Flexible(
@@ -231,7 +222,8 @@ class _HomePageState extends State<HomePage> {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => widget.homeBloc.add(ToMyBusinessesList()),
+                    function: () => widget.homeBloc.add(ToMyBusinessesList(
+                        businesses: entrepreneur.businesses)),
                     action: "Analizar mis comercios",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),
@@ -289,8 +281,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 myWidgets.actionWidget(
-                    function: () =>
-                        widget.homeBloc.add(ToConsultantsListPage()),
+                    function: () => null,
                     action: "Mis comercios asesorados",
                     context: context,
                     actionImagePath: "assets/images/icons/FolderDataColor.png"),
@@ -307,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                   height: 10.0,
                 ),
                 myWidgets.actionWidget(
-                    function: () => widget.homeBloc.add(ToMyBusinessesList()),
+                    function: () => null,
                     action: "Consultar valoraciones del perfil",
                     context: context,
                     actionImagePath: "assets/images/icons/DataAnalytic.png"),
