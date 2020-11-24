@@ -128,6 +128,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(2);
     } else if (event is ToEditProfilePage) {
       yield OnEditProfilePage();
+    } else if (event is DeleteBusiness) {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      final response = await businessRepository.deleteBusiness(
+          username: _prefs.getString('username'), id: event.business.id);
+      if (response != null && response.statusCode == 200) {
+        final businesses = await businessRepository.findAllBusinesses(
+            username: _prefs.getString('username'));
+        if (businesses != null) {
+          Fluttertoast.showToast(
+              msg: response.message,
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+          yield OnHomePage(0);
+        } else {
+          Fluttertoast.showToast(
+              msg: 'Ocurrio un error al obtener sus comercios',
+              backgroundColor: Colors.red);
+          yield OnEditBusinessPage(business: event.business);
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg:
+                'Ocurrio un error al eliminar el comercio, intentelo nuevamente',
+            backgroundColor: Colors.red);
+        yield OnEditBusinessPage(business: event.business);
+      }
     } else if (event is SaveNewBusinessInfo) {
       //Estado para pantalla de carga
       AuthenticationLoading();

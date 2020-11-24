@@ -270,7 +270,8 @@ class _EditBusinessPageState extends State<EditBusinessPage> {
               SizedBox(height: 15.0),
               // Fin de datos de usuario
               Container(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 60.0),
+                padding: EdgeInsets.only(
+                    top: 15.0, left: 60.0, right: 60.0, bottom: 5.0),
                 child: myWidgets.customButton(
                     context: context,
                     labelText: 'Guardar',
@@ -285,6 +286,17 @@ class _EditBusinessPageState extends State<EditBusinessPage> {
                         city: _cityController.text,
                         businessLine: _businessLineController.text,
                         businessSector: _businessSectorController.text)),
+                    maxWidth: 65),
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                    bottom: 25.0, left: 60.0, right: 60.0, top: 12.0),
+                child: myWidgets.customButton(
+                    isMain: false,
+                    context: context,
+                    labelText: 'Eliminar comercio',
+                    function: () =>
+                        homeBloc.add(DeleteBusiness(business: business)),
                     maxWidth: 65),
               ),
             ]),

@@ -27,7 +27,7 @@ class BusinessRepository {
       String url = NetworkUtils.path + 'entrepreneur/createbusiness';
       final response = await http.post(url, body: {
         "username": username,
-        "legalName": email,
+        "legalName": legalName,
         "comercialName": comercialName,
         "email": email,
         "phoneNumber": phoneNumber,
@@ -114,6 +114,29 @@ class BusinessRepository {
       if (response.statusCode == 200) {
         Business business = Business.fromJson(json.decode(response.body));
         return business;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: updateBusiness: ' + e.toString());
+      return null;
+    }
+  }
+
+  Future<ServerResponse> deleteBusiness({
+    @required String username,
+    @required String id,
+  }) async {
+    try {
+      String url = NetworkUtils.path +
+          'entrepreneur/deleteonebusiness?username=$username&business_id=$id';
+      final response = await http.delete(url);
+
+      if (response.statusCode == 200) {
+        ServerResponse serverResponse =
+            ServerResponse.fromJson(json.decode(response.body));
+        serverResponse.statusCode = response.statusCode;
+        return serverResponse;
       } else {
         return null;
       }

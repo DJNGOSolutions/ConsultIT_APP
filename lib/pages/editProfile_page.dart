@@ -252,74 +252,83 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color.fromRGBO(143, 148, 251, .2),
-                          blurRadius: 20.0,
-                          offset: Offset(0, 10))
-                    ]),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          fit: FlexFit.loose,
-                          flex: 2,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Icon(Icons.verified,
-                                size: 28, color: Color.fromRGBO(3, 90, 166, 1)),
+              homeBloc.userRepository.user.tipo.toUpperCase() ==
+                      'consultor'.toUpperCase()
+                  ? SizedBox(
+                      height: 15.0,
+                    )
+                  : SizedBox(),
+              homeBloc.userRepository.user.tipo.toUpperCase() ==
+                      'consultor'.toUpperCase()
+                  ? Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 8.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Color.fromRGBO(143, 148, 251, .2),
+                                blurRadius: 20.0,
+                                offset: Offset(0, 10))
+                          ]),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Flexible(
+                                fit: FlexFit.loose,
+                                flex: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Icon(Icons.verified,
+                                      size: 28,
+                                      color: Color.fromRGBO(3, 90, 166, 1)),
+                                ),
+                              ),
+                              Flexible(
+                                fit: FlexFit.loose,
+                                flex: 6,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Text(
+                                    'INFORMACION DE CONSULTOR',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontFamily: Fonts.primaryFont,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.loose,
-                          flex: 6,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              'INFORMACION DE CONSULTOR',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: Fonts.primaryFont,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Telefono de contacto
-                    myWidgets.inputField(_tituloProfController,
-                        hintText: 'Ingrese su titulo profesional',
-                        labelText: 'Titulo profesional',
-                        icon: Icons.picture_in_picture,
-                        uppercase: false,
-                        bold: false), // Pais de residencia
-                    myWidgets.inputField(_avgPrecioController,
-                        hintText: 'Ingrese el precio de referencia por hora',
-                        labelText: 'Precio de referencia por hora',
-                        icon: Icons.monetization_on,
-                        uppercase: false,
-                        bold: false),
-                    // Ciudad de residencia
-                    myWidgets.inputField(_especializacionController,
-                        hintText: 'Giro de especializacion',
-                        labelText: 'Giro de Especializacion',
-                        icon: Icons.keyboard,
-                        uppercase: false,
-                        bold: false),
-                  ],
-                ),
-              ),
+                          // Telefono de contacto
+                          myWidgets.inputField(_tituloProfController,
+                              hintText: 'Ingrese su titulo profesional',
+                              labelText: 'Titulo profesional',
+                              icon: Icons.picture_in_picture,
+                              uppercase: false,
+                              bold: false), // Pais de residencia
+                          myWidgets.inputField(_avgPrecioController,
+                              hintText:
+                                  'Ingrese el precio de referencia por hora',
+                              labelText: 'Precio de referencia por hora',
+                              icon: Icons.monetization_on,
+                              uppercase: false,
+                              bold: false),
+                          // Ciudad de residencia
+                          myWidgets.inputField(_especializacionController,
+                              hintText: 'Giro de especializacion',
+                              labelText: 'Giro de Especializacion',
+                              icon: Icons.keyboard,
+                              uppercase: false,
+                              bold: false),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
               SizedBox(height: 15.0),
               // Fin de datos de usuario
               Container(

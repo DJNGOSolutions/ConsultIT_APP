@@ -1,3 +1,4 @@
+import 'package:consult_it_app/bloc/home_bloc.dart';
 import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/states/home_states.dart';
@@ -124,6 +125,9 @@ class SaveNewProfileInfo extends HomeEvent {
 }
 
 class SaveNewBusinessInfo extends HomeEvent {
+  @override
+  String toString() => 'SaveNewBusinessInfo';
+
   final String comercialName,
       email,
       phoneNumber,
@@ -146,6 +150,14 @@ class SaveNewBusinessInfo extends HomeEvent {
       @required this.city,
       @required this.businessLine,
       @required this.businessSector});
+}
+
+class DeleteBusiness extends HomeEvent {
+  final Business business;
+
+  DeleteBusiness({@required this.business});
+  @override
+  String toString() => 'DeleteBusiness';
 }
 
 class ToFAQBotPage extends HomeEvent {
