@@ -71,7 +71,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                 SizedBox(height: 5.0),
                 Text(consultant.deegre.toUpperCase() ?? ''.toUpperCase(),
                     style: Styles.bodyTextStyle),
-                SizedBox(height: 20.0),
+                SizedBox(height: 15.0),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -117,7 +117,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                       ),
                     ]),
                 SizedBox(
-                  height: 20.0,
+                  height: 10.0,
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -168,7 +168,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                             ]),
                       ),
                     ]),
-                SizedBox(height: 20.0),
+                SizedBox(height: 15.0),
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -187,7 +187,7 @@ class _ConsultantProfilePageState extends State<ConsultantProfilePage> {
                           textAlign: TextAlign.center,
                           style: Styles.bodyTextStyle)
                     ]),
-                SizedBox(height: 40.0),
+                SizedBox(height: 25.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(height: 5.0),
                   Text('Emprendedor/a'.toUpperCase(),
                       style: Styles.bodyTextStyle),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 15.0),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ]),
                   SizedBox(
-                    height: 20.0,
+                    height: 10.0,
                   ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -164,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ]),
                         ),
                       ]),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 15.0),
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
@@ -183,7 +183,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             textAlign: TextAlign.center,
                             style: Styles.bodyTextStyle)
                       ]),
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 25.0),
                   myWidgets.customButton(
                       context: context,
                       labelText: 'Editar Perfil',
