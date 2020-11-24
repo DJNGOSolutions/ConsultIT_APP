@@ -128,7 +128,7 @@ class _HomeControllerState extends State<HomeController> {
       return AnalizeMarketPage(
         homeBloc: _homeBloc,
         heroTag: 'AnalizeMarket',
-        optionName: 'Analizar mercado internacional',
+        optionName: 'Analizar mercado',
       );
     } else if (state is OnMyBussinessesList) {
       return BusinessesListPage(
