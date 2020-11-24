@@ -1,6 +1,7 @@
 import 'package:consult_it_app/bloc/authentication_bloc.dart';
 import 'package:consult_it_app/bloc/home_bloc.dart';
-import 'package:consult_it_app/pages/AnalizeMarket_page.dart';
+import 'package:consult_it_app/pages/AnalyzeBusiness_page.dart';
+import 'package:consult_it_app/pages/AnalyzeMarket_page.dart';
 import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/businessesList_page.dart';
@@ -136,6 +137,13 @@ class _HomeControllerState extends State<HomeController> {
         heroTag: 'BusinessName',
         optionName: 'Analizar mis comercios',
         myBusinesses: state.businesses,
+      );
+    } else if (state is OnAnalyzeBusiness) {
+      return AnalyzeBusinessPage(
+        homeBloc: _homeBloc,
+        entrepreneur: _homeBloc.entrepreneurRepository.entrepreneur,
+        heroTag: state.heroTag,
+        optionName: 'Analisis de Valor Presente Neto',
       );
     }
   }

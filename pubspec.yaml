@@ -43,6 +43,7 @@ dependencies:
   http: any
   local_auth: ^0.6.2+1
   date_format: ^1.0.9
+  im_stepper: ^0.1.2+6
 
 dev_dependencies:
   flutter_test:

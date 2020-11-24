@@ -267,8 +267,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is BottomBarPressed) {
       yield ChangeHomeContainer(event.currentIndex);
       yield OnHomePage(event.currentIndex);
-    } else if (event is ToFCNPage) {
-      yield OnFCNPage(business: event.business);
+    } else if (event is ToAnalyzeBusinessPage) {
+      yield OnAnalyzeBusiness(business: event.business, heroTag: event.heroTag);
     } else {
       throw UnimplementedError();
     }

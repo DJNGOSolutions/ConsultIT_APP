@@ -182,10 +182,11 @@ class BottomBarPressed extends HomeEvent {
   String toString() => 'BottomBarPressed';
 }
 
-class ToFCNPage extends HomeEvent {
+class ToAnalyzeBusinessPage extends HomeEvent {
   final Business business;
+  final String heroTag;
 
-  ToFCNPage({@required this.business});
+  ToAnalyzeBusinessPage({@required this.business, @required this.heroTag});
 
   @override
   String toString() => 'ToFCNPage';

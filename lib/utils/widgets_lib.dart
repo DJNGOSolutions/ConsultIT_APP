@@ -531,9 +531,12 @@ Widget businessItem(
     child: Hero(
       tag: heroTag,
       child: GestureDetector(
-        onTap: (() => {bloc.add(ToFCNPage(business: business))}),
+        onTap: (() => {
+              bloc.add(
+                  ToAnalyzeBusinessPage(business: business, heroTag: heroTag))
+            }),
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.15,
+          height: MediaQuery.of(context).size.height * 0.125,
           width: MediaQuery.of(context).size.width,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -569,12 +572,13 @@ Widget businessItem(
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
                           child: Text('${business.legalName}',
-                              style: Styles.headerTextStyle),
+                              style: Styles.subHeaderTextStyle
+                                  .apply(color: MyColors.mainColor)),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 1.0),
                           child: Text(business.comercialName ?? '',
-                              style: Styles.subHeaderTextStyle),
+                              style: Styles.bodyTextStyle),
                         ),
                         Center(
                           child: Container(
@@ -603,6 +607,44 @@ Widget businessItem(
           ),
         ),
       ),
+    ),
+  );
+}
+
+Widget stepperContainer(
+    {@required String title,
+    @required String content,
+    @required BuildContext context}) {
+  return Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Styles.headerTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        Text(
+          content,
+          style: Styles.bodyTextStyleNonBold,
+        ),
+        SizedBox(
+          height: 30.0,
+        ),
+        Center(
+          child: Container(
+            height: 40.0,
+            child: customButton(
+                maxWidth: 130.0,
+                context: context,
+                function: null,
+                labelText: 'Ingresar Datos'),
+          ),
+        )
+      ],
     ),
   );
 }

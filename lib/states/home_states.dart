@@ -92,10 +92,11 @@ class ChangeHomeContainer extends HomeState {
   String toString() => 'ChangeHomeContainer';
 }
 
-class OnFCNPage extends HomeState {
+class OnAnalyzeBusiness extends HomeState {
+  final String heroTag;
   final Business business;
 
-  OnFCNPage({@required this.business});
+  OnAnalyzeBusiness({@required this.business, @required this.heroTag});
   @override
   String toString() => 'OnFCNPage';
 }
