@@ -84,9 +84,10 @@ class ToConsultantDetailsPage extends HomeEvent {
 
 class ToWebView extends HomeEvent {
   final HomeState nextState;
-  final String query;
+  final String sector;
+  final String city;
 
-  ToWebView({@required this.query, @required this.nextState});
+  ToWebView({@required this.sector, this.city, @required this.nextState});
   @override
   String toString() => 'ToWebView';
 }

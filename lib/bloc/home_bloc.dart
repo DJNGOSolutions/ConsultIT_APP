@@ -7,6 +7,7 @@ import 'package:consult_it_app/repositories/user_repository.dart';
 import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
+import 'package:consult_it_app/utils/widgets_lib.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,7 +122,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is ToConsultantDetailsPage) {
       yield OnConsultantsProfilePage(consultant: event.consultant);
     } else if (event is ToWebView) {
-      _launchUrl(sector: event.query);
+      _launchUrl(sector: event.sector);
       yield event.nextState;
     } else if (event is ToProfilePage) {
       yield OnHomePage(2);
@@ -273,10 +274,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<void> _launchUrl({@required String sector}) async {
+  Future<void> _launchUrl({@required String sector, String city}) async {
     String googleUrl = 'https://www.google.com/search?q=';
-    String search =
-        'oportunidad de mercado para empresas de ' + sector + ' en El Salvador';
+    String search;
+    isNotEmptyOrNull(city)
+        ? search =
+            'oportunidad de mercado para empresas de ' + sector + ' en $city'
+        : search = 'oportunidad de mercado para empresas de ' +
+            sector +
+            ' en El Salvador';
     String finalUrl = googleUrl + search.replaceAll(" ", '+');
     if (await canLaunch(finalUrl)) {
       await launch(finalUrl, forceWebView: true, forceSafariVC: true);
