@@ -196,12 +196,14 @@ inputField(TextEditingController controller,
         @required String labelText,
         @required IconData icon,
         bool uppercase = true,
+        bool enabled = true,
         bool bold = true,
         bool obscure = false}) =>
     TextField(
       controller: controller,
       onSubmitted: (value) => controller.text = value,
       obscureText: obscure,
+      enabled: enabled,
       decoration: InputDecoration(
           prefixIcon: Icon(
             icon,

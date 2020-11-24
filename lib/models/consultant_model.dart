@@ -34,6 +34,7 @@ class Consultant {
 
   factory Consultant.fromJson(Map<String, dynamic> json) {
     return Consultant(
+        user: User.fromJson(json['user']),
         firstname: json['firstName'].toString() ?? '',
         lastName: json['lastName'].toString() ?? '',
         deegre: json['degree'].toString() ?? '',
@@ -61,7 +62,8 @@ class AllConsultants {
         Consultant consultant = Consultant.fromJson(parsedConsultants[i]);
         consultant.birthdate = convertDateFromString(consultant.birthdate);
         _allConsultants.add(consultant);
-        print('Consultor $i: ${consultant.firstname}');
+        print(
+            'Consultor $i: ${consultant.firstname} Username: ${consultant.user.username}');
       }
     }
   }

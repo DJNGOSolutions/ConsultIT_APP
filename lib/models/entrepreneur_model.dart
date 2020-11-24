@@ -1,7 +1,6 @@
 import 'package:consult_it_app/models/business_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:date_format/date_format.dart';
-import 'package:flutter/material.dart';
 
 class Entrepreneur {
   User user;

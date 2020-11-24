@@ -4,6 +4,7 @@ import 'package:consult_it_app/repositories/business_repository.dart';
 import 'package:consult_it_app/repositories/consultant_repository.dart';
 import 'package:consult_it_app/repositories/entrepreneur_repository.dart';
 import 'package:consult_it_app/repositories/user_repository.dart';
+import 'package:consult_it_app/states/authentication_states.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:consult_it_app/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -101,8 +102,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is ToMyBusinessDetailsPage) {
       yield OnMyBusinessDetails(business: event.business);
     } else if (event is ToEditBusinessPage) {
-      //TODO: Agregar estado para pantalla donde se edita la informacion del negocio
-      yield OnHomePage(0);
+      yield OnEditBusinessPage(business: event.business);
     } else if (event is ToConsultantsListPage) {
       final serverResponse = await consultantRepository.findAllConsultants();
       if (serverResponse != null) {
@@ -128,7 +128,50 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield OnHomePage(2);
     } else if (event is ToEditProfilePage) {
       yield OnEditProfilePage();
+    } else if (event is SaveNewBusinessInfo) {
+      //Estado para pantalla de carga
+      AuthenticationLoading();
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      //Actualizar perfil del negocio
+      final response = await businessRepository.updateBusiness(
+          id: event.business.id,
+          comercialName: event.comercialName,
+          email: event.email,
+          phoneNumber: event.phoneNumber,
+          address: event.address,
+          postalAddress: event.postalAddress,
+          state: event.state,
+          city: event.city,
+          businessLine: event.businessLine,
+          businessSector: event.businessSector);
+      if (response != null) {
+        //Si la respuesta es 200 se obtienen todos los comercios para un entrepreneur
+        final businesses = await businessRepository.findAllBusinesses(
+            username: _prefs.getString('username'));
+        if (businesses != null) {
+          //Si la lista de businesses es correcta se le asigna al perfil del entrrepreneur
+          entrepreneurRepository.entrepreneur.businesses = businesses;
+          Fluttertoast.showToast(
+              msg: "El comercio se actualizo con exito",
+              backgroundColor: MyColors.mainColor,
+              textColor: MyColors.accentColor);
+          yield OnMyBusinessDetails(business: response);
+        } else {
+          Fluttertoast.showToast(
+              msg:
+                  'Error al obtener lista de comercios comercio, intentelo de nuevo.',
+              backgroundColor: Colors.red);
+          yield OnEditBusinessPage(business: event.business);
+        }
+      } else {
+        Fluttertoast.showToast(
+            msg:
+                'Error de conexion al actualizar comercio, intentelo de nuevo.',
+            backgroundColor: Colors.red);
+        yield OnEditBusinessPage(business: event.business);
+      }
     } else if (event is SaveNewProfileInfo) {
+      AuthenticationLoading();
       if (event.isEntrepreneur) {
         final response = await entrepreneurRepository.updateProfile(
             id: userRepository.user.id,

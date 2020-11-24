@@ -31,6 +31,14 @@ class OnMyBusinessDetails extends HomeState {
   String toString() => 'MyBusinessDetails';
 }
 
+class OnEditBusinessPage extends HomeState {
+  final Business business;
+
+  OnEditBusinessPage({@required this.business});
+  @override
+  String toString() => 'OnEditBusinessPage';
+}
+
 class OnWebBrowser extends HomeState {
   @override
   String toString() => 'OnWebBrowser';

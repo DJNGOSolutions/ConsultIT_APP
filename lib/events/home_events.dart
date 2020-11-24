@@ -123,6 +123,31 @@ class SaveNewProfileInfo extends HomeEvent {
   String toString() => 'SaveNewProfileInfo';
 }
 
+class SaveNewBusinessInfo extends HomeEvent {
+  final String comercialName,
+      email,
+      phoneNumber,
+      address,
+      postalAddress,
+      state,
+      city,
+      businessLine,
+      businessSector;
+  final Business business;
+
+  SaveNewBusinessInfo(
+      {@required this.comercialName,
+      @required this.email,
+      @required this.business,
+      @required this.phoneNumber,
+      @required this.address,
+      @required this.postalAddress,
+      @required this.state,
+      @required this.city,
+      @required this.businessLine,
+      @required this.businessSector});
+}
+
 class ToFAQBotPage extends HomeEvent {
   @override
   String toString() => 'ToFAQBotPage';

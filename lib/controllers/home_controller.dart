@@ -4,10 +4,10 @@ import 'package:consult_it_app/pages/addBusiness_page.dart';
 import 'package:consult_it_app/pages/businessProfile_page.dart';
 import 'package:consult_it_app/pages/consultantDetails_page.dart';
 import 'package:consult_it_app/pages/consultantsList_page.dart';
+import 'package:consult_it_app/pages/editBusiness_page.dart';
 import 'package:consult_it_app/pages/editProfile_page.dart';
 import 'package:consult_it_app/pages/faqbot_page.dart';
 import 'package:consult_it_app/pages/home_page.dart';
-import 'package:consult_it_app/pages/profile_page.dart';
 import 'package:consult_it_app/states/home_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,6 +93,12 @@ class _HomeControllerState extends State<HomeController> {
         homeBloc: _homeBloc,
         business: state.business,
       );
+    } else if (state is OnEditBusinessPage) {
+      return EditBusinessPage(
+        heroTag: 'BusinessImage',
+        homeBloc: _homeBloc,
+        business: state.business,
+      );
     } else if (state is OnConsultantsList) {
       return ConsultantsListPage(
         heroTag: 'ConsultantName',
@@ -103,7 +109,7 @@ class _HomeControllerState extends State<HomeController> {
       );
     } else if (state is OnConsultantsProfilePage) {
       return ConsultantDetailsPage(
-          heroTag: 'ProfileImageRonald Vega',
+          heroTag: 'ProfileImage${state.consultant.user.id}',
           imgPath: 'assets/images/icons/profile.png',
           consultant: state.consultant,
           homeBloc: _homeBloc);

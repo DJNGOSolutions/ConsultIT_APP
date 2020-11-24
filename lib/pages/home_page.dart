@@ -6,7 +6,6 @@ import 'package:consult_it_app/models/consultant_model.dart';
 import 'package:consult_it_app/models/entrepreneur_model.dart';
 import 'package:consult_it_app/models/user_model.dart';
 import 'package:consult_it_app/pages/consultantProfile_page.dart';
-import 'package:consult_it_app/pages/consultantsList_page.dart';
 import 'package:consult_it_app/pages/profile_Page.dart';
 import 'package:consult_it_app/pages/transactionsHistory_page.dart';
 import 'package:consult_it_app/states/home_states.dart';

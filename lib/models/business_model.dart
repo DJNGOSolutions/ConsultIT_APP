@@ -22,6 +22,11 @@ class Business {
     businessLine = business['businessLine'];
     businessSector = business['businessSector'];
   }
+
+  factory Business.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> jsonBusiness = json["updatedBusiness"];
+    return Business(jsonBusiness);
+  }
 }
 
 class Businesses {

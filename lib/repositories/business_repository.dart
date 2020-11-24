@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BusinessRepository {
+  // ignore: non_constant_identifier_names
   String TAG = 'BusinessRepository';
 
   Future<ServerResponse> addNewBusiness({
@@ -80,6 +81,44 @@ class BusinessRepository {
       }
     } catch (e) {
       print('ERROR: $TAG: findAllBusinesses: ' + e.toString());
+      return null;
+    }
+  }
+
+  Future<Business> updateBusiness(
+      {@required String id,
+      String comercialName,
+      String email,
+      String phoneNumber,
+      String address,
+      String postalAddress,
+      String state,
+      String city,
+      String businessLine,
+      String businessSector}) async {
+    try {
+      String url = NetworkUtils.path + 'business/update';
+      final response = await http.put(url, body: {
+        "business_id": id,
+        "comercialName": comercialName,
+        "email": email,
+        "phoneNumber": phoneNumber,
+        "address": address,
+        "postalAddress": postalAddress,
+        "state": state,
+        "city": city,
+        "businessLine": businessLine,
+        "businessSector": businessSector
+      });
+
+      if (response.statusCode == 200) {
+        Business business = Business.fromJson(json.decode(response.body));
+        return business;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('ERROR: $TAG: updateBusiness: ' + e.toString());
       return null;
     }
   }
