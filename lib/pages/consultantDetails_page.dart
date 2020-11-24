@@ -9,12 +9,14 @@ class ConsultantDetailsPage extends StatelessWidget {
   final String heroTag, imgPath;
   final Consultant consultant;
   final HomeBloc homeBloc;
+  final bool hasPhoto;
   const ConsultantDetailsPage(
       {Key key,
       @required this.heroTag,
       @required this.imgPath,
       @required this.consultant,
-      @required this.homeBloc})
+      @required this.homeBloc,
+      @required this.hasPhoto})
       : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class ConsultantDetailsPage extends StatelessWidget {
                 tag: heroTag,
                 child: Container(
                   margin: EdgeInsets.only(top: 20.0, bottom: 10.0),
-                  height: 115,
+                  height: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(250),
                     boxShadow: [
@@ -43,7 +45,10 @@ class ConsultantDetailsPage extends StatelessWidget {
                           offset: Offset(0, 0))
                     ],
                     image: DecorationImage(
-                        image: AssetImage(imgPath), fit: BoxFit.contain),
+                        image: hasPhoto
+                            ? NetworkImage(imgPath)
+                            : AssetImage(imgPath),
+                        fit: BoxFit.contain),
                   ),
                 ),
               ),

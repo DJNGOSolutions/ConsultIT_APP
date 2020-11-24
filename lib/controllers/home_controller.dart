@@ -112,7 +112,10 @@ class _HomeControllerState extends State<HomeController> {
     } else if (state is OnConsultantsProfilePage) {
       return ConsultantDetailsPage(
           heroTag: 'ProfileImage${state.consultant.user.id}',
-          imgPath: 'assets/images/icons/profile.png',
+          imgPath: isNotEmptyOrNull(state.consultant.photo)
+              ? state.consultant.photo
+              : 'assets/images/logo.png',
+          hasPhoto: isNotEmptyOrNull(state.consultant.photo) ? true : false,
           consultant: state.consultant,
           homeBloc: _homeBloc);
     } else if (state is OnEditProfilePage) {
@@ -134,6 +137,14 @@ class _HomeControllerState extends State<HomeController> {
         optionName: 'Analizar mis comercios',
         myBusinesses: state.businesses,
       );
+    }
+  }
+
+  bool isNotEmptyOrNull(String word) {
+    if (word != null && word != '' && word != ' ' && word != 'null') {
+      return true;
+    } else {
+      return false;
     }
   }
 }
