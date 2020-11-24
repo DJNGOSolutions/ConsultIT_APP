@@ -139,7 +139,7 @@ class AuthenticationBloc
           city: event.municipio,
           postalAddress: event.codPostal,
           photo: '',
-          historicAveragePrice: 0,
+          historicAveragePrice: '0',
           consultantType: event.giro,
           referencePrice: event.precioBase);
       if (serverResponse != null) {

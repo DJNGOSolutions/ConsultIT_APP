@@ -49,6 +49,23 @@ class Consultant {
         state: json['state'].toString() ?? '',
         city: json['city'].toString() ?? '');
   }
+
+  factory Consultant.fromJsonObject(Map<String, dynamic> json) {
+    return Consultant(
+        firstname: json['firstName'].toString() ?? '',
+        lastName: json['lastName'].toString() ?? '',
+        deegre: json['degree'].toString() ?? '',
+        photo: json['photo'].toString() ?? '',
+        birthdate: json['birthdate'].toString() ?? '',
+        referencePrice: double.parse(json['referencePrice'].toString()),
+        historicAveragePrice:
+            double.parse(json['historicAveragePrice'].toString()),
+        phoneNumber: json['phoneNumber'].toString() ?? '',
+        averageRating: double.parse(json['averageRating'].toString()),
+        consultantType: json['consultantType'].toString() ?? '',
+        state: json['state'].toString() ?? '',
+        city: json['city'].toString() ?? '');
+  }
 }
 
 class AllConsultants {

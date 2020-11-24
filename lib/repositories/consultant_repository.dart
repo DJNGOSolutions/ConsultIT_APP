@@ -17,7 +17,7 @@ class ConsultantRepository {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        consultant = Consultant.fromJson(json.decode(response.body));
+        consultant = Consultant.fromJsonObject(json.decode(response.body));
         return consultant;
       } else {
         print(response.toString());

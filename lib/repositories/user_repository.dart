@@ -54,7 +54,7 @@ class UserRepository {
       @required String city,
       @required String postalAddress,
       @required String photo,
-      @required double historicAveragePrice}) async {
+      @required String historicAveragePrice}) async {
     ServerResponse serverResponse = new ServerResponse();
     try {
       String url = NetworkUtils.path + 'user/signup';
