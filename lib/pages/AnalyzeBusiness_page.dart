@@ -25,7 +25,7 @@ class AnalyzeBusinessPage extends StatefulWidget {
 class _AnalyzeBusinessPageState extends State<AnalyzeBusinessPage> {
   HomeBloc get homeBloc => widget.homeBloc;
   Entrepreneur get entrepreneur => widget.entrepreneur;
-  int number = 1;
+  int number = 0;
 
   @override
   Widget build(BuildContext context) {

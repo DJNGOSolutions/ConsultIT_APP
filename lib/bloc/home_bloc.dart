@@ -122,7 +122,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is ToConsultantDetailsPage) {
       yield OnConsultantsProfilePage(consultant: event.consultant);
     } else if (event is ToWebView) {
-      _launchUrl(sector: event.sector);
+      _launchUrl(sector: event.sector, city: event.city);
       yield event.nextState;
     } else if (event is ToProfilePage) {
       yield OnHomePage(2);
@@ -274,16 +274,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<void> _launchUrl({@required String sector, String city}) async {
+  Future<void> _launchUrl(
+      {@required String sector, String city = 'El Salvador'}) async {
     String googleUrl = 'https://www.google.com/search?q=';
     String search;
-    isNotEmptyOrNull(city)
-        ? search = 'oportunidad de mercado para empresas del sector ' +
-            sector +
-            ' en $city'
-        : search = 'oportunidad de mercado para empresas de ' +
-            sector +
-            ' en El Salvador';
+    search = 'oportunidad de mercado para empresas del sector ' +
+        sector +
+        ' en $city';
     String finalUrl = googleUrl + search.replaceAll(" ", '+');
     if (await canLaunch(finalUrl)) {
       await launch(finalUrl, forceWebView: true, forceSafariVC: true);

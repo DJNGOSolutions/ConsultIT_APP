@@ -166,6 +166,7 @@ class _AnalizeMarketPageState extends State<AnalizeMarketPage> {
     myWidgets.isNotEmptyOrNull(sector)
         ? myWidgets.isNotEmptyOrNull(city)
             ? homeBloc.add(ToWebView(
+                city: __cityController.text,
                 sector: _businessSectorController.text,
                 nextState: OnAnalizeMarket()))
             : Fluttertoast.showToast(
